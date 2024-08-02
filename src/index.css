@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,500;6..12,600;6..12,700&display=swap');
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: var(--color-black);
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+:root {
+  /* COLORS */
+  --color-white: #fff;
+
+  --color-gray: #d1d5db;
+  --color-gray-light: #999999;
+  --color-gray-dark: #333333;
+
+  --color-black: #000;
+  --color-black-light: #1a1a1a;
+
+  --color-main-400: #818cf8;
+  --color-main-500: #6366f1;
+  --color-main-600: #4f46e5;
+  --color-main-800: #3730a3;
+  --color-main-950: #1e1b4b;
+
+  --color-error-400: #f87171;
+  --color-error-500: #ef4444;
+  --color-error-600: #dc2626;
+  --color-error-800: #991b1b;
+  --color-error-950: #450a0a;
+
+  /* TYPOGRAPHY */
+  --font-size-xs: 1.2rem;
+  --font-size-sm: 1.4rem;
+  --font-size-base: 1.6rem;
+  --font-size-md: 1.8rem;
+  --font-size-lg: 2rem;
+  --font-size-xl: 2.4rem;
+  --font-size-2xl: 3rem;
+  --font-size-3xl: 3.6rem;
+
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --letter-spacing-xs: 0.1rem;
+  --letter-spacing-sm: 0.15rem;
+  --letter-spacing-md: 0.2rem;
+  --letter-spacing-lg: 0.25rem;
+  --letter-spacing-xl: 0.3rem;
+
+  --word-spacing-xs: 0.1rem;
+  --word-spacing-sm: 0.15rem;
+  --word-spacing-md: 0.2rem;
+  --word-spacing-lg: 0.25rem;
+  --word-spacing-xl: 0.3rem;
+
+  /* SPACING */
+  --padding-xs: 0.4rem;
+  --padding-sm: 0.8rem;
+  --padding-md: 1.6rem;
+  --padding-lg: 2rem;
+  --padding-xl: 2.4rem;
+  --padding-2xl: 3rem;
+  --padding-3xl: 3.6rem;
+
+  --margin-xs: 0.4rem;
+  --margin-sm: 0.8rem;
+  --margin-md: 1.6rem;
+  --margin-lg: 2rem;
+  --margin-xl: 2.4rem;
+  --margin-2xl: 3rem;
+  --margin-3xl: 3.6rem;
+
+  /* BORDER */
+  --border-rounded-xs: 0.8rem;
+  --border-rounded-sm: 1.4rem;
+  --border-rounded-md: 2rem;
+  --border-rounded-lg: 2.4rem;
+  --border-rounded-xl: 3rem;
+  --border-rounded-2xl: 3.6rem;
+  --border-rounded-3xl: 4.4rem;
+  --border-rounded-full: 999rem;
+}
+
+/* BOOKMARK CLASSES */
+.bookmark {
+  color: var(--color-gray-dark);
+}
+
+.bookmark:hover,
+.bookmark:active {
+  color: var(--color-gray-light);
+}
+
+.bookmark-active {
+  color: #fab005;
+}
+
+.bookmark-active:hover,
+.bookmark-active:active {
+  color: #f59f00;
+}
+
+/* GLOBAL STYLES FOR THE SCROLL-BAR */
+::-webkit-scrollbar {
+  width: 0.8rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-black-light);
+  border-radius: var(--border-rounded-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-gray-dark);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-black);
+}
+
+::-webkit-scrollbar-corner {
+  display: none;
+}
+
+/* GLOBAL STYLES FOR THE SELECTION OF ELEMENTS */
+::selection {
+  background-color: var(--color-main-600);
+  color: var(--color-white);
+}
