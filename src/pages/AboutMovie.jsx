@@ -39,7 +39,7 @@ function AboutMovie() {
         <div>
           <div className='flex gap-4 self-start'>
             <img
-              className='w-28 h-44'
+              className='w-44 h-60'
               src={movieDetails.moviePoster}
               alt={`Poster for ${movieDetails.movieName}`}
             />
