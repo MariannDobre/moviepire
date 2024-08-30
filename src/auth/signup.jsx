@@ -1,34 +1,8 @@
 import React from 'react';
+import { useSignup } from '../hooks/useSignup';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import useSignup from '../hooks/useSignup';
-
-import styled from 'styled-components';
-import { Box, Input, Label, Title, Button } from '../globalVariables';
-
-import MiniLoader from '../components/loaders/miniLoader';
-
-const SignupContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: calc(100dvh - 5.6rem);
-  gap: 4.8rem;
-  width: 120rem;
-`;
-
-const SignupForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-  width: 48rem;
-  padding: var(--padding-3xl) 0;
-  background-color: rgba(26, 26, 26, 0.5);
-  border: 0.15rem solid var(--color-main-950);
-`;
+import SmallLoader from '../components/loaders/SmallLoader';
 
 function Signup() {
   const navigate = useNavigate();
@@ -50,7 +24,7 @@ function Signup() {
   }
 
   return (
-    <SignupContainer
+    <div
       style={{
         background: `linear-gradient(
          90deg,
@@ -61,16 +35,9 @@ function Signup() {
           ),url(loginBg.jpg) no-repeat center / cover`,
       }}
     >
-      <Title
-        $titleCustomStyles={`
-        font-size: var(--font-size-3xl);
-        letter-spacing: var(--letter-spacing-md);
-      `}
-      >
-        Create an account
-      </Title>
+      <h1>Create an account</h1>
 
-      <SignupForm
+      <form
         style={{
           backdropFilter: 'blur(0.4rem)',
           border: `${
@@ -92,28 +59,22 @@ function Signup() {
         }}
         onSubmit={handleSubmit(onSubmit)}
       >
-        <Box
-          $direction='column'
-          $gap='0.8rem'
-        >
-          <Label htmlFor='username'>Username:</Label>
+        <div>
+          <label htmlFor='username'>Username:</label>
           {errors ? (
             <span style={{ color: 'orangered' }}>
               {errors?.username?.message}
             </span>
           ) : null}
-          <Input
+          <input
+            style={`${
+              errors?.username
+                ? 'border: 0.1rem solid var(--color-error-600); background-color: rgba(252, 165, 165, 0.35)'
+                : ''
+            }`}
             type='text'
             id='username'
             disabled={isPending}
-            $inputCustomStyles={`
-              width: 32rem;
-              ${
-                errors?.username
-                  ? 'border: 0.1rem solid var(--color-error-600); background-color: rgba(252, 165, 165, 0.35)'
-                  : ''
-              }
-            `}
             {...register('username', {
               required: 'This field is required.',
               minLength: {
@@ -126,28 +87,22 @@ function Signup() {
               },
             })}
           />
-        </Box>
+        </div>
 
-        <Box
-          $direction='column'
-          $gap='0.8rem'
-        >
-          <Label htmlFor='email'>Email:</Label>
+        <div>
+          <label htmlFor='email'>Email:</label>
           {errors ? (
             <span style={{ color: 'orangered' }}>{errors?.email?.message}</span>
           ) : null}
-          <Input
+          <input
+            style={`${
+              errors?.email
+                ? 'border: 0.1rem solid var(--color-error-600); background-color: rgba(252, 165, 165, 0.35)'
+                : ''
+            }`}
             type='email'
             id='email'
             disabled={isPending}
-            $inputCustomStyles={`
-              width: 32rem;
-              ${
-                errors?.email
-                  ? 'border: 0.1rem solid var(--color-error-600); background-color: rgba(252, 165, 165, 0.35)'
-                  : ''
-              }
-            `}
             {...register('email', {
               required: 'This field is required.',
               pattern: {
@@ -156,33 +111,27 @@ function Signup() {
               },
             })}
           />
-        </Box>
+        </div>
 
-        <Box
-          $direction='column'
-          $gap='0.8rem'
-        >
-          <Label htmlFor='password'>
+        <div>
+          <label htmlFor='password'>
             Password&nbsp;
             <span style={{ color: '#d1d5db' }}>(min 6 characters)</span>:
-          </Label>
+          </label>
           {errors ? (
             <span style={{ color: 'orangered' }}>
               {errors?.password?.message}
             </span>
           ) : null}
-          <Input
+          <input
+            style={`${
+              errors?.password
+                ? 'border: 0.1rem solid var(--color-error-600); background-color: rgba(252, 165, 165, 0.35)'
+                : ''
+            }`}
             type='password'
             id='password'
             disabled={isPending}
-            $inputCustomStyles={`
-              width: 32rem;
-              ${
-                errors?.password
-                  ? 'border: 0.1rem solid var(--color-error-600); background-color: rgba(252, 165, 165, 0.35)'
-                  : ''
-              }
-            `}
             {...register('password', {
               required: 'This field is required.',
               minLength: {
@@ -195,45 +144,34 @@ function Signup() {
               },
             })}
           />
-        </Box>
+        </div>
 
-        <Box
-          $direction='column'
-          $gap='0.8rem'
-        >
-          <Label htmlFor='confirmPassword'>Confirm Password:</Label>
+        <div>
+          <label htmlFor='confirmPassword'>Confirm Password:</label>
           {errors ? (
             <span style={{ color: 'orangered' }}>
               {errors?.confirmPassword?.message}
             </span>
           ) : null}
-          <Input
+          <input
+            style={` ${
+              errors?.confirmPassword
+                ? 'border: 0.1rem solid var(--color-error-600); background-color: rgba(252, 165, 165, 0.35)'
+                : ''
+            }`}
             type='password'
             id='confirmPassword'
             disabled={isPending}
-            $inputCustomStyles={`
-              width: 32rem;
-              ${
-                errors?.confirmPassword
-                  ? 'border: 0.1rem solid var(--color-error-600); background-color: rgba(252, 165, 165, 0.35)'
-                  : ''
-              }
-            `}
             {...register('confirmPassword', {
               required: 'This field is required.',
               validate: (value) =>
                 value === getValues().password || 'The passwords must match.',
             })}
           />
-        </Box>
+        </div>
 
-        <Box
-          $width='32rem'
-          $alignItems='center'
-          $justifyContent='space-between'
-          style={{ marginTop: '3rem' }}
-        >
-          <Button
+        <div>
+          <button
             style={{
               color: `${
                 errors?.username ||
@@ -262,10 +200,10 @@ function Signup() {
             }}
             disabled={isPending}
           >
-            {!isPending ? `Sign Up` : <MiniLoader />}
-          </Button>
+            {!isPending ? `Sign Up` : <SmallLoader />}
+          </button>
 
-          <Button
+          <button
             style={{
               color: `${
                 errors?.username ||
@@ -296,10 +234,10 @@ function Signup() {
             onClick={handleCancel}
           >
             Cancel
-          </Button>
-        </Box>
-      </SignupForm>
-    </SignupContainer>
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
 

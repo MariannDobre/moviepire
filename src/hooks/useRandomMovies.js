@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { get5RandomMovies } from '../services/apiMovies';
 
-export function useCarouselMovies() {
+export function useRandomMovies() {
   const {
     data: randomMovies,
     isPending,
     error,
   } = useQuery({
-    queryKey: ['carouselMovies'],
+    queryKey: ['sliderMovies'],
     queryFn: () => get5RandomMovies(),
   });
 

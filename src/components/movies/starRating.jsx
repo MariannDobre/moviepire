@@ -1,17 +1,9 @@
 import React, { useState } from 'react';
-
-import styled from 'styled-components';
-
 import { TiStarFullOutline, TiStarOutline } from 'react-icons/ti';
 
 const FILLED_STAR = '#4f46e5';
 const OUTLINED_STAR = '#999999';
 const SIZE = '28px';
-
-const StarContainer = styled.div`
-  display: flex;
-  gap: 0.4rem;
-`;
 
 function StarRating({ rating, setRating }) {
   const [hoveredRating, setHoveredRating] = useState(0);
@@ -21,7 +13,7 @@ function StarRating({ rating, setRating }) {
   }
 
   return (
-    <StarContainer>
+    <div>
       {Array.from({ length: 10 }, (_, i) => {
         return (
           <Stars
@@ -33,7 +25,7 @@ function StarRating({ rating, setRating }) {
           />
         );
       })}
-    </StarContainer>
+    </div>
   );
 }
 
@@ -41,21 +33,9 @@ export default StarRating;
 
 // RENDER THE STARS
 
-const Star = styled.button`
-  outline: none;
-  border: none;
-  cursor: pointer;
-  background-color: transparent;
-
-  &:focus {
-    outline: none;
-    border: none;
-  }
-`;
-
 function Stars({ fullStar, onRating, onHoverIn, onHoverOut }) {
   return (
-    <Star
+    <button
       onClick={onRating}
       onMouseEnter={onHoverIn}
       onMouseLeave={onHoverOut}
@@ -71,6 +51,6 @@ function Stars({ fullStar, onRating, onHoverIn, onHoverOut }) {
           fill={OUTLINED_STAR}
         />
       )}
-    </Star>
+    </button>
   );
 }

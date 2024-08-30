@@ -2,11 +2,8 @@ import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-
-import AppLayout from './interface/appLayout';
+import Layout from './interface/Layout';
 import MoviesDetails from './pages/moviesDetails';
-import Main from './components/main/main';
-import MoviesTrailer from './pages/moviesTrailer';
 import ViewlistPage from './pages/viewlistPage';
 import Login from './auth/login';
 import Signup from './auth/signup';
@@ -14,7 +11,10 @@ import Signout from './auth/signout';
 import AccountSettings from './pages/accountSettings';
 import ConfirmEmail from './pages/confirmEmail';
 import PageNotFound from './pages/pageNotFound';
-import Test from './components/test';
+import HomePage from './pages/HomePage';
+import Discovery from './pages/Discovery';
+import AboutMovie from './pages/AboutMovie';
+import MovieTrailer from './pages/MovieTrailer';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,63 +32,73 @@ function App() {
         <Routes>
           <Route
             path='/'
-            element={<AppLayout />}
+            element={<Layout />}
           >
             <Route
               index
-              element={<Main />}
+              element={<HomePage />}
             />
 
             <Route
-              path='/title-id/:movieId'
-              element={<MoviesDetails />}
+              path='/discovery'
+              element={<Discovery />}
             />
 
             <Route
-              path='/title-id/:movieId/trailer-id/:titleName'
-              element={<MoviesTrailer />}
+              path='/about/:movieId'
+              element={<AboutMovie />}
             />
 
             <Route
-              path='/login'
-              element={<Login />}
-            />
-
-            <Route
-              path='/signup'
-              element={<Signup />}
-            />
-
-            <Route
-              path='/signout'
-              element={<Signout />}
-            />
-
-            <Route
-              path='/settings'
-              element={<AccountSettings />}
-            />
-
-            <Route
-              path='/confirm-email'
-              element={<ConfirmEmail />}
-            />
-
-            <Route
-              path='/viewlist'
-              element={<ViewlistPage />}
-            />
-
-            <Route
-              path='*'
-              element={<PageNotFound />}
-            />
-
-            <Route
-              path='/test'
-              element={<Test />}
+              path='/trailer-for/:movieId'
+              element={<MovieTrailer />}
             />
           </Route>
+
+          {/* <Route
+            path='/title-id/:movieId'
+            element={<MoviesDetails />}
+          />
+
+          <Route
+            path='/title-id/:movieId/trailer-id/:titleName'
+            element={<MoviesTrailer />}
+          />
+
+          <Route
+            path='/login'
+            element={<Login />}
+          />
+
+          <Route
+            path='/signup'
+            element={<Signup />}
+          />
+
+          <Route
+            path='/signout'
+            element={<Signout />}
+          />
+
+          <Route
+            path='/settings'
+            element={<AccountSettings />}
+          />
+
+          <Route
+            path='/confirm-email'
+            element={<ConfirmEmail />}
+          />
+
+          <Route
+            path='/viewlist'
+            element={<ViewlistPage />}
+          /> */}
+
+          <Route
+            path='*'
+            element={<PageNotFound />}
+          />
         </Routes>
       </BrowserRouter>
 

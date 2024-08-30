@@ -42,13 +42,13 @@ export async function getMoviesDetails(movieId) {
 }
 
 // Getting the trailer of a certain movie
-export async function getMovieTrailer(titleName) {
+export async function getMovieTrailer(movieId) {
   const { data: trailerData, error } = await supabase
     .from('movies')
     .select(
       'movieName, movieYear, moviePoster, movieTrailer, movieGenre, movieDescription'
     )
-    .eq('movieName', titleName)
+    .eq('id', movieId)
     .single();
 
   if (error)

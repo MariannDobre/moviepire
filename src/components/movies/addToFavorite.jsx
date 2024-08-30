@@ -6,38 +6,8 @@ import {
 } from '../../hooks/useAddToFavorites';
 import { useDeleteRating } from '../../hooks/useRating';
 import { useViewedMovies } from '../../hooks/useViewedMovies';
-
-import styled from 'styled-components';
-
 import { BsBookmarkPlusFill, BsBookmarkCheckFill } from 'react-icons/bs';
-import MiniLoader from '../loaders/miniLoader';
-
-const FavoriteButton = styled.button`
-  outline: none;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-
-  svg {
-    --height-12: 4.8rem;
-    --font-8: 3.2rem;
-
-    height: var(--height-12);
-    font-size: var(--font-8);
-    color: var(--color-gray-dark);
-  }
-
-  &:hover {
-    svg {
-      color: var(--color-gray-light);
-    }
-  }
-
-  &:focus {
-    outline: none;
-    border: none;
-  }
-`;
+import SmallLoader from '../loaders/SmallLoader';
 
 function AddToFavorite({
   userId,
@@ -94,13 +64,13 @@ function AddToFavorite({
   return (
     <>
       {isGetting ? (
-        <MiniLoader />
+        <SmallLoader />
       ) : (
-        <FavoriteButton onClick={handleToggleStatus}>
+        <button onClick={handleToggleStatus}>
           {status ? (
             <>
               {isRemoving ? (
-                <MiniLoader />
+                <SmallLoader />
               ) : (
                 <BsBookmarkCheckFill
                   style={{ color: status ? '#fab005' : '' }}
@@ -108,9 +78,9 @@ function AddToFavorite({
               )}
             </>
           ) : (
-            <>{isAdding ? <MiniLoader /> : <BsBookmarkPlusFill />}</>
+            <>{isAdding ? <SmallLoader /> : <BsBookmarkPlusFill />}</>
           )}
-        </FavoriteButton>
+        </button>
       )}
     </>
   );

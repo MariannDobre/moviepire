@@ -1,26 +1,5 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
-import styled from 'styled-components';
-
-const StyledFilter = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.2rem;
-`;
-
-const FilterButton = styled.button`
-  outline: none;
-  border: none;
-  background-color: transparent;
-  font-size: var(--font-size-md);
-  color: var(--color-gray);
-  cursor: pointer;
-
-  &:focus {
-    outline: none;
-    border: none;
-  }
-`;
 
 function Filter({ filterField, options }) {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -32,17 +11,17 @@ function Filter({ filterField, options }) {
   }
 
   return (
-    <StyledFilter>
+    <div>
       {options.map((option) => (
-        <FilterButton
+        <button
           key={option.value}
           style={{ color: filterBy === option.value ? '#4f46e5' : '' }}
           onClick={() => handleClick(option.value)}
         >
           {option.label}
-        </FilterButton>
+        </button>
       ))}
-    </StyledFilter>
+    </div>
   );
 }
 

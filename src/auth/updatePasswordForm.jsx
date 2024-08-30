@@ -1,59 +1,7 @@
 import React, { useState } from 'react';
 import { useUpdateUserPass } from '../hooks/useUpdatePass';
-
-import styled from 'styled-components';
-import { Box, Label, Input, Button } from '../globalVariables';
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
-
-import MiniLoader from '../components/loaders/miniLoader';
-
-const UpdateDataContainer = styled.div`
-  --width: 100%;
-  --height: 100%;
-
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  width: var(--width);
-  height: var(--height);
-  background-color: transparent;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 2.4rem;
-`;
-
-const Div = styled.div`
-  position: relative;
-
-  button {
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translate(-50%, -50%);
-  }
-`;
-
-const ShowPasswordButton = styled.button`
-  display: block;
-  outline: none;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  /* pointer-events: none; */
-
-  svg {
-    font-size: var(--font-size-lg);
-    color: var(--color-main-400);
-  }
-
-  &:focus {
-    outline: none;
-    border: none;
-  }
-`;
+import SmallLoader from '../components/loaders/SmallLoader';
 
 function UpdatePasswordForm() {
   const { updateUserPassFn, isPending } = useUpdateUserPass();
@@ -89,35 +37,27 @@ function UpdatePasswordForm() {
   }
 
   return (
-    <UpdateDataContainer
-      style={{
-        backdropFilter: 'blur(0.4rem)',
-      }}
-    >
-      <Form onSubmit={handleSubmit}>
-        <Box
-          $direction='column'
-          $gap='0.8rem'
-        >
-          <Label htmlFor='newPassword'>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor='newPassword'>
             New Password&nbsp;
             <span style={{ color: '#999999' }}>(min 6 characters)</span>:
-          </Label>
+          </label>
 
-          <span
-            style={{
-              fontSize: '1.2rem',
-              color: 'orangered',
-              letterSpacing: '0.1rem',
-            }}
-          >
+          <span>
             {password.length > 1 && passwordLength
               ? 'The password should have at least 6 characters.'
               : null}
           </span>
 
-          <Div>
-            <Input
+          <div>
+            <input
+              style={`${
+                password.length > 1 && passwordLength
+                  ? 'border: 0.1rem solid var(--color-error-600); background-color: rgba(252, 165, 165, 0.35)'
+                  : ''
+              }`}
               type={showPassword ? 'text' : 'password'}
               id='newPassword'
               value={password}
@@ -125,18 +65,9 @@ function UpdatePasswordForm() {
               disabled={isPending}
               minLength={6}
               maxLength={18}
-              $inputCustomStyles={`
-               width: 28rem;
-               color: var(--color-gray);
-               ${
-                 password.length > 1 && passwordLength
-                   ? 'border: 0.1rem solid var(--color-error-600); background-color: rgba(252, 165, 165, 0.35)'
-                   : ''
-               }
-              `}
             />
 
-            <ShowPasswordButton
+            <button
               type='button'
               onClick={() => setShowPassword((showPassword) => !showPassword)}
             >
@@ -157,29 +88,23 @@ function UpdatePasswordForm() {
                   }}
                 />
               )}
-            </ShowPasswordButton>
-          </Div>
-        </Box>
+            </button>
+          </div>
+        </div>
 
-        <Box
-          $direction='column'
-          $gap='0.8rem'
-        >
-          <Label htmlFor='confirmNewPassword'>Confirm Password:</Label>
+        <div>
+          <label htmlFor='confirmNewPassword'>Confirm Password:</label>
 
           {!passwordMatch && formSubmitted && (
-            <span
-              style={{
-                fontSize: '1.2rem',
-                color: 'orangered',
-                letterSpacing: '0.1rem',
-              }}
-            >
-              Passwords should match.
-            </span>
+            <span>Passwords should match.</span>
           )}
 
-          <Input
+          <input
+            style={`${
+              !passwordMatch && formSubmitted
+                ? 'border: 0.1rem solid var(--color-error-600); background-color: rgba(252, 165, 165, 0.35)'
+                : ''
+            }`}
             type={showPassword ? 'text' : 'password'}
             id='confirmNewPassword'
             value={confirmPassword}
@@ -187,36 +112,24 @@ function UpdatePasswordForm() {
             disabled={isPending}
             minLength={6}
             maxLength={18}
-            $inputCustomStyles={`
-              width: 28rem;
-              color: var(--color-gray);
-             ${
-               !passwordMatch && formSubmitted
-                 ? 'border: 0.1rem solid var(--color-error-600); background-color: rgba(252, 165, 165, 0.35)'
-                 : ''
-             }
-           `}
           />
-        </Box>
+        </div>
 
-        <Box
-          $alignItems='center'
-          $justifyContent='space-between'
-        >
-          <Button disabled={isPending}>
-            {!isPending ? `Change` : <MiniLoader />}
-          </Button>
+        <div>
+          <button disabled={isPending}>
+            {!isPending ? `Change` : <SmallLoader />}
+          </button>
 
-          <Button
+          <button
             type='reset'
             onClick={handleCancel}
             disabled={isPending}
           >
             Cancel
-          </Button>
-        </Box>
-      </Form>
-    </UpdateDataContainer>
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
 
