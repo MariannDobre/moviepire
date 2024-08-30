@@ -15,6 +15,7 @@ import HomePage from './pages/HomePage';
 import Discovery from './pages/Discovery';
 import AboutMovie from './pages/AboutMovie';
 import MovieTrailer from './pages/MovieTrailer';
+import AboutApp from './pages/AboutApp';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -42,6 +43,11 @@ function App() {
             <Route
               path='/discovery'
               element={<Discovery />}
+            />
+
+            <Route
+              path='/about-app'
+              element={<AboutApp />}
             />
 
             <Route

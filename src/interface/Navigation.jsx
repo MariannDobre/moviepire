@@ -16,7 +16,7 @@ import {
 // links for the user that is not authentificated
 const notAuthLinks = [
   { icon: <FaHome />, label: 'home', navigateTo: '/' },
-  { icon: <FaQuestion />, label: 'about', navigateTo: '/about' },
+  { icon: <FaQuestion />, label: 'about', navigateTo: '/about-app' },
   { icon: <FaSearch />, label: 'discovery', navigateTo: '/discovery' },
   { icon: <FaDoorOpen />, label: 'loggin', navigateTo: '/log-into-account' },
   { icon: <FaPen />, label: 'create account', navigateTo: '/register-account' },
