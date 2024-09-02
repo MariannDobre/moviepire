@@ -18,17 +18,18 @@ const notAuthLinks = [
   { icon: <FaHome />, label: 'home', navigateTo: '/' },
   { icon: <FaQuestion />, label: 'about', navigateTo: '/about-app' },
   { icon: <FaSearch />, label: 'discovery', navigateTo: '/discovery' },
-  { icon: <FaDoorOpen />, label: 'loggin', navigateTo: '/log-into-account' },
+  { icon: <FaDoorOpen />, label: 'log in', navigateTo: '/log-into-account' },
   { icon: <FaPen />, label: 'create account', navigateTo: '/register-account' },
   { icon: <FaWrench />, label: 'how to use', navigateTo: '/how-to-use-it' },
 ];
 
 // links for the user that is authentificated
 const authLinks = [
+  { icon: <FaHome />, label: 'home', navigateTo: '/' },
   {
     icon: <FaUser />,
     label: 'account',
-    navigateTo: '/account',
+    navigateTo: '/account-settings',
   },
 ];
 
@@ -46,7 +47,7 @@ function Navigation() {
   // custom hook call to determine if the user is authentificated or not
   const { isAuthenticated } = useUser();
   // what array should get mapped based on isAuthenticated value
-  const navLinks = isAuthenticated === false ? notAuthLinks : authLinks;
+  const navLinks = isAuthenticated === false ? authLinks : notAuthLinks;
 
   // handler that toggles the visibility of the menu
   const handleSidebar = (event) => {
@@ -71,7 +72,8 @@ function Navigation() {
       >
         <div
           ref={sidebarMenuRef}
-          className='flex flex-col gap-6 py-3 px-6 bg-black w-72 h-full border-r border-neutral-800'
+          // py-5 => py-3 from the nav + py-2 from the profile button
+          className='flex flex-col gap-6 py-5 px-6 bg-black w-72 h-full border-r border-neutral-800'
         >
           <button
             onClick={handleSidebar}
@@ -89,12 +91,12 @@ function Navigation() {
                 key={index}
                 to={navigateTo}
                 className={`text-gray-300 ${
-                  pathname === navigateTo ? 'text-red-100' : ''
-                } text-lg capitalize tracking-wider flex items-center justify-start gap-2 py-1 px-2 -ml-1.5 rounded-xl hover:bg-neutral-50/20 focus-visible:bg-neutral-50/20`}
+                  pathname === navigateTo && 'text-red-100 bg-neutral-50/10'
+                } text-lg capitalize tracking-wider flex items-center justify-start gap-2 py-1 px-2 -ml-1.5 rounded-md hover:bg-neutral-50/20 focus-visible:bg-neutral-50/20 transition-all duration-300`}
               >
                 <span
                   className={`text-gray-500 ${
-                    pathname === navigateTo ? 'text-red-400' : ''
+                    pathname === navigateTo && 'text-red-400'
                   }`}
                 >
                   {icon}

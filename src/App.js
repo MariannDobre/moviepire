@@ -5,10 +5,10 @@ import { Toaster } from 'react-hot-toast';
 import Layout from './interface/Layout';
 import MoviesDetails from './pages/moviesDetails';
 import ViewlistPage from './pages/viewlistPage';
-import Login from './auth/login';
+import Login from './pages/Login';
 import Signup from './auth/signup';
 import Signout from './auth/signout';
-import AccountSettings from './pages/accountSettings';
+// import AccountSettings from './pages/accountSettings';
 import ConfirmEmail from './pages/confirmEmail';
 import PageNotFound from './pages/pageNotFound';
 import HomePage from './pages/HomePage';
@@ -16,6 +16,8 @@ import Discovery from './pages/Discovery';
 import AboutMovie from './pages/AboutMovie';
 import MovieTrailer from './pages/MovieTrailer';
 import AboutApp from './pages/AboutApp';
+import CreateAccount from './pages/CreateAccount';
+import AccountSettings from './pages/AccountSettings';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -41,13 +43,28 @@ function App() {
             />
 
             <Route
+              path='/about-app'
+              element={<AboutApp />}
+            />
+
+            <Route
               path='/discovery'
               element={<Discovery />}
             />
 
             <Route
-              path='/about-app'
-              element={<AboutApp />}
+              path='/log-into-account'
+              element={<Login />}
+            />
+
+            <Route
+              path='/register-account'
+              element={<CreateAccount />}
+            />
+
+            <Route
+              path='/account-settings'
+              element={<AccountSettings />}
             />
 
             <Route
