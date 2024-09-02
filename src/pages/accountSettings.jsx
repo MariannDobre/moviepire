@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import UpdatePublicData from '../auth/UpdatePublicData';
 import UpdatePrivateData from '../auth/UpdatePrivateData';
-import AccoutEmail from '../auth/AccoutEmail';
+import AccountDetails from '../auth/AccountDetails';
 import { FaGlobe, FaShieldAlt } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 
@@ -21,11 +21,11 @@ const settingsButtons = [
     componentToRender: <UpdatePrivateData />,
   },
   {
-    label: 'Account email',
-    value: 'account-email',
+    label: 'Account details',
+    value: 'account-details',
     type: 'button',
     icon: <MdEmail />,
-    componentToRender: <AccoutEmail />,
+    componentToRender: <AccountDetails />,
   },
 ];
 
