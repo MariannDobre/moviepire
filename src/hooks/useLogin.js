@@ -16,7 +16,6 @@ export function useLogin() {
       toast.success('You were logged in your account successfully.');
     },
     onError: (err) => {
-      console.log(`An error occured:`, err);
       toast.error(
         `Something went wrong with your credentials: ${err?.message}`
       );

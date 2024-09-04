@@ -47,7 +47,7 @@ function Navigation() {
   // custom hook call to determine if the user is authentificated or not
   const { isAuthenticated } = useUser();
   // what array should get mapped based on isAuthenticated value
-  const navLinks = isAuthenticated === false ? authLinks : notAuthLinks;
+  const navLinks = isAuthenticated === true ? authLinks : notAuthLinks;
 
   // handler that toggles the visibility of the menu
   const handleSidebar = (event) => {

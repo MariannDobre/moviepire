@@ -128,7 +128,7 @@ function App() {
       <Toaster
         position='top-center'
         gutter={12}
-        containerStyle={{ margin: 'var(--margin-sm)' }}
+        containerStyle={{ margin: '12px' }}
         toastOptions={{
           success: {
             duration: 3500,
@@ -137,13 +137,14 @@ function App() {
             duration: 5000,
           },
           style: {
-            fontSize: 'var(--font-size-base)',
-            maxWidth: '64rem',
+            fontSize: '16px',
+            maxWidth: '720px',
             textAlign: 'center',
-            padding: 'var(--padding-md) var(--padding-xl)',
-            backgroundColor: 'var(--color-black-light)',
-            color: 'var(--color-white)',
-            borderRadius: 'calc(var(--border-rounded-xs) / 2)',
+            padding: '12px',
+            backgroundColor: '#1a1a1a',
+            color: 'rgb(231 229 228)',
+            borderRadius: '6px',
+            letterSpacing: '1px',
           },
         }}
       />

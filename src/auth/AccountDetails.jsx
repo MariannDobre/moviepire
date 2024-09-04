@@ -7,7 +7,7 @@ function AccountDetails() {
   return (
     <div className='flex flex-col gap-6 bg-neutral-50/10 p-3 rounded-md shadow-lg outline outline-1 outline-neutral-800'>
       <div className='flex flex-col gap-1'>
-        <label className='text-sm text-stone-300 tracking-wider pl-3'>
+        <label className='text-sm text-stone-300 tracking-wider pl-3 self-start'>
           Account Username:
         </label>
 
@@ -21,7 +21,7 @@ function AccountDetails() {
       </div>
 
       <div className='flex flex-col gap-1'>
-        <label className='text-sm text-stone-300 tracking-wider pl-3'>
+        <label className='text-sm text-stone-300 tracking-wider pl-3 self-start'>
           Account Email:
         </label>
 
