@@ -1,8 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useUser } from '../hooks/useUser';
+import { useUser } from '../hooks/auth/useUser';
+import { useUpdatePublicData } from '../hooks/auth/mutations/useUpdatePublicData';
 import { FaUser } from 'react-icons/fa';
-import { useUpdateUser } from '../hooks/useUpdateData';
 import SmallLoader from '../components/loaders/SmallLoader';
 
 function UpdatePublicData() {
@@ -14,7 +14,7 @@ function UpdatePublicData() {
     formState: { errors },
   } = useForm();
   const { user } = useUser();
-  const { updateCurrentUserFn, isPending } = useUpdateUser();
+  const { updateUserPublicData, isPending } = useUpdatePublicData();
 
   // derived state to get the avatar of the user
   const userAvatar = user?.user_metadata?.avatar;
@@ -31,7 +31,7 @@ function UpdatePublicData() {
 
   // the handler that will submit the data to the supabase client
   const onSubmit = ({ updatedUsername }) => {
-    updateCurrentUserFn({ updatedUsername, updatedAvatarFile });
+    updateUserPublicData({ updatedUsername, updatedAvatarFile });
   };
 
   // the handler that will cancel the login action and will redirect the user with a step back in the history

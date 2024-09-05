@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useUpdateUserPass } from '../hooks/useUpdatePass';
+import { useUpdatePrivateData } from '../hooks/auth/mutations/useUpdatePrivateData';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import SmallLoader from '../components/loaders/SmallLoader';
 
@@ -14,7 +14,7 @@ function UpdatePrivateData() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { updateUserPassFn, isPending } = useUpdateUserPass();
+  const { updatePassword, isPending } = useUpdatePrivateData();
 
   // track if the confirm password field match with the password field
   const newPassword = watch('newPassword');

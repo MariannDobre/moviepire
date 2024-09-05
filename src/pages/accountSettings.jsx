@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useUser } from '../hooks/auth/useUser';
 import UpdatePublicData from '../auth/UpdatePublicData';
 import UpdatePrivateData from '../auth/UpdatePrivateData';
 import AccountDetails from '../auth/AccountDetails';
 import { FaGlobe, FaShieldAlt } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
-import { useUser } from '../hooks/useUser';
 
 const settingsButtons = [
   {
@@ -31,6 +32,7 @@ const settingsButtons = [
 ];
 
 function AccountSettings() {
+  const navigate = useNavigate();
   // state to control what form should be displayed
   const [selectSetting, setSelectSetting] = useState('public-informations');
   // custom hook call to render dynamically the UI based if the user is logged in or is using the app without an account
@@ -97,13 +99,31 @@ function AccountSettings() {
           </div>
         </div>
       ) : (
-        <div className='w-[1280px] flex items-center justify-center rounded-md shadow-lg bg-neutral-400/20 backdrop-blur p-6 border-none outline outline-1 outline-neutral-800'>
+        <div className='w-[1280px] flex flex-col gap-3 items-center justify-center rounded-md shadow-lg bg-neutral-400/20 backdrop-blur p-6 border-none outline outline-1 outline-neutral-800'>
           <p className='text-stone-200 text-lg tracking-wider text-center'>
             To view the content of this page, please sign in to your account. If
             you don't have an account, feel free to create one—it's quick and
             easy! By logging in, you'll gain access to personalized features and
             a better overall experience.
           </p>
+
+          <div className='flex items-center justify-center gap-6'>
+            <button
+              className='outline-none border-none bg-neutral-900 text-base text-slate-500 font-medium tracking-wide py-2 px-3 rounded-md shadow-lg hover:bg-neutral-950 hover:text-slate-400 focus-visible:bg-neutral-950 focus-visible:text-slate-400 transition-all duration-300'
+              type='button'
+              onClick={() => navigate('/')}
+            >
+              Home Page
+            </button>
+
+            <button
+              className='outline-none border-none bg-neutral-900 text-base text-slate-500 font-medium tracking-wide py-2 px-3 rounded-md shadow-lg hover:bg-neutral-950 hover:text-slate-400 focus-visible:bg-neutral-950 focus-visible:text-slate-400 transition-all duration-300'
+              type='button'
+              onClick={() => navigate('/discovery')}
+            >
+              Discovery
+            </button>
+          </div>
         </div>
       )}
     </div>

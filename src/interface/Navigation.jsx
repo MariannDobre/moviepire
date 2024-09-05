@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { useUser } from '../hooks/useUser';
-import { useClickOutside } from '../hooks/useClickOutside';
+import { useUser } from '../hooks/auth/useUser';
+import { useClickOutside } from '../hooks/assets/useClickOutside';
 import { HiOutlineMenu, HiOutlineMenuAlt2 } from 'react-icons/hi';
 import {
   FaDoorOpen,
@@ -12,6 +12,8 @@ import {
   FaQuestion,
   FaWrench,
 } from 'react-icons/fa';
+import { IoIosJournal } from 'react-icons/io';
+import { ImBooks } from 'react-icons/im';
 
 // links for the user that is not authentificated
 const notAuthLinks = [
@@ -26,11 +28,24 @@ const notAuthLinks = [
 // links for the user that is authentificated
 const authLinks = [
   { icon: <FaHome />, label: 'home', navigateTo: '/' },
+  { icon: <FaQuestion />, label: 'about', navigateTo: '/about-app' },
+  { icon: <FaSearch />, label: 'discovery', navigateTo: '/discovery' },
   {
     icon: <FaUser />,
     label: 'account',
     navigateTo: '/account-settings',
   },
+  {
+    icon: <IoIosJournal />,
+    label: 'viewlist',
+    navigateTo: '/viewlist',
+  },
+  {
+    icon: <ImBooks />,
+    label: 'Search by Genre',
+    navigateTo: '/search-movies-by-genre',
+  },
+  { icon: <FaWrench />, label: 'how to use', navigateTo: '/how-to-use-it' },
 ];
 
 function Navigation() {
@@ -47,7 +62,7 @@ function Navigation() {
   // custom hook call to determine if the user is authentificated or not
   const { isAuthenticated } = useUser();
   // what array should get mapped based on isAuthenticated value
-  const navLinks = isAuthenticated === true ? authLinks : notAuthLinks;
+  const navLinks = !isAuthenticated ? authLinks : notAuthLinks;
 
   // handler that toggles the visibility of the menu
   const handleSidebar = (event) => {

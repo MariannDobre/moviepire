@@ -1,10 +1,9 @@
 import React from 'react';
-import { useRandomMovies } from '../hooks/useRandomMovies';
-import MainSlider from '../components/discovery/MainSlider';
-import SliderSidebar from '../components/discovery/SliderSidebar';
+import { useAllMovies } from '../hooks/movies/useAllMovies';
 
 function Discovery() {
-  const { randomMovies } = useRandomMovies();
+  const { movies, isGetting, error } = useAllMovies();
+  console.log(movies);
 
   return (
     <div className='flex flex-col gap-12'>
@@ -13,10 +12,12 @@ function Discovery() {
       </h1>
 
       {/* 1824px */}
-      <div className='flex gap-12 h-[640px]'>
-        <MainSlider sliderData={randomMovies} />
-
-        <SliderSidebar sidebarData={randomMovies} />
+      <div className='text-stone-300'>
+        {isGetting ? (
+          <h1>Getting the data from the db</h1>
+        ) : (
+          <h1>Data received</h1>
+        )}
       </div>
     </div>
   );

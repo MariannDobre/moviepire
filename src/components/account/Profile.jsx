@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../hooks/useUser';
+import { useUser } from '../../hooks/auth/useUser';
 import { FaUser } from 'react-icons/fa';
 
 function Profile() {

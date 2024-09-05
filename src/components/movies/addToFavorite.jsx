@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
-import {
-  useAddToFavorite,
-  useRemoveFromFavorite,
-  useStatus,
-} from '../../hooks/useAddToFavorites';
-import { useDeleteRating } from '../../hooks/useRating';
-import { useViewedMovies } from '../../hooks/useViewedMovies';
+// import {
+//   useAddToFavorite,
+//   useRemoveFromFavorite,
+//   useStatus,
+// } from '../../hooks/useAddToFavorites';
+// import { useDeleteRating } from '../../hooks/useRating';
+// import { useViewedMovies } from '../../hooks/useViewedMovies';
 import { BsBookmarkPlusFill, BsBookmarkCheckFill } from 'react-icons/bs';
 import SmallLoader from '../loaders/SmallLoader';
+import { useMovieStatus } from '../../hooks/movies/useMovieStatus';
+import { useViewedMovies } from '../../hooks/movies/useViewedMovies';
+import { useAddToViewlist } from '../../hooks/movies/mutations/useAddToViewlist';
+import { useRemoveFromViewlist } from '../../hooks/movies/mutations/useRemoveFromViewlist';
+import { useRemoveRating } from '../../hooks/movies/mutations/useRemoveRating';
 
 function AddToFavorite({
   userId,
@@ -17,14 +22,14 @@ function AddToFavorite({
   movieDuration,
   movieRating,
 }) {
-  const { favoritesStatus, isPending: isGetting } = useStatus(userId, itemId);
-  const status = favoritesStatus[0]?.is_favorite
-    ? favoritesStatus[0]?.is_favorite
+  const { viewedStatus, isFetching } = useMovieStatus(userId, itemId);
+  const status = viewedStatus[0]?.is_favorite
+    ? viewedStatus[0]?.is_favorite
     : null;
   const listOrder = Date.now();
   const [isFavorite, setIsFavorite] = useState(status);
   const { viewedMovies } = useViewedMovies(userId);
-  const { addToFavorites, isPending: isAdding } = useAddToFavorite(
+  const { addToViewlist, isPending: isAdding } = useAddToViewlist(
     userId,
     itemId,
     movieTitle,
@@ -33,7 +38,7 @@ function AddToFavorite({
     movieRating,
     listOrder
   );
-  const { removeFromFavorites, isPending: isRemoving } = useRemoveFromFavorite(
+  const { removeFromFavorites, isPending: isRemoving } = useRemoveFromViewlist(
     userId,
     itemId,
     movieTitle
@@ -43,7 +48,7 @@ function AddToFavorite({
     (item) => item?.item_id === Number(itemId)
   );
   const favoriteRecordId = findFavoriteRecordId[0]?.record_id;
-  const { deleteRating } = useDeleteRating(
+  const { deleteRating } = useRemoveRating(
     userId,
     itemId,
     movieTitle,
@@ -55,7 +60,7 @@ function AddToFavorite({
       removeFromFavorites();
       deleteRating();
     } else {
-      addToFavorites();
+      addToViewlist();
     }
 
     setIsFavorite(!status);
@@ -63,7 +68,7 @@ function AddToFavorite({
 
   return (
     <>
-      {isGetting ? (
+      {isFetching ? (
         <SmallLoader />
       ) : (
         <button onClick={handleToggleStatus}>

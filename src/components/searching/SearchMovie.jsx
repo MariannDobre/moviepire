@@ -1,5 +1,5 @@
 import React, { startTransition, useState } from 'react';
-import { useClickOutside } from '../../hooks/useClickOutside';
+import { useClickOutside } from '../../hooks/assets/useClickOutside';
 import { FaSearch } from 'react-icons/fa';
 import Results from './Results';
 

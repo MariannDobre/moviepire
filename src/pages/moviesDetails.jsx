@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useUser } from '../hooks/useUser';
-import { useRating } from '../hooks/useRating';
-import { useMovieDetails } from '../hooks/useMovieDetails';
-import { useStatus } from '../hooks/useAddToFavorites';
+import { useUser } from '../hooks/auth/useUser';
+import { useRatings } from '../hooks/movies/useRatings';
+import { useMovieDetails } from '../hooks/movies/useMovieDetails';
+import { useMovieStatus } from '../hooks/movies/useMovieStatus';
 import { BsPlayCircle } from 'react-icons/bs';
 import { MdClose } from 'react-icons/md';
 import { FaAngleRight } from 'react-icons/fa6';
@@ -22,8 +22,8 @@ function MoviesDetails() {
   const { user, isAuthenticated } = useUser();
   const userId = user?.id;
   const { movieDetails } = useMovieDetails(movieId);
-  const { dbRatings } = useRating(userId, movieId);
-  const { favoritesStatus, isPending: gettingFavoriteStatus } = useStatus(
+  const { ratings } = useRatings(userId, movieId);
+  const { viewedStatus, isFetching: gettingFavoriteStatus } = useMovieStatus(
     userId,
     movieId
   );
@@ -32,9 +32,7 @@ function MoviesDetails() {
   const movieTitle = movieDetails?.movieName;
 
   // Computing the necessary values for AddToFavorite component to work properly
-  const findMovieRating = dbRatings?.filter(
-    (item) => item?.item_id === movieId
-  );
+  const findMovieRating = ratings?.filter((item) => item?.item_id === movieId);
   const movieRating = findMovieRating[0]?.ratings
     ? findMovieRating[0]?.ratings
     : 0;
@@ -91,7 +89,7 @@ function MoviesDetails() {
 
             <div>
               <p>
-                {favoritesStatus[0]?.is_favorite === true
+                {viewedStatus[0]?.is_favorite === true
                   ? `seen ${
                       movieDetails?.type === 'tv show' ? 'series' : 'movie'
                     }`

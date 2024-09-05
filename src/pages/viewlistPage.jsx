@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useUser } from '../hooks/useUser';
-import { useViewedMovies } from '../hooks/useViewedMovies';
-import { useDeleteRating, useRating } from '../hooks/useRating';
-import { useRemoveFromFavorite } from '../hooks/useAddToFavorites';
+import { useUser } from '../hooks/auth/useUser';
+import { useViewedMovies } from '../hooks/movies/useViewedMovies';
+import { useRatings } from '../hooks/movies/useRatings';
+import { useRemoveRating } from '../hooks/movies/mutations/useRemoveRating';
+import { useRemoveFromViewlist } from '../hooks/movies/mutations/useRemoveFromViewlist';
 import { TiStarFullOutline, TiStarOutline } from 'react-icons/ti';
 import { BsBookmarkCheckFill } from 'react-icons/bs';
 import { FaArrowUpLong, FaArrowDownLong } from 'react-icons/fa6';
@@ -18,14 +19,14 @@ function ViewlistPage() {
   const [favoriteRecordId, setFavoriteRecordId] = useState(null);
   const { user } = useUser();
   const userId = user?.id;
-  const { viewedMovies, isPending: isGettingMovies } = useViewedMovies(userId);
-  const { dbRatings, isPending: isGettingRatings } = useRating(userId, null);
-  const { removeFromFavorites } = useRemoveFromFavorite(
+  const { viewedMovies, isFetching: isGettingMovies } = useViewedMovies(userId);
+  const { dbRatings, isPending: isGettingRatings } = useRatings(userId, null);
+  const { removeFromFavorites } = useRemoveFromViewlist(
     userId,
     movieId,
     movieTitle
   );
-  const { deleteRating } = useDeleteRating(
+  const { deleteRating } = useRemoveRating(
     userId,
     movieId,
     movieTitle,

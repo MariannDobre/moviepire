@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useViewedMovies } from '../../hooks/useViewedMovies';
-import { useStatus } from '../../hooks/useAddToFavorites';
-import {
-  useDeleteRating,
-  useInsertRating,
-  useRating,
-  useUpdateRating,
-} from '../../hooks/useRating';
+import { useViewedMovies } from '../../hooks/movies/useViewedMovies';
+import { useMovieStatus } from '../../hooks/movies/useMovieStatus';
+import { useRatings } from '../../hooks/movies/useRatings';
+import { useRemoveRating } from '../../hooks/movies/mutations/useRemoveRating';
+import { useAddRating } from '../../hooks/movies/mutations/useAddRating';
+import { useUpdateRating } from '../../hooks/movies/mutations/useUpdateRating';
+
 import { TiStarFullOutline, TiStarOutline } from 'react-icons/ti';
 import { BsTrashFill, BsHandThumbsUpFill } from 'react-icons/bs';
 import { RiUploadCloudFill } from 'react-icons/ri';
@@ -20,9 +19,9 @@ function RateMovie({ movieTitle, userId, itemId }) {
   const [isHovered, setIsHovered] = useState(false);
   const location = useLocation();
   const rateMovie = location.search.includes('rate-movie');
-  const { dbRatings, isPending: isGetting } = useRating(userId, itemId);
+  const { dbRatings, isPending: isGetting } = useRatings(userId, itemId);
   const { viewedMovies } = useViewedMovies(userId);
-  const { favoritesStatus } = useStatus(userId, itemId);
+  const { favoritesStatus } = useMovieStatus(userId, itemId);
 
   const findCurrentItemRating = dbRatings.filter(
     (item) => item.item_id === Number(itemId)
@@ -34,7 +33,7 @@ function RateMovie({ movieTitle, userId, itemId }) {
   );
   const favoriteRecordId = findFavoriteRecordId[0]?.record_id;
 
-  const { insertRating, isPending: isInserting } = useInsertRating(
+  const { insertRating, isPending: isInserting } = useAddRating(
     userId,
     itemId,
     rating,
@@ -51,7 +50,7 @@ function RateMovie({ movieTitle, userId, itemId }) {
     setRating,
     favoriteRecordId
   );
-  const { deleteRating, isPending: isDeleting } = useDeleteRating(
+  const { deleteRating, isPending: isDeleting } = useRemoveRating(
     userId,
     itemId,
     movieTitle,
