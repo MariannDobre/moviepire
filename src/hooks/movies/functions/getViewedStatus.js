@@ -2,6 +2,8 @@ import supabase from '../../../services/supabase';
 
 // calls the supabase client to send back the viewed status of each movie
 export async function getViewedStatus(userId, itemId) {
+  if (userId === null) return;
+
   const { data, error } = await supabase
     .from('favorites')
     .select('is_favorite')

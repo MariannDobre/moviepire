@@ -2,9 +2,18 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useMovieDetails } from '../hooks/movies/useMovieDetails';
+import { useMovieStatus } from '../hooks/movies/useMovieStatus';
 import { useUser } from '../hooks/auth/useUser';
 
+import Modal from '../interface/compound components/Modal';
+import ViewClip from '../components/movies/ViewClip';
 import SmallLoader from '../components/loaders/SmallLoader';
+
+import {
+  BsFillBookmarkPlusFill,
+  BsFillBookmarkCheckFill,
+} from 'react-icons/bs';
+
 import 'react-lazy-load-image-component/src/effects/opacity.css';
 
 const actionsButtonsStyles =
@@ -14,8 +23,20 @@ function AboutMovie() {
   const params = useParams();
   const navigate = useNavigate();
   const { movieId } = params;
-  const { movieDetails, isFetching, error } = useMovieDetails(movieId);
-  const { isAuthenticated } = useUser();
+  const { user, isAuthenticated } = useUser();
+  const userId = isAuthenticated ? user?.id : null;
+  const {
+    movieDetails,
+    isFetching: getMovies,
+    error: detailsError,
+  } = useMovieDetails(movieId);
+  const {
+    viewedStatus,
+    isFetching: getStatus,
+    error: statusError,
+  } = useMovieStatus(userId, movieId);
+  console.log(user);
+  console.log(userId);
 
   const movieDuration = movieDetails?.movieDuration;
   const totalMinutes = parseInt(movieDuration, 10);
@@ -25,7 +46,7 @@ function AboutMovie() {
 
   return (
     <React.Fragment>
-      {error && (
+      {detailsError && (
         <div className='text-stone-200 w-full h-[660px] flex items-center justify-center bg-neutral-900/75 rounded-md outline outline-1 outline-neutral-400/50'>
           <p className='text-lg tracking-wide'>
             An unexpected error occurred. We are trying to figure it out and
@@ -34,7 +55,7 @@ function AboutMovie() {
         </div>
       )}
 
-      {isFetching ? (
+      {getMovies ? (
         <div
           style={{ height: 'calc(100vh - 96px - 61px)' }}
           className='text-stone-200 w-full flex items-center justify-center bg-neutral-900/75 rounded-md outline outline-1 outline-neutral-400/50'
@@ -60,13 +81,23 @@ function AboutMovie() {
           >
             <div>
               <div className='flex gap-4 self-start'>
-                <LazyLoadImage
-                  className='w-44 h-60'
-                  src={movieDetails.moviePoster}
-                  alt={`Poster for ${movieDetails.movieName}`}
-                  effect='opacity'
-                  delayTime={500}
-                />
+                <div className='w-44 h-60 relative'>
+                  <LazyLoadImage
+                    className='w-full h-full'
+                    src={movieDetails.moviePoster}
+                    alt={`Poster for ${movieDetails.movieName}`}
+                    effect='opacity'
+                    delayTime={500}
+                  />
+
+                  <button className='absolute text-5xl text-neutral-900 top-0 -left-1.5 bg-transparent border-none outline-0 outline-transparent p-0 w-auto h-auto hover:text-neutral-700 focus-visible:text-neutral-700 transition-all duration-300'>
+                    {false ? (
+                      <BsFillBookmarkCheckFill />
+                    ) : (
+                      <BsFillBookmarkPlusFill />
+                    )}
+                  </button>
+                </div>
 
                 <div className='flex flex-col gap-2'>
                   <h1 className='text-3xl text-stone-200 tracking-wide'>
@@ -105,9 +136,38 @@ function AboutMovie() {
 
               <button className={actionsButtonsStyles}>Add to Viewlist</button>
 
-              <button className={actionsButtonsStyles}>Rate Title</button>
+              {/* <button className={actionsButtonsStyles}>Rate Title</button> */}
+              <Modal>
+                <Modal.Open
+                  opens='rate-movie'
+                  renderButton={() => (
+                    <button className={actionsButtonsStyles}>Rate Title</button>
+                  )}
+                />
 
-              <button className={actionsButtonsStyles}>View Clip</button>
+                <Modal.Window name='rate-movie'>
+                  {/* <RateMovie /> */}
+
+                  <div className='text-xl text-green-500'>RATE MOVIES</div>
+                </Modal.Window>
+              </Modal>
+
+              {/* <button className={actionsButtonsStyles}>View Clip</button> */}
+              <Modal>
+                <Modal.Open
+                  opens='view-clip'
+                  renderButton={() => (
+                    <button className={actionsButtonsStyles}>View Clip</button>
+                  )}
+                />
+
+                <Modal.Window name='view-clip'>
+                  <ViewClip
+                    movieClip={movieDetails.movieVideos[0]}
+                    movieName={movieDetails.movieName}
+                  />
+                </Modal.Window>
+              </Modal>
             </div>
           </div>
 
