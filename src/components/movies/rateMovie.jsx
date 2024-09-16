@@ -235,6 +235,7 @@ function RateMovie({ movieTitle, movieId }) {
   const findCurrentRating = ratings.filter(
     (item) => item.item_id === Number(movieId)
   );
+  console.log(findCurrentRating);
 
   const starSize =
     findCurrentRating[0]?.ratings && rating === 0
@@ -273,7 +274,12 @@ function RateMovie({ movieTitle, movieId }) {
 
       <RateButton
         rating={rating}
+        ratingId={findCurrentRating[0]?.id}
+        setRating={setRating}
         ratingStatus={findCurrentRating}
+        userId={user?.id}
+        movieId={movieId}
+        movieTitle={movieTitle}
       />
     </div>
   );

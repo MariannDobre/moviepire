@@ -7,16 +7,61 @@ import SmallLoader from '../loaders/SmallLoader';
 const buttonsStyles =
   'w-44 py-1.5 px-6 text-stone-200 text-base tracking-wider bg-red-400 border-none outline-none cursor-pointer rounded-md shadow-lg hover:bg-red-500 hover:text-stone-100 focus-visible:bg-red-500 focus-visible:text-stone-100 disabled:bg-neutral-950 disabled:text-gray-500/75 disabled:cursor-not-allowed transition-all duration-300';
 
-function RateButton({ rating, ratingStatus }) {
-  // what i need for insertRating:  userId,
+function RateButton({
+  rating,
+  ratingId,
+  setRating,
+  ratingStatus,
+  userId,
+  movieId,
+  movieTitle,
+  viewedRecordId, // in teste, posibil optional posibil obligatoriu
+}) {
+  //  what i need for insertRating:
+  //  userId,
   //  itemId,
   //  rating,
   //  movieTitle,
   //  setRating,
-  //  favoriteRecordId
-  const { insertRating, isPending: isInserting } = useAddRating();
-  const { modifyRating, isPending: isUpdating } = useUpdateRating();
-  const { deleteRating, isPending: isDeleting } = useRemoveRating();
+  //  favoriteRecordId // in teste, posibil optional posibil obligatoriu
+
+  const { insertRating, isPending: isInserting } = useAddRating(
+    userId,
+    movieId,
+    movieTitle,
+    rating,
+    setRating
+  );
+
+  //  what i need for modifyRating/updateRating:
+  //  ratingId,
+  //  userId,
+  //  itemId,
+  //  rating,
+  //  movieTitle,
+  //  setRating,
+  //  favoriteRecordId // in teste, posibil optional posibil obligatoriu
+
+  const { modifyRating, isPending: isUpdating } = useUpdateRating(
+    userId,
+    movieId,
+    movieTitle,
+    rating,
+    ratingId,
+    setRating
+  );
+
+  //  what i need for deleteRating:
+  //  userId,
+  //  itemId,
+  //  movieTitle,
+  //  favoriteRecordId // in teste, posibil optional posibil obligatoriu
+
+  const { deleteRating, isPending: isDeleting } = useRemoveRating(
+    userId,
+    movieId,
+    movieTitle
+  );
 
   return (
     <React.Fragment>
@@ -24,6 +69,7 @@ function RateButton({ rating, ratingStatus }) {
         <button
           className={buttonsStyles}
           type='button'
+          onClick={() => insertRating()}
           disabled={!rating || isInserting}
         >
           {isInserting ? <SmallLoader /> : 'Rate Title'}
@@ -33,6 +79,7 @@ function RateButton({ rating, ratingStatus }) {
           <button
             className={buttonsStyles}
             type='button'
+            onClick={() => modifyRating()}
             disabled={!rating || isUpdating}
           >
             {isUpdating ? <SmallLoader /> : 'Update Rating'}
@@ -41,6 +88,7 @@ function RateButton({ rating, ratingStatus }) {
           <button
             className={buttonsStyles}
             type='button'
+            onClick={() => deleteRating()}
             disabled={rating || isDeleting}
           >
             {isDeleting ? <SmallLoader /> : 'Delete Rating'}

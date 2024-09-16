@@ -4,13 +4,12 @@ import { updateRating } from '../functions/updateRating';
 
 // let the user to update their current rating
 export function useUpdateRating(
-  ratingId,
   userId,
-  itemId,
-  rating,
+  movieId,
   movieTitle,
-  setRating,
-  favoriteRecordId
+  rating,
+  ratingId,
+  setRating
 ) {
   const queryClient = useQueryClient();
 
@@ -19,11 +18,10 @@ export function useUpdateRating(
     isPending,
     error,
   } = useMutation({
-    mutationFn: () =>
-      updateRating(ratingId, rating, favoriteRecordId, userId, itemId),
+    mutationFn: () => updateRating(userId, movieId, rating, ratingId),
     onSuccess: () => {
       toast.success(`The rating for: ${movieTitle}, was updated successfully.`);
-      queryClient.invalidateQueries({ queryKey: ['ratings', userId, itemId] });
+      queryClient.invalidateQueries({ queryKey: ['ratings', userId, movieId] });
       setRating(0);
     },
     onError: (error) =>

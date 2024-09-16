@@ -11,9 +11,9 @@ export async function removeRating(userId, itemId, favoriteRecordId) {
   const { error: viewlistTableError } = await supabase
     .from('favorites')
     .update({ your_ratings: 0 })
-    .eq('record_id', favoriteRecordId)
     .eq('user_id', userId)
     .eq('item_id', itemId);
+  // .eq('record_id', favoriteRecordId)
 
   if (ratingsTableError)
     throw new Error(

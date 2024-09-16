@@ -5,7 +5,6 @@ import React, {
   useState,
 } from 'react';
 import { RiCloseFill } from 'react-icons/ri';
-import { useClickOutside } from '../../hooks/assets/useClickOutside';
 
 const ModalContext = createContext();
 

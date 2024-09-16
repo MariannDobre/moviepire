@@ -3,14 +3,7 @@ import toast from 'react-hot-toast';
 import { addRating } from '../functions/addRating';
 
 // let the user to add/insert a rating for his viewed movie
-export function useAddRating(
-  userId,
-  itemId,
-  rating,
-  movieTitle,
-  setRating,
-  favoriteRecordId
-) {
+export function useAddRating(userId, movieId, movieTitle, rating, setRating) {
   const queryClient = useQueryClient();
 
   const {
@@ -18,11 +11,11 @@ export function useAddRating(
     isPending,
     error,
   } = useMutation({
-    mutationFn: () => addRating(userId, itemId, rating, favoriteRecordId),
+    mutationFn: () => addRating(userId, movieId, rating),
     onSuccess: () => {
       toast.success(`The rating for: ${movieTitle}, was added successfully.`);
       queryClient.invalidateQueries({
-        queryKey: ['ratings', userId, itemId],
+        queryKey: ['ratings', userId, movieId],
       });
       setRating(0);
     },

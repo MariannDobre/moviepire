@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import { removeRating } from '../functions/removeRating';
 
 // let the user to delete their rating
-export function useRemoveRating(userId, itemId, movieTitle, favoriteRecordId) {
+export function useRemoveRating(userId, movieId, movieTitle) {
   const queryClient = useQueryClient();
 
   const {
@@ -11,10 +11,10 @@ export function useRemoveRating(userId, itemId, movieTitle, favoriteRecordId) {
     isPending,
     error,
   } = useMutation({
-    mutationFn: () => removeRating(userId, itemId, favoriteRecordId),
+    mutationFn: () => removeRating(userId, movieId),
     onSuccess: () => {
       toast.success(`The rating for: ${movieTitle}, was deleted successfully.`);
-      queryClient.invalidateQueries({ queryKey: ['ratings', userId, itemId] });
+      queryClient.invalidateQueries({ queryKey: ['ratings', userId, movieId] });
     },
     onError: (error) =>
       toast.error(
