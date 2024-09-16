@@ -15,6 +15,9 @@ export function useSignup() {
         'Your account has been created successfully. Verify your email address.'
       );
     },
+    onError: (err) => {
+      toast.error(`Something went wrong: ${err.message}`);
+    },
   });
 
   return { signupUser, isPending };

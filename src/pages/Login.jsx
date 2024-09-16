@@ -17,8 +17,8 @@ function Login() {
   const { isAuthenticated } = useUser();
 
   // the handler that will submit the data to the supabase client
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = ({ loginEmail, loginPassword }) => {
+    loginUser({ loginEmail, loginPassword }, { onSettled: () => reset() });
   };
 
   // the handler that will cancel the login action and will redirect the user with a step back in the history

@@ -36,6 +36,14 @@ function CreateAccount() {
       registerPassword,
       registerConfirmPassword
     );
+    signupUser(
+      {
+        registerUsername,
+        registerEmail,
+        registerPassword,
+      },
+      { onSettled: () => reset() }
+    );
   };
 
   // the handler that will cancel the login action and will redirect the user with a step back in the history

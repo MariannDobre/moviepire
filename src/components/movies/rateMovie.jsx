@@ -10,13 +10,15 @@ import { useUpdateRating } from '../../hooks/movies/mutations/useUpdateRating';
 import { TiStarFullOutline, TiStarOutline } from 'react-icons/ti';
 import { BsTrashFill, BsHandThumbsUpFill } from 'react-icons/bs';
 import { RiUploadCloudFill } from 'react-icons/ri';
-import StarRating from './starRating';
 import SmallLoader from '../loaders/SmallLoader';
+import ChooseRating from './ChooseRating';
+import RateButton from './RateButton';
+import { useUser } from '../../hooks/auth/useUser';
+import { FaStar } from 'react-icons/fa';
 
-function RateMovie({ movieTitle, userId, itemId }) {
+function Test({ movieTitle, userId, itemId }) {
   const [rating, setRating] = useState(0);
   const [openModal, setOpenModal] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
   const location = useLocation();
   const rateMovie = location.search.includes('rate-movie');
   const { dbRatings, isPending: isGetting } = useRatings(userId, itemId);
@@ -77,15 +79,6 @@ function RateMovie({ movieTitle, userId, itemId }) {
   }
 
   //
-  function handleMouseEnter() {
-    setIsHovered(true);
-  }
-
-  function handleMouseLeave() {
-    setIsHovered(false);
-  }
-
-  //
   function handleInsertRating() {
     insertRating();
     setOpenModal(false);
@@ -120,9 +113,6 @@ function RateMovie({ movieTitle, userId, itemId }) {
       </button>
 
       {openModal && (
-        // <Modal>
-        //   <Modal.Overlay>
-        //     <Modal.Body>
         <div>
           <div>
             <div>
@@ -138,15 +128,6 @@ function RateMovie({ movieTitle, userId, itemId }) {
 
                     <span>!</span>
                   </div>
-
-                  {/* <Modal.CloseModal
-                    onClose={handleCloseModal}
-                    onEnter={handleMouseEnter}
-                    onLeave={handleMouseLeave}
-                    favoritesStatus={favoritesStatus}
-                    isHovered={isHovered}
-                    setIsHovered={setIsHovered}
-                  /> */}
 
                   <p>
                     You are not allowed to rate something&nbsp;
@@ -185,14 +166,14 @@ function RateMovie({ movieTitle, userId, itemId }) {
 
                   <h1>{movieTitle}</h1>
 
-                  <StarRating
+                  {/* <StarRating
                     rating={
                       findCurrentItemRating[0]?.ratings && rating === 0
                         ? findCurrentItemRating[0]?.ratings
                         : rating
                     }
                     setRating={setRating}
-                  />
+                  /> */}
 
                   {findCurrentItemRating[0]?.ratings ? (
                     <button
@@ -238,14 +219,76 @@ function RateMovie({ movieTitle, userId, itemId }) {
                   )}
                 </React.Fragment>
               )}
-              {/* </Modal.Body>
-          </Modal.Overlay>
-        </Modal> */}
             </div>
           </div>
         </div>
       )}
     </>
+  );
+}
+
+function RateMovie({ movieTitle, movieId }) {
+  const [rating, setRating] = useState(0);
+  const { user } = useUser();
+  const { ratings, isFetching } = useRatings(user?.id, movieId);
+
+  const findCurrentRating = ratings.filter(
+    (item) => item.item_id === Number(movieId)
+  );
+
+  const starSize =
+    findCurrentRating[0]?.ratings && rating === 0
+      ? 80 + findCurrentRating[0]?.ratings * 2
+      : rating > 0
+      ? 80 + rating * 2
+      : 80;
+  const ratingForStar =
+    findCurrentRating[0]?.ratings && rating === 0
+      ? findCurrentRating[0]?.ratings
+      : rating > 0
+      ? rating
+      : '?';
+
+  return (
+    <div className='relative flex flex-col items-center justify-center gap-3'>
+      <Star
+        rating={rating}
+        isFetching={isFetching}
+        displayRating={ratingForStar}
+        starSize={starSize}
+      />
+
+      <h1 className='text-lg text-stone-200 tracking-wide'>
+        Rate {movieTitle}
+      </h1>
+
+      <ChooseRating
+        rating={
+          findCurrentRating[0]?.ratings && rating === 0
+            ? findCurrentRating[0]?.ratings
+            : rating
+        }
+        setRating={setRating}
+      />
+
+      <RateButton
+        rating={rating}
+        ratingStatus={findCurrentRating}
+      />
+    </div>
+  );
+}
+
+function Star({ rating, isFetching, displayRating, starSize }) {
+  return (
+    <div className='absolute -top-full text-red-400'>
+      {/* <FaStar size={rating ? 80 + rating * 2 : 80} /> */}
+      <FaStar size={starSize} />
+
+      <span className='text-lg text-stone-200 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2'>
+        {isFetching ? <SmallLoader /> : displayRating}
+      </span>
+    </div>
   );
 }
 

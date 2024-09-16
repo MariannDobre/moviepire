@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { TiStarFullOutline, TiStarOutline } from 'react-icons/ti';
+import { FaStar, FaRegStar } from 'react-icons/fa';
 
-const FILLED_STAR = '#4f46e5';
-const OUTLINED_STAR = '#999999';
-const SIZE = '28px';
+const FILLED_STAR = '#f87171';
+const OUTLINED_STAR = '#a3a3a3';
+const SIZE = '24px';
 
-function StarRating({ rating, setRating }) {
+function ChooseRating({ rating, setRating }) {
   const [hoveredRating, setHoveredRating] = useState(0);
 
   function handleRating(rating) {
@@ -13,7 +13,7 @@ function StarRating({ rating, setRating }) {
   }
 
   return (
-    <div>
+    <div className='flex items-center justify-center gap-1.5'>
       {Array.from({ length: 10 }, (_, i) => {
         return (
           <Stars
@@ -29,24 +29,26 @@ function StarRating({ rating, setRating }) {
   );
 }
 
-export default StarRating;
+export default ChooseRating;
 
 // RENDER THE STARS
 
 function Stars({ fullStar, onRating, onHoverIn, onHoverOut }) {
   return (
     <button
+      className='cursor-pointer border-none outline-none bg-transparent'
+      type='button'
       onClick={onRating}
       onMouseEnter={onHoverIn}
       onMouseLeave={onHoverOut}
     >
       {fullStar ? (
-        <TiStarFullOutline
+        <FaStar
           size={SIZE}
           fill={FILLED_STAR}
         />
       ) : (
-        <TiStarOutline
+        <FaRegStar
           size={SIZE}
           fill={OUTLINED_STAR}
         />

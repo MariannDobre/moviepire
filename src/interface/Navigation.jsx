@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useUser } from '../hooks/auth/useUser';
+import { useSignout } from '../hooks/auth/mutations/useSignout';
 import { useClickOutside } from '../hooks/assets/useClickOutside';
 import { HiOutlineMenu, HiOutlineMenuAlt2 } from 'react-icons/hi';
 import {
@@ -12,8 +13,10 @@ import {
   FaQuestion,
   FaWrench,
 } from 'react-icons/fa';
+import { FaRightFromBracket } from 'react-icons/fa6';
 import { IoIosJournal } from 'react-icons/io';
 import { ImBooks } from 'react-icons/im';
+import SmallLoader from '../components/loaders/SmallLoader';
 
 // links for the user that is not authentificated
 const notAuthLinks = [
@@ -61,8 +64,10 @@ function Navigation() {
   const pathname = url.pathname;
   // custom hook call to determine if the user is authentificated or not
   const { isAuthenticated } = useUser();
+  // custom hook call to sign out the user
+  const { signoutUser, isPending } = useSignout();
   // what array should get mapped based on isAuthenticated value
-  const navLinks = !isAuthenticated ? authLinks : notAuthLinks;
+  const navLinks = isAuthenticated ? authLinks : notAuthLinks;
 
   // handler that toggles the visibility of the menu
   const handleSidebar = (event) => {
@@ -119,6 +124,28 @@ function Navigation() {
                 {label}
               </NavLink>
             ))}
+
+            {isAuthenticated ? (
+              <button
+                className={`text-gray-300 text-lg capitalize tracking-wider flex items-center ${
+                  isPending ? 'justify-center' : 'justify-start'
+                } gap-2 py-1 px-2 -ml-1.5 rounded-md border-none outline-none hover:bg-neutral-50/20 focus-visible:bg-neutral-50/20 transition-all duration-300`}
+                type='button'
+                onClick={() => signoutUser()}
+                disabled={isPending}
+              >
+                {isPending ? (
+                  <SmallLoader />
+                ) : (
+                  <>
+                    <span className='text-gray-500'>
+                      <FaRightFromBracket />
+                    </span>
+                    Log Out
+                  </>
+                )}
+              </button>
+            ) : null}
           </nav>
         </div>
       </div>

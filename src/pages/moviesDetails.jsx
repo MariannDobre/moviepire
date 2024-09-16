@@ -7,7 +7,7 @@ import { useMovieStatus } from '../hooks/movies/useMovieStatus';
 import { BsPlayCircle } from 'react-icons/bs';
 import { MdClose } from 'react-icons/md';
 import { FaAngleRight } from 'react-icons/fa6';
-import RateMovie from '../components/movies/rateMovie';
+import RateMovie from '../components/movies/RateMovie';
 import AddToFavorite from '../components/movies/addToFavorite';
 import SmallLoader from '../components/loaders/SmallLoader';
 

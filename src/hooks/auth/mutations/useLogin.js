@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
 import { login } from '../functions/login';
+import toast from 'react-hot-toast';
 
 // log the user into his account
 export function useLogin() {
@@ -9,7 +9,8 @@ export function useLogin() {
   const queryClient = useQueryClient();
 
   const { mutate: loginUser, isPending } = useMutation({
-    mutationFn: ({ email, password }) => login({ email, password }),
+    mutationFn: ({ loginEmail, loginPassword }) =>
+      login({ loginEmail, loginPassword }),
     onSuccess: (user) => {
       queryClient.setQueryData(['user'], user);
       queryClient.invalidateQueries('user');

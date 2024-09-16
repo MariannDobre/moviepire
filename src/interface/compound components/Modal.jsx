@@ -5,6 +5,7 @@ import React, {
   useState,
 } from 'react';
 import { RiCloseFill } from 'react-icons/ri';
+import { useClickOutside } from '../../hooks/assets/useClickOutside';
 
 const ModalContext = createContext();
 
@@ -29,7 +30,7 @@ function Open({ opens, renderButton }) {
   });
 }
 
-function Window({ children, name }) {
+function Window({ children, name, height }) {
   const { openModal, close } = useContext(ModalContext);
 
   if (openModal !== name) return null;
@@ -38,8 +39,12 @@ function Window({ children, name }) {
     <div
       id='overlay'
       className='fixed bg-black/50 flex items-center justify-center backdrop-blur w-screen h-screen top-0 right-0 bottom-0 left-0 z-[9999]'
+      onClick={close} // close the modal by clicking outside (on the overlay)
     >
-      <div className='w-[960px] h-[480px] flex flex-col items-center gap-6 rounded-md shadow-lg bg-neutral-900/95 p-6 border-none outline outline-1 outline-neutral-400/50'>
+      <div
+        className={`w-[960px] ${height} flex flex-col items-center justify-center gap-6 rounded-md shadow-lg bg-neutral-900/95 p-6 border-none outline outline-1 outline-neutral-400/50`}
+        onClick={(event) => event.stopPropagation()} // prevent the event to bubble up to the parent and close it from inside
+      >
         <button
           className='self-start outline-none border-none text-stone-200 text-2xl hover:text-red-400 focus-visible:text-red-400 transition-all duration-300'
           onClick={close}
