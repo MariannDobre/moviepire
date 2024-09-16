@@ -6,7 +6,7 @@ import ChooseRating from './ChooseRating';
 import RateButton from './RateButton';
 import { FaStar } from 'react-icons/fa';
 
-function RateMovie({ movieTitle, movieId }) {
+function RateMovie({ movieId, movieTitle }) {
   const [rating, setRating] = useState(0);
   const { user } = useUser();
   const { ratings, isFetching } = useRatings(user?.id, movieId);

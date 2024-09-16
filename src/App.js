@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Layout from './interface/Layout';
 import MoviesDetails from './pages/moviesDetails';
-import ViewlistPage from './pages/viewlistPage';
+import ViewlistPage from './pages/ViewlistPage';
 import Login from './pages/Login';
 import ConfirmEmail from './pages/confirmEmail';
 import PageNotFound from './pages/pageNotFound';
@@ -72,6 +72,11 @@ function App() {
             <Route
               path='/trailer-for/:movieId'
               element={<MovieTrailer />}
+            />
+
+            <Route
+              path='/viewlist'
+              element={<ViewlistPage />}
             />
           </Route>
 

@@ -12,8 +12,6 @@ function Rating({ movieId }) {
     (item) => item.item_id === Number(movieId)
   );
 
-  // console.log(findCurrentRating);
-
   return (
     <p className='flex items-center gap-1 py-1.5 px-3 text-lg tracking-wide text-neutral-400/50 bg-neutral-900/75 shadow-lg outline outline-1 outline-neutral-400/50 rounded-md'>
       {isFetching ? (

@@ -13,6 +13,7 @@ import MovieDescription from '../components/movies/MovieDescription';
 import MovieCast from '../components/movies/MovieCast';
 import MovieDetails from '../components/movies/MovieDetails';
 import Rating from '../components/movies/Rating';
+import AddToViewed from '../components/movies/AddToViewed';
 
 const actionsButtonsStyles =
   'text-sm text-center text-red-400 tracking-wider bg-neutral-800/50 py-1 px-2 outline outline-1 outline-neutral-400/50 border-none cursor-pointer rounded-full shadow-lg hover:text-red-400/75 hover:bg-neutral-800/25 hover:outline-neutral-500 transition-all duration-300';
@@ -91,7 +92,9 @@ function AboutMovie() {
                   name='add-to-viewlist'
                   height='auto'
                 >
-                  {isAuthenticated ? null : (
+                  {isAuthenticated ? (
+                    <AddToViewed movieTitle={movieDetails.movieName} />
+                  ) : (
                     <div>
                       <p className='text-stone-200 text-lg tracking-wider text-center'>
                         You need to have an account to be able to add this title
@@ -116,8 +119,8 @@ function AboutMovie() {
                 >
                   {isAuthenticated ? (
                     <RateMovie
-                      movieTitle={movieDetails.movieName}
                       movieId={movieId}
+                      movieTitle={movieDetails.movieName}
                     />
                   ) : (
                     <div>

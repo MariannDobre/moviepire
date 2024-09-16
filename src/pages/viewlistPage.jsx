@@ -12,7 +12,7 @@ import SortBy from '../components/sorting/sortBy';
 import Filter from '../components/sorting/filter';
 import SmallLoader from '../components/loaders/SmallLoader';
 
-function ViewlistPage() {
+function Test() {
   const [viewDescription, setViewDescription] = useState(null);
   const [movieId, setMovieId] = useState(null);
   const [movieTitle, setMovieTitle] = useState(null);
@@ -223,4 +223,60 @@ function ViewlistPage() {
   );
 }
 
+// displays the entire viewlist page
+function ViewlistPage() {
+  const { user } = useUser();
+
+  return (
+    <div className='w-full'>
+      <ViewlistHeading username={user?.user_metadata?.username} />
+    </div>
+  );
+}
+
 export default ViewlistPage;
+
+// displays the heading of the page
+function ViewlistHeading({ username }) {
+  return (
+    <div className='flex flex-col gap-1 p-3 rounded-md bg-neutral-900/75'>
+      <h1 className='text-stone-200 text-3xl tracking-wide font-bold'>
+        Your Viewlist
+      </h1>
+
+      <span className='text-stone-400 text-base tracking-wide'>
+        by <strong className='text-red-400 tracking-wide'>{username}</strong>
+      </span>
+
+      <p className='text-stone-400 text-base tracking-wide'>
+        Your Viewlist is the place to track the titles that you've watched. You
+        can sort your Viewlist by your rating, year, title and runtime.
+      </p>
+    </div>
+  );
+}
+
+// displays the details such as total viewed titles of the user, the sorting feature, the order of the sorting, the layout (as column or as grid)
+function ViewlistDetails() {
+  return <div></div>;
+}
+
+// displays the total viewed titles of the user
+function ViewlistLength() {
+  return <div></div>;
+}
+
+// displays the sorting feature
+function ViewlistSorting() {
+  return <div></div>;
+}
+
+// let the user to choose the layout of the page
+function ViewlistLayout() {
+  return <div></div>;
+}
+
+// displays the viewed movies of the user and their details
+function ViewlistMovies() {
+  return <div></div>;
+}
