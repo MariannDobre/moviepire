@@ -3,7 +3,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Layout from './interface/Layout';
-import MoviesDetails from './pages/moviesDetails';
 import ViewlistPage from './pages/ViewlistPage';
 import Login from './pages/Login';
 import ConfirmEmail from './pages/confirmEmail';
@@ -80,10 +79,7 @@ function App() {
             />
           </Route>
 
-          {/* <Route
-            path='/title-id/:movieId'
-            element={<MoviesDetails />}
-          />
+          {/* 
 
           <Route
             path='/title-id/:movieId/trailer-id/:titleName'

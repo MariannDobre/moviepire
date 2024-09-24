@@ -17,14 +17,6 @@ function RateButton({
   movieTitle,
   viewedRecordId, // in teste, posibil optional posibil obligatoriu
 }) {
-  //  what i need for insertRating:
-  //  userId,
-  //  itemId,
-  //  rating,
-  //  movieTitle,
-  //  setRating,
-  //  favoriteRecordId // in teste, posibil optional posibil obligatoriu
-
   const { insertRating, isPending: isInserting } = useAddRating(
     userId,
     movieId,
@@ -32,15 +24,6 @@ function RateButton({
     rating,
     setRating
   );
-
-  //  what i need for modifyRating/updateRating:
-  //  ratingId,
-  //  userId,
-  //  itemId,
-  //  rating,
-  //  movieTitle,
-  //  setRating,
-  //  favoriteRecordId // in teste, posibil optional posibil obligatoriu
 
   const { modifyRating, isPending: isUpdating } = useUpdateRating(
     userId,
@@ -50,12 +33,6 @@ function RateButton({
     ratingId,
     setRating
   );
-
-  //  what i need for deleteRating:
-  //  userId,
-  //  itemId,
-  //  movieTitle,
-  //  favoriteRecordId // in teste, posibil optional posibil obligatoriu
 
   const { deleteRating, isPending: isDeleting } = useRemoveRating(
     userId,

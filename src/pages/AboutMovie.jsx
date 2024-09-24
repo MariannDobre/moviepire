@@ -8,7 +8,6 @@ import ViewClip from '../components/movies/ViewClip';
 import RateMovie from '../components/movies/RateMovie';
 import SmallLoader from '../components/loaders/SmallLoader';
 
-import 'react-lazy-load-image-component/src/effects/opacity.css';
 import MovieDescription from '../components/movies/MovieDescription';
 import MovieCast from '../components/movies/MovieCast';
 import MovieDetails from '../components/movies/MovieDetails';
@@ -25,7 +24,7 @@ function AboutMovie() {
   const { isAuthenticated } = useUser();
   const {
     movieDetails,
-    isFetching: getMovies,
+    isFetching: getMovie,
     error: detailsError,
   } = useMovieDetails(movieId);
 
@@ -40,7 +39,7 @@ function AboutMovie() {
         </div>
       )}
 
-      {getMovies ? (
+      {getMovie ? (
         <div
           style={{ height: 'calc(100vh - 96px - 61px)' }}
           className='text-stone-200 w-full flex items-center justify-center bg-neutral-900/75 rounded-md outline outline-1 outline-neutral-400/50'
@@ -67,7 +66,7 @@ function AboutMovie() {
             <div className='flex items-start justify-between'>
               <MovieDetails movieDetails={movieDetails} />
 
-              <Rating movieId={movieId} />
+              {isAuthenticated && <Rating movieId={movieId} />}
             </div>
 
             <div className='flex items-center gap-4 self-end'>
@@ -83,7 +82,7 @@ function AboutMovie() {
                   opens='add-to-viewlist'
                   renderButton={() => (
                     <button className={actionsButtonsStyles}>
-                      Add to Viewlist
+                      Manage Title
                     </button>
                   )}
                 />
@@ -93,12 +92,17 @@ function AboutMovie() {
                   height='auto'
                 >
                   {isAuthenticated ? (
-                    <AddToViewed movieTitle={movieDetails.movieName} />
+                    <AddToViewed
+                      movieId={movieId}
+                      movieTitle={movieDetails.movieName}
+                      movieYear={movieDetails.movieYear}
+                      movieDuration={movieDetails.movieDuration}
+                    />
                   ) : (
                     <div>
                       <p className='text-stone-200 text-lg tracking-wider text-center'>
                         You need to have an account to be able to add this title
-                        to the view list.
+                        to the viewlist.
                       </p>
                     </div>
                   )}

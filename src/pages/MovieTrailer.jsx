@@ -1,10 +1,10 @@
 import React from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTrailer } from '../hooks/movies/useTrailer';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import SmallLoader from '../components/loaders/SmallLoader';
 import { BsHouse, BsArrowReturnLeft } from 'react-icons/bs';
 import { SlArrowRight } from 'react-icons/sl';
-import SmallLoader from '../components/loaders/SmallLoader';
 
 import 'react-lazy-load-image-component/src/effects/opacity.css';
 
