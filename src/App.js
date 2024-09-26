@@ -1,9 +1,8 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Layout from './interface/Layout';
-import ViewlistPage from './pages/ViewlistPage';
 import Login from './pages/Login';
 import ConfirmEmail from './pages/confirmEmail';
 import PageNotFound from './pages/pageNotFound';
@@ -14,6 +13,7 @@ import MovieTrailer from './pages/MovieTrailer';
 import AboutApp from './pages/AboutApp';
 import CreateAccount from './pages/CreateAccount';
 import AccountSettings from './pages/AccountSettings';
+import ViewlistPageWrapper from './pages/ViewlistPage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -75,46 +75,22 @@ function App() {
 
             <Route
               path='/viewlist'
-              element={<ViewlistPage />}
+              element={<ViewlistPageWrapper />}
             />
           </Route>
 
           {/* 
 
-          <Route
-            path='/title-id/:movieId/trailer-id/:titleName'
-            element={<MoviesTrailer />}
-          />
+         
 
-          <Route
-            path='/login'
-            element={<Login />}
-          />
-
-          <Route
-            path='/signup'
-            element={<Signup />}
-          />
-
-          <Route
-            path='/signout'
-            element={<Signout />}
-          />
-
-          <Route
-            path='/settings'
-            element={<AccountSettings />}
-          />
+        
 
           <Route
             path='/confirm-email'
             element={<ConfirmEmail />}
           />
 
-          <Route
-            path='/viewlist'
-            element={<ViewlistPage />}
-          /> */}
+           */}
 
           <Route
             path='*'
@@ -129,10 +105,10 @@ function App() {
         containerStyle={{ margin: '12px' }}
         toastOptions={{
           success: {
-            duration: 7500,
+            duration: 6500,
           },
           error: {
-            duration: 7500,
+            duration: 6500,
           },
           style: {
             fontSize: '16px',

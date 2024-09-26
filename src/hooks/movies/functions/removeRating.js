@@ -1,7 +1,7 @@
 import supabase from '../../../services/supabase';
 
 // calls the supabase ratings table to remove the record based on the userId and itemId parameter
-export async function removeRating(userId, itemId, favoriteRecordId) {
+export async function removeRating(userId, itemId) {
   const { error: ratingsTableError } = await supabase
     .from('ratings')
     .delete()
@@ -13,7 +13,6 @@ export async function removeRating(userId, itemId, favoriteRecordId) {
     .update({ your_ratings: 0 })
     .eq('user_id', userId)
     .eq('item_id', itemId);
-  // .eq('record_id', favoriteRecordId)
 
   if (ratingsTableError)
     throw new Error(

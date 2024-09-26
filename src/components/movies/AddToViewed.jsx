@@ -39,7 +39,7 @@ function AddToViewed({ movieId, movieTitle, movieYear, movieDuration }) {
   );
 
   // custom hook call to remove the movie to the view list
-  const { removeFromFavorites, isPending: isRemoving } = useRemoveFromViewlist(
+  const { removeFromViewlist, isPending: isRemoving } = useRemoveFromViewlist(
     user?.id,
     movieId,
     movieTitle
@@ -48,7 +48,7 @@ function AddToViewed({ movieId, movieTitle, movieYear, movieDuration }) {
   // handler function to toggle the status of the movie, either is viewed either not
   function toggleStatus() {
     if (status) {
-      removeFromFavorites();
+      removeFromViewlist();
     } else {
       addToViewlist();
     }

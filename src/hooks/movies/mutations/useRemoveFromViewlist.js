@@ -7,7 +7,7 @@ export function useRemoveFromViewlist(userId, itemId, movieTitle) {
   const queryClient = useQueryClient();
 
   const {
-    mutate: removeFromFavorites,
+    mutate: removeFromViewlist,
     isPending,
     error,
   } = useMutation({
@@ -27,5 +27,5 @@ export function useRemoveFromViewlist(userId, itemId, movieTitle) {
       ),
   });
 
-  return { removeFromFavorites, isPending, error };
+  return { removeFromViewlist, isPending, error };
 }

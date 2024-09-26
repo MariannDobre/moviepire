@@ -1,240 +1,49 @@
 import React, { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from '../hooks/auth/useUser';
 import { useViewedMovies } from '../hooks/movies/useViewedMovies';
 import { useRatings } from '../hooks/movies/useRatings';
-import { useRemoveRating } from '../hooks/movies/mutations/useRemoveRating';
 import { useRemoveFromViewlist } from '../hooks/movies/mutations/useRemoveFromViewlist';
-import { TiStarFullOutline, TiStarOutline } from 'react-icons/ti';
-import { BsBookmarkCheckFill } from 'react-icons/bs';
-import { FaArrowUpLong, FaArrowDownLong, FaTag } from 'react-icons/fa6';
-import { FaTags } from 'react-icons/fa';
 import SortBy from '../components/sorting/sortBy';
 import Filter from '../components/sorting/filter';
 import SmallLoader from '../components/loaders/SmallLoader';
 import Modal from '../interface/compound components/Modal';
-import { BsFillGrid3X3GapFill } from 'react-icons/bs';
-import { FaListUl } from 'react-icons/fa';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import {
+  BsFillBookmarkCheckFill,
+  BsInfoCircle,
+  BsFillGrid3X3GapFill,
+} from 'react-icons/bs';
+import {
+  FaStar,
+  FaRegStar,
+  FaTags,
+  FaPlay,
+  FaCheck,
+  FaListUl,
+} from 'react-icons/fa';
+import { FaArrowUpLong, FaArrowDownLong } from 'react-icons/fa6';
+import { MdKeyboardArrowRight } from 'react-icons/md';
 
 import 'react-lazy-load-image-component/src/effects/opacity.css';
 
-function Test() {
-  const [viewDescription, setViewDescription] = useState(null);
-  const [movieId, setMovieId] = useState(null);
-  const [movieTitle, setMovieTitle] = useState(null);
-  const [favoriteRecordId, setFavoriteRecordId] = useState(null);
-  const { user } = useUser();
-  const userId = user?.id;
-  const { viewedMovies, isFetching: isGettingMovies } = useViewedMovies(userId);
-  const { dbRatings, isPending: isGettingRatings } = useRatings(userId, null);
-  const { removeFromFavorites } = useRemoveFromViewlist(
-    userId,
-    movieId,
-    movieTitle
-  );
-  const { deleteRating } = useRemoveRating(
-    userId,
-    movieId,
-    movieTitle,
-    favoriteRecordId
-  );
-
-  function handleViewDescription(id) {
-    setViewDescription((viewDescription) =>
-      viewDescription === id ? null : id
-    );
-  }
-
-  function handleRemoveFromFavorites(id, title, recordId, userRating) {
-    setMovieId(id);
-    setMovieTitle(title);
-    setFavoriteRecordId(recordId);
-    removeFromFavorites();
-
-    if (userRating === undefined) return;
-    deleteRating();
-  }
-
-  return (
-    <div>
-      {userId ? (
-        <>
-          <p>Your Viewedlist</p>
-
-          <div>
-            <p>
-              <strong>{viewedMovies?.length}</strong>&nbsp;Titles
-            </p>
-
-            <div>
-              <p>Sort by:</p>
-
-              <SortBy
-                options={[
-                  {
-                    value: 'list_order',
-                    label: 'List Order',
-                  },
-                  { value: 'alphabetical', label: 'Alphabetical' },
-                  { value: 'release_date', label: 'Release Date' },
-                  { value: 'runtime', label: 'Runtime' },
-                  { value: 'your_ratings', label: 'Ratings' },
-                ]}
-              />
-
-              <Filter
-                filterField='order'
-                options={[
-                  { value: 'asc', label: <FaArrowUpLong /> },
-                  { value: 'desc', label: <FaArrowDownLong /> },
-                ]}
-              />
-            </div>
-          </div>
-
-          <>
-            {viewedMovies?.length > 0 ? (
-              <>
-                {viewedMovies.map((movie) => {
-                  const {
-                    movies: {
-                      id,
-                      movieName,
-                      movieYear,
-                      movieDuration,
-                      moviePoster,
-                      movieDescription,
-                      movieGenre,
-                      movieDirector,
-                      movieStars,
-                      type,
-                    },
-                    record_id,
-                  } = movie;
-                  const truncatedDescription =
-                    movieDescription.length > 350
-                      ? `${movieDescription.slice(0, 350)}...`
-                      : movieDescription;
-                  const runtime = movieDuration;
-                  const totalMinutes = parseInt(runtime, 10);
-                  const hours = Math.floor(totalMinutes / 60);
-                  const minutes = totalMinutes % 60;
-                  const formattedRuntime = `${hours}h ${
-                    minutes < 10 ? 0 : ''
-                  }${minutes}m`;
-
-                  const userRating = dbRatings.find(
-                    (rating) => rating?.item_id === id
-                  );
-
-                  return (
-                    <div key={id}>
-                      {isGettingMovies ? (
-                        <SmallLoader />
-                      ) : (
-                        <>
-                          <img
-                            src={moviePoster}
-                            alt='Movie poster'
-                          />
-                          <button
-                            onClick={() =>
-                              handleRemoveFromFavorites(
-                                id,
-                                movieName,
-                                record_id,
-                                userRating
-                              )
-                            }
-                          >
-                            <BsBookmarkCheckFill />
-                          </button>
-
-                          <div>
-                            <Link to={`/title-id/${id}`}>{movieName}</Link>
-
-                            <div>
-                              <p>{movieYear}</p>
-
-                              <p>{formattedRuntime}</p>
-
-                              <p>{type}</p>
-
-                              <p>{movieGenre.join(', ')}</p>
-                            </div>
-
-                            <div>
-                              {userRating ? (
-                                <span>
-                                  {isGettingRatings ? (
-                                    <SmallLoader />
-                                  ) : (
-                                    <>
-                                      <TiStarFullOutline />
-                                      &nbsp;{userRating?.ratings}
-                                    </>
-                                  )}
-                                </span>
-                              ) : (
-                                <Link to={`/title-id/${id}?rate-movie`}>
-                                  <TiStarOutline /> Rate
-                                </Link>
-                              )}
-                            </div>
-
-                            <div>
-                              <p>{movieDirector}</p>
-
-                              <span>{movieStars.join(', ')}</span>
-                            </div>
-
-                            <p>
-                              {movieDescription?.length > 350 &&
-                              viewDescription === id
-                                ? movieDescription
-                                : truncatedDescription}
-                              {movieDescription?.length > 350 ? (
-                                <button
-                                  style={{
-                                    color:
-                                      viewDescription === id ? '#fab005' : '',
-                                  }}
-                                  onClick={() => handleViewDescription(id)}
-                                >
-                                  {viewDescription === id
-                                    ? 'collapse'
-                                    : 'expand'}
-                                </button>
-                              ) : null}
-                            </p>
-                          </div>
-                        </>
-                      )}
-                    </div>
-                  );
-                })}
-              </>
-            ) : (
-              <p>No titles added to the view list</p>
-            )}
-          </>
-        </>
-      ) : (
-        <p>
-          You need to register or to log in to be able to view your favorites
-          movies
-        </p>
-      )}
-    </div>
-  );
-}
-
-//
+// the filter buttons for genre, type and year
 const filterGenre = [
   {
     label: 'Action',
     value: 'Action',
+  },
+  {
+    label: 'Adventure',
+    value: 'Adventure',
+  },
+  {
+    label: 'Animation',
+    value: 'Animation',
+  },
+  {
+    label: 'Biography',
+    value: 'Biography',
   },
   {
     label: 'Comedy',
@@ -249,12 +58,60 @@ const filterGenre = [
     value: 'Drama',
   },
   {
+    label: 'Family',
+    value: 'Family',
+  },
+  {
+    label: 'Fantasy',
+    value: 'Fantasy',
+  },
+  {
+    label: 'History',
+    value: 'History',
+  },
+  {
+    label: 'Horror',
+    value: 'Horror',
+  },
+  {
+    label: 'Kids',
+    value: 'Kids',
+  },
+  {
+    label: 'Music',
+    value: 'Music',
+  },
+  {
+    label: 'Mystery',
+    value: 'Mystery',
+  },
+  {
+    label: 'Psychological',
+    value: 'Psychological',
+  },
+  {
+    label: 'Romance',
+    value: 'Romance',
+  },
+  {
+    label: 'Sci-Fi',
+    value: 'Sci-Fi',
+  },
+  {
+    label: 'Sport',
+    value: 'Sport',
+  },
+  {
     label: 'Thriller',
     value: 'Thriller',
   },
   {
-    label: 'Romance',
-    value: 'romance',
+    label: 'War',
+    value: 'War',
+  },
+  {
+    label: 'Western',
+    value: 'Western',
   },
 ];
 
@@ -296,37 +153,70 @@ const filterYear = [
   },
 ];
 
-const testData = [
-  { title: 'rocky', year: 2020, genre: ['Action', 'Crime'], type: 'movie' },
-  {
-    title: 'malumosu',
-    year: 2012,
-    genre: ['Crime', 'Action', 'thriller'],
-    type: 'tv show',
-  },
-  { title: 'girby', year: 2017, genre: ['romance', 'comedy'], type: 'movie' },
-  {
-    title: 'kingdom',
-    year: 2020,
-    genre: ['Crime', 'comedy', 'Action'],
-    type: 'movie',
-  },
-  {
-    title: 'fairy',
-    year: 2008,
-    genre: ['Crime', 'thriller'],
-    type: 'animation',
-  },
-  { title: 'cars', year: 1997, genre: ['comedy', 'Action'], type: 'animation' },
-];
+function ViewlistPageWrapper() {
+  const navigate = useNavigate();
+  const { isAuthenticated } = useUser();
+
+  return (
+    <div className='flex items-center justify-center w-full'>
+      {isAuthenticated ? (
+        <ViewlistPage />
+      ) : (
+        <div
+          style={{
+            height: 'calc(100vh - 96px - 61px)',
+            background: `radial-gradient(
+                         circle,
+                       rgba(0, 0, 0, 0.6),
+                       rgba(0, 0, 0, 0.8),
+                       rgba(0, 0, 0, 0.9),
+                       rgba(0, 0, 0, 1)
+                         ),url(authBg.jpg) no-repeat center / cover`,
+          }}
+          className='flex items-center justify-center w-full'
+        >
+          <div className='w-[1280px] flex flex-col gap-3 items-center justify-center rounded-md shadow-lg bg-neutral-400/20 backdrop-blur p-6 border-none outline outline-1 outline-neutral-800'>
+            <p className='text-stone-200 text-lg tracking-wider text-center'>
+              To view the content of this page, please sign in to your account.
+              If you don't have an account, feel free to create one—it's quick
+              and easy! By logging in, you'll gain access to personalized
+              features and a better overall experience.
+            </p>
+
+            <div className='flex items-center justify-center gap-6'>
+              <button
+                className='outline-none border-none bg-neutral-900 text-base text-slate-500 font-medium tracking-wide py-2 px-3 rounded-md shadow-lg hover:bg-neutral-950 hover:text-slate-400 focus-visible:bg-neutral-950 focus-visible:text-slate-400 transition-all duration-300'
+                type='button'
+                onClick={() => navigate('/')}
+              >
+                Home Page
+              </button>
+
+              <button
+                className='outline-none border-none bg-neutral-900 text-base text-slate-500 font-medium tracking-wide py-2 px-3 rounded-md shadow-lg hover:bg-neutral-950 hover:text-slate-400 focus-visible:bg-neutral-950 focus-visible:text-slate-400 transition-all duration-300'
+                type='button'
+                onClick={() => navigate('/discovery')}
+              >
+                Discovery
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default ViewlistPageWrapper;
 
 // displays the entire viewlist page
 function ViewlistPage() {
-  const { isAuthenticated, user } = useUser();
+  const { user } = useUser();
   const { viewedMovies, isFetching } = useViewedMovies(user?.id);
   const [selectedGenre, setSelectedGenre] = useState([]);
   const [selectedType, setSelectedType] = useState(null);
   const [selectedYear, setSelectedYear] = useState(null);
+  const [pageLayout, setPageLayout] = useState('column');
 
   // filter the movies based on the selected filter
   const filteredMovies = viewedMovies?.filter((movie) => {
@@ -367,16 +257,20 @@ function ViewlistPage() {
             setSelectedType={setSelectedType}
             selectedYear={selectedYear}
             setSelectedYear={setSelectedYear}
+            pageLayout={pageLayout}
+            setPageLayout={setPageLayout}
           />
 
-          <ViewlistMovies filteredMovies={filteredMovies} />
+          <ViewlistMovies
+            filteredMovies={filteredMovies}
+            userId={user?.id}
+            pageLayout={pageLayout}
+          />
         </React.Fragment>
       )}
     </div>
   );
 }
-
-export default ViewlistPage;
 
 // displays the heading of the page
 function ViewlistHeading({ username }) {
@@ -407,10 +301,12 @@ function ViewlistDetails({
   setSelectedType,
   selectedYear,
   setSelectedYear,
+  pageLayout,
+  setPageLayout,
 }) {
   return (
     <div className='flex items-center justify-between p-3'>
-      <ViewlistLength />
+      <ViewlistLength movies={movies} />
 
       <div className='flex items-center gap-3'>
         <ViewlistFilter
@@ -425,15 +321,24 @@ function ViewlistDetails({
 
         <ViewlistSorting />
 
-        <ViewlistLayout />
+        <ViewlistLayout
+          pageLayout={pageLayout}
+          setPageLayout={setPageLayout}
+        />
       </div>
     </div>
   );
 }
 
 // displays the total viewed titles of the user
-function ViewlistLength() {
-  return <p className='text-stone-200 text-base tracking-wide'>150 Titles</p>;
+function ViewlistLength({ movies }) {
+  return (
+    <p className='text-stone-200 text-base tracking-wider'>
+      {movies?.length
+        ? `${movies?.length} ${movies?.length === 1 ? 'title' : 'titles'} found`
+        : 'No titles found'}
+    </p>
+  );
 }
 
 // displays the button that allow the user to filter the fetched data
@@ -459,7 +364,7 @@ function ViewlistFilter({
 
       <Modal.Window
         name='viewlist-filter'
-        height='h-[480px]'
+        height='h-[560px]'
       >
         <FilterTab
           movies={movies}
@@ -551,7 +456,7 @@ function FilterTab({
           genres
         </p>
 
-        <div className='flex items-center gap-3'>
+        <div className='w-full flex items-center gap-3 flex-wrap'>
           {filterGenre.map((button, index) => (
             <button
               key={index}
@@ -686,21 +591,31 @@ function ViewlistSorting() {
 }
 
 // let the user to choose the layout of the page
-function ViewlistLayout() {
+function ViewlistLayout({ pageLayout, setPageLayout }) {
   return (
     <div className='flex items-center'>
       <button
-        className='p-3 rounded-full border-none outline-none text-lg text-stone-400 bg-transparent hover:text-stone-200 hover:bg-stone-400/10 focus-visible:text-stone-200 focus-visible:bg-stone-400/10'
+        className={`p-3 rounded-full border-none outline-none text-lg ${
+          pageLayout === 'column'
+            ? 'text-red-400 bg-transparent hover:bg-red-700/10 focus-visible:bg-red-700/10'
+            : 'text-stone-400 bg-transparent hover:text-stone-200 hover:bg-stone-400/10 focus-visible:text-stone-200 focus-visible:bg-stone-400/10'
+        }`}
         type='button'
-        value='flex-column'
+        value='column'
+        onClick={() => setPageLayout('column')}
       >
         <FaListUl />
       </button>
 
       <button
-        className='p-3 rounded-full border-none outline-none text-lg text-stone-400 bg-transparent hover:text-stone-200 hover:bg-stone-400/10 focus-visible:text-stone-200 focus-visible:bg-stone-400/10'
+        className={`p-3 rounded-full border-none outline-none text-lg ${
+          pageLayout === 'grid'
+            ? 'text-red-400 bg-transparent hover:bg-red-700/10 focus-visible:bg-red-700/10'
+            : 'text-stone-400 bg-transparent hover:text-stone-200 hover:bg-stone-400/10 focus-visible:text-stone-200 focus-visible:bg-stone-400/10'
+        }`}
         type='button'
         value='grid'
+        onClick={() => setPageLayout('grid')}
       >
         <BsFillGrid3X3GapFill />
       </button>
@@ -709,18 +624,43 @@ function ViewlistLayout() {
 }
 
 // displays the viewed movies of the user and their details
-function ViewlistMovies({ filteredMovies }) {
+function ViewlistMovies({ filteredMovies, userId, pageLayout }) {
+  const [movieId, setMovieId] = useState(null);
+  const [movieTitle, setMovieTitle] = useState(null);
+  const { ratings, isFetching } = useRatings(userId, null);
+  const { removeFromViewlist, isPending } = useRemoveFromViewlist(
+    userId,
+    movieId,
+    movieTitle
+  );
+
+  const handleRemoveFromViewlist = (movieId, movieTitle) => {
+    setMovieId(movieId);
+    setMovieTitle(movieTitle);
+    removeFromViewlist();
+  };
+
   return (
-    <div className='flex flex-col gap-3'>
+    <div
+      className={`${
+        pageLayout === 'column'
+          ? 'flex flex-col gap-6 p-3 bg-neutral-900/75'
+          : 'grid grid-cols-8 gap-3 bg-transparent'
+      } rounded-md`}
+    >
       {filteredMovies.map(
         (
           {
             movies: {
+              id,
               movieName,
               moviePoster,
               movieDuration,
+              movieDescription,
               movieYear,
               movieGenre,
+              movieDirector,
+              movieStars,
             },
           },
           index
@@ -732,41 +672,337 @@ function ViewlistMovies({ filteredMovies }) {
             minutes < 10 ? 0 : ''
           }${minutes}m`;
 
+          const userRating = ratings.find((rating) => rating?.item_id === id);
+
           return (
             <div
               key={index}
-              className='bg-red-100 flex flex-col'
+              className={`pb-3 ${
+                pageLayout === 'column'
+                  ? 'flex flex-col gap-3 border-b border-stone-300 last:border-b-0 last:pb-0'
+                  : 'w-[215px] h-[540px] border-none bg-neutral-900/75 p-3 rounded-md'
+              }`}
             >
-              <div className='flex'>
-                <LazyLoadImage
-                  className='w-full h-full'
-                  src={moviePoster}
-                  alt={`Poster for ${movieName}`}
-                  effect='opacity'
-                  delayTime={500}
-                />
+              <div
+                className={`${
+                  pageLayout === 'column'
+                    ? 'flex items-center justify-between'
+                    : 'h-full w-full flex flex-col justify-between'
+                }`}
+              >
+                <div
+                  className={`${
+                    pageLayout === 'column'
+                      ? 'flex gap-3'
+                      : 'flex flex-col gap-3 w-full'
+                  }`}
+                >
+                  <div
+                    className={`relative ${
+                      pageLayout === 'column' ? 'w-24 h-36' : 'w-[191px] h-72'
+                    }`}
+                  >
+                    <LazyLoadImage
+                      className={`${
+                        pageLayout === 'column'
+                          ? 'w-24 h-36 rounded-tl-lg'
+                          : 'w-[191px] h-72 rounded-tl-lg'
+                      }`}
+                      src={moviePoster}
+                      alt={`Poster for ${movieName}`}
+                      effect='opacity'
+                      delayTime={500}
+                    />
 
-                <div>
-                  <h1>
-                    <span className='text-red-400'>{index + 1}</span>
-                    {movieName}
-                  </h1>
+                    <div className='absolute top-0 -left-1'>
+                      {isPending && movieId === id ? (
+                        <span className='ml-1 w-[22.5px] h-[30px] bg-yellow-600 rounded-t-lg flex items-center justify-center'>
+                          <SmallLoader fontSize='text-sm' />
+                        </span>
+                      ) : (
+                        <button
+                          type='button'
+                          onClick={() =>
+                            handleRemoveFromViewlist(id, movieName)
+                          }
+                          className='text-3xl outline-none border-none text-yellow-500 drop-shadow-lg hover:text-yellow-600 focus-visible:text-yellow-600 transition-all duration-300'
+                        >
+                          <BsFillBookmarkCheckFill />
+                        </button>
+                      )}
+                    </div>
+                  </div>
 
-                  <div>
-                    <p>{movieYear}</p>
+                  <div
+                    className={`flex flex-col ${
+                      pageLayout === 'column' ? 'gap-1' : 'gap-3'
+                    }`}
+                  >
+                    <Link
+                      to={`/about/${id}`}
+                      className='text-stone-200 text-lg tracking-wide outline-none border-none hover:text-red-400 focus-visible:text-red-400 transition-all duration-300'
+                    >
+                      <span className='text-red-400 font-bold'>
+                        {index + 1}.
+                      </span>
+                      &nbsp;
+                      {movieName}
+                    </Link>
 
-                    <p>{formattedDuration}</p>
+                    {pageLayout === 'column' && (
+                      <p className='text-sm text-stone-400 tracking-wide'>
+                        {movieGenre.join(' • ')}
+                      </p>
+                    )}
+
+                    <div className='flex items-center gap-3'>
+                      <p className='text-sm text-stone-400 tracking-wide'>
+                        {movieYear}
+                      </p>
+
+                      <p className='text-sm text-stone-400 tracking-wide'>
+                        {formattedDuration}
+                      </p>
+                    </div>
+
+                    <div className='flex items-center'>
+                      {userRating ? (
+                        <React.Fragment>
+                          {isFetching ? (
+                            <span className='w-12 flex items-center justify-center'>
+                              <SmallLoader fontSize='text-sm' />
+                            </span>
+                          ) : (
+                            <span className='w-12 flex items-center gap-1 text-sm text-stone-200'>
+                              <span className='text-red-400 text-base mb-1'>
+                                <FaStar />
+                              </span>
+                              {userRating?.ratings}
+                            </span>
+                          )}
+                        </React.Fragment>
+                      ) : (
+                        <Link
+                          className='w-12 h-4 flex items-center gap-1 p-0 text-sm tracking-wider text-stone-200 outline-none border-none hover:text-red-400 focus-visible:text-red-400 transition-all duration-300'
+                          to={`/about/${id}?rate-movie`}
+                        >
+                          <span className='text-red-400 text-base mb-1'>
+                            <FaRegStar />
+                          </span>
+                          Rate
+                        </Link>
+                      )}
+                    </div>
                   </div>
                 </div>
+
+                <Modal>
+                  <Modal.Open
+                    opens='movie-informations'
+                    renderButton={() => (
+                      <button
+                        type='button'
+                        className={`outline-none border-none ${
+                          pageLayout === 'column'
+                            ? 'bg-transparent rounded-full text-red-400 text-xl p-3 self-center hover:bg-red-700/10 focus-visible:bg-red-700/10'
+                            : 'bg-stone-400/10 text-red-400 py-1.5 rounded-md text-sm font-medium tracking-wider hover:bg-red-700/10 focus-visible:bg-red-700/10'
+                        } transition-all duration-300`}
+                      >
+                        {pageLayout === 'column' ? <BsInfoCircle /> : 'Details'}
+                      </button>
+                    )}
+                  />
+
+                  <Modal.Window
+                    name='movie-informations'
+                    height='h-[480px]'
+                  >
+                    <MovieInformations
+                      movieId={id}
+                      movieName={movieName}
+                      moviePoster={moviePoster}
+                      movieYear={movieYear}
+                      movieDuration={formattedDuration}
+                      movieGenre={movieGenre}
+                      movieDescription={movieDescription}
+                      movieDirector={movieDirector}
+                      movieStars={movieStars}
+                      userRating={userRating}
+                      isFetching={isFetching}
+                      isPending={isPending}
+                      removeFromViewlist={removeFromViewlist}
+                      stateId={movieId}
+                      stateSetId={setMovieId}
+                      stateTitle={movieTitle}
+                      stateSetTitle={setMovieTitle}
+                    />
+                  </Modal.Window>
+                </Modal>
               </div>
 
-              <div></div>
-              <p className='text-pink-300'>{movieYear}</p>
-              <span className='text-pink-500'>{movieGenre}</span>
+              {pageLayout === 'column' && (
+                <div className='flex flex-col gap-1'>
+                  <p className='text-sm text-stone-300 tracking-wider'>
+                    {movieDescription}
+                  </p>
+
+                  <div className='flex items-center gap-3'>
+                    <p className='flex items-center gap-3 text-sm text-red-400 tracking-wider'>
+                      <span className='text-stone-200 font-bold'>Director</span>
+                      {movieDirector}
+                    </p>
+
+                    <p className='flex items-center gap-3 text-sm text-red-400 tracking-wider'>
+                      <span className='text-stone-200 font-bold'>Stars</span>
+                      {movieStars.join(' • ')}
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
           );
         }
       )}
+    </div>
+  );
+}
+
+function MovieInformations({
+  movieId,
+  movieName,
+  moviePoster,
+  movieYear,
+  movieDuration,
+  movieGenre,
+  movieDescription,
+  movieDirector,
+  movieStars,
+  userRating,
+  isFetching,
+  isPending,
+  removeFromViewlist,
+  stateId,
+  stateSetId,
+  stateTitle,
+  stateSetTitle,
+}) {
+  const navigate = useNavigate();
+
+  const handleRemoveFromViewlist = (movieId, movieTitle) => {
+    stateSetId(movieId);
+    stateSetTitle(movieTitle);
+    removeFromViewlist();
+  };
+
+  return (
+    <div className='flex flex-col gap-3'>
+      <div className='flex gap-3'>
+        <LazyLoadImage
+          className='w-24 h-36 rounded-tl-lg'
+          src={moviePoster}
+          alt={`Poster for ${movieName}`}
+          effect='opacity'
+          delayTime={500}
+        />
+
+        <div className='flex flex-col gap-1'>
+          <Link
+            className='group flex items-center text-stone-200 text-xl font-bold tracking-wide'
+            to={`/about/${movieId}`}
+          >
+            {movieName}
+            <span className='text-3xl group-hover:text-red-400'>
+              <MdKeyboardArrowRight />
+            </span>
+          </Link>
+
+          <div className='flex flex-col gap-1'>
+            <p className='text-sm text-stone-400 tracking-wide'>
+              {movieYear} • {movieDuration}
+            </p>
+
+            <p className='text-sm text-stone-400 tracking-wide'>
+              {movieGenre.join(' • ')}
+            </p>
+
+            <div className='flex items-center my-0.5'>
+              {userRating ? (
+                <React.Fragment>
+                  {isFetching ? (
+                    <span className='w-12 flex items-center justify-center'>
+                      <SmallLoader fontSize='text-sm' />
+                    </span>
+                  ) : (
+                    <span className='w-12 flex items-center gap-1 text-sm text-stone-200'>
+                      <span className='text-red-400 text-base mb-1'>
+                        <FaStar />
+                      </span>
+                      {userRating?.ratings}
+                    </span>
+                  )}
+                </React.Fragment>
+              ) : (
+                <Link
+                  className='w-12 h-4 flex items-center gap-1 p-0 text-sm tracking-wider text-stone-200 outline-none border-none hover:text-red-400 focus-visible:text-red-400 transition-all duration-300'
+                  to={`/about/${movieId}?rate-movie`}
+                >
+                  <span className='text-red-400 text-base mb-1'>
+                    <FaRegStar />
+                  </span>
+                  Rate
+                </Link>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p className='text-stone-200 text-sm tracking-wider'>
+        {movieDescription}
+      </p>
+
+      <div className='flex flex-col gap-3'>
+        <p className='flex items-center gap-3 text-sm text-red-400 tracking-wider'>
+          <span className='text-stone-400 font-bold'>Director</span>
+          {movieDirector}
+        </p>
+
+        <p className='flex items-center gap-3 text-sm text-red-400 tracking-wider'>
+          <span className='text-stone-400 font-bold'>Stars</span>
+          {movieStars.join(' • ')}
+        </p>
+      </div>
+
+      <div className='w-full flex items-center justify-center gap-6'>
+        <button
+          type='button'
+          onClick={() => navigate(`/trailer-for/${movieId}`)}
+          className='w-full bg-stone-400/10 text-red-400 flex items-center justify-center gap-3 py-1.5 rounded-md text-base tracking-wide font-medium outline-none border-none hover:bg-red-700/10 focus-visible:bg-red-700/10 transition-all duration-300'
+        >
+          <span className='text-sm'>
+            <FaPlay />
+          </span>
+          Trailer
+        </button>
+
+        <button
+          type='button'
+          disabled={isPending}
+          onClick={() => handleRemoveFromViewlist(movieId, movieName)}
+          className='w-full bg-stone-400/10 text-red-400 flex items-center justify-center gap-3 py-1.5 rounded-md text-base tracking-wide font-medium outline-none border-none hover:bg-red-700/10 focus-visible:bg-red-700/10 disabled:cursor-not-allowed disabled:bg-neutral-950 transition-all duration-300'
+        >
+          {isPending ? (
+            <SmallLoader />
+          ) : (
+            <React.Fragment>
+              <span className='text-sm'>
+                <FaCheck />
+              </span>
+              Viewed
+            </React.Fragment>
+          )}
+        </button>
+      </div>
     </div>
   );
 }
