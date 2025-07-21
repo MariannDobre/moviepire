@@ -108,7 +108,7 @@ export default function LoginForm() {
           type='button'
           onClick={() => setShowPassword((currentValue) => !currentValue)}
           className={`absolute right-3 ${
-            errors?.loginPassword ? 'bottom-[50px]' : 'bottom-3'
+            errors?.loginPassword ? 'bottom-[48px]' : 'bottom-2.5'
           } border-none outline-none text-base text-neutral-500 hover:text-blue-400 focus-visible:text-blue-400 transition-all duration-500`}
         >
           {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}

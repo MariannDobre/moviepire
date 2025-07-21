@@ -52,11 +52,11 @@ export default function Topbar() {
             </span>
 
             <div className='w-6 h-6 bg-blue-400 absolute -top-2 -left-2 flex items-center justify-center rounded-full shadow-sm'>
-              {isFetching ? (
+              {isAuthenticated && isFetching ? (
                 <SmallLoader size='text-lg' />
               ) : (
                 <span className='w-full h-full text-sm text-white font-medium tracking-wide flex items-center justify-center rounded-full bg-transparent'>
-                  {diaryMovies ? diaryMovies?.length : null}
+                  {diaryMovies ? diaryMovies?.length : '-'}
                 </span>
               )}
             </div>

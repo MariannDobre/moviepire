@@ -175,7 +175,7 @@ export default function RegisterForm() {
           type='button'
           onClick={() => setShowPassword((currentValue) => !currentValue)}
           className={`absolute right-3 ${
-            errors?.registerPassword ? 'bottom-[50px]' : 'bottom-3'
+            errors?.registerPassword ? 'bottom-[48px]' : 'bottom-2.5'
           } border-none outline-none text-base text-neutral-500 hover:text-blue-400 focus-visible:text-blue-400 transition-all duration-500`}
         >
           {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
@@ -218,7 +218,7 @@ export default function RegisterForm() {
             setShowConfirmPassword((currentValue) => !currentValue)
           }
           className={`absolute right-3 ${
-            errors?.registerConfirmPassword ? 'bottom-[50px]' : 'bottom-3'
+            errors?.registerConfirmPassword ? 'bottom-[48px]' : 'bottom-2.5'
           } border-none outline-none text-base text-neutral-500 hover:text-blue-400 focus-visible:text-blue-400 transition-all duration-500`}
         >
           {showConfirmPassword ? <FaRegEyeSlash /> : <FaRegEye />}

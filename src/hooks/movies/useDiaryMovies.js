@@ -15,6 +15,7 @@ export function useDiaryMovies(userId, genre, type, yearRange) {
   } = useQuery({
     queryKey: ['diaryMovies', userId, genre, type, yearRange],
     queryFn: () => getDiaryMovies(userId, genre, type, yearRange),
+    enabled: !!userId,
   });
 
   return { diaryMovies, isFetching, error };
