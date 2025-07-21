@@ -1,7 +1,28 @@
-import React from 'react';
+import { CgSpinner } from 'react-icons/cg';
 
 function PageLoader() {
-  return <div>PageLoader</div>;
+  return (
+    <section className='w-screen h-screen bg-black flex flex-col gap-6 items-center justify-center'>
+      <h6 className='text-3xl text-blue-400 font-medium tracking-wide text-center'>
+        The page is currently loading.
+        <br />
+        It may take a few moments!
+      </h6>
+
+      <span className='text-5xl text-white text-center animate-spin'>
+        <CgSpinner />
+      </span>
+
+      <p className='text-lg text-gray-400 font-normal tracking-wide text-center w-full max-w-[960px]'>
+        Did you know that
+        <br />
+        Some scenes are shot over 50 times to get them right.
+        <br />
+        Director Stanley Kubrick was famous for doing over 100 takes of a single
+        scene to capture the perfect performance.
+      </p>
+    </section>
+  );
 }
 
 export default PageLoader;

@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useUser } from '../../hooks/auth/useUser';
+import { useDiaryMovies } from '../../hooks/movies/useDiaryMovies';
 import { Link } from 'react-router-dom';
 
 import Logo from './Logo';
 import SearchMovie from '../searching/SearchMovie';
 import Profile from './Profile';
 import SignOut from './SignOut';
+import SmallLoader from '../loaders/SmallLoader';
 
 import { BsFillJournalBookmarkFill } from 'react-icons/bs';
-import { useDiaryMovies } from '../../hooks/movies/useDiaryMovies';
-import SmallLoader from '../loaders/SmallLoader';
 
 export default function Topbar() {
   const { user, isAuthenticated } = useUser();
