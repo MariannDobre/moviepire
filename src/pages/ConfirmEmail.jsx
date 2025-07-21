@@ -6,7 +6,7 @@ import SmallLoader from '../components/loaders/SmallLoader';
 
 import { MdOutlineEmail } from 'react-icons/md';
 
-function ConfirmEmail() {
+export default function ConfirmEmail() {
   const navigate = useNavigate();
   const { user, isAuthenticated, isFetching } = useUser();
 
@@ -48,7 +48,7 @@ function ConfirmEmail() {
       }}
       className='w-full h-[calc(100vh-80px-48px-48px)] flex flex-col items-center justify-center'
     >
-      {isAuthenticated ? (
+      {user && isAuthenticated ? (
         <div className='w-full max-w-[760px] h-auto flex flex-col items-center justify-center gap-6 p-6 rounded-lg shadow-sm bg-black/75 backdrop-blur-md border border-neutral-500'>
           <div className='w-16 h-16 flex items-center justify-center rounded-full shadow-sm'>
             <span className='w-full h-full flex items-center justify-center rounded-full drop-shadow-sm bg-blue-400 text-3xl text-white'>
@@ -76,6 +76,36 @@ function ConfirmEmail() {
             className='outline-none border-none w-auto h-auto flex items-center justify-center text-center cursor-pointer bg-blue-400 text-white text-base font-normal tracking-wide py-1.5 px-6 rounded-md shadow-sm hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
           >
             Home Page
+          </button>
+        </div>
+      ) : !user ? (
+        <div className='w-full max-w-[760px] h-auto flex flex-col items-center justify-center gap-6 p-6 rounded-lg shadow-sm bg-black/75 backdrop-blur-md border border-neutral-500'>
+          <div className='w-16 h-16 flex items-center justify-center rounded-full shadow-sm'>
+            <span className='w-full h-full flex items-center justify-center rounded-full drop-shadow-sm bg-blue-400 text-3xl text-white'>
+              <MdOutlineEmail />
+            </span>
+          </div>
+
+          <div className='w-full h-auto flex flex-col items-center gap-1.5'>
+            <h6 className='text-2xl text-white font-medium tracking-wide text-center'>
+              Join to unlock all features
+            </h6>
+
+            <p className='text-neutral-400 text-base font-normal tracking-wide text-center'>
+              You haven't created an account yet. To unlock diary, rating,
+              favorites, and profile features, please create an account and
+              confirm your email address.
+              <br />
+              Meanwhile, you can continue browsing the app as a guest.
+            </p>
+          </div>
+
+          <button
+            type='button'
+            onClick={() => navigate('/register')}
+            className='outline-none border-none w-auto h-auto flex items-center justify-center text-center cursor-pointer bg-blue-400 text-white text-base font-normal tracking-wide py-1.5 px-6 rounded-md shadow-sm hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
+          >
+            Create Account
           </button>
         </div>
       ) : (
@@ -113,5 +143,3 @@ function ConfirmEmail() {
     </section>
   );
 }
-
-export default ConfirmEmail;
