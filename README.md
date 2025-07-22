@@ -69,13 +69,12 @@ Built with a **performance-first mindset** and using only the **best-in-class li
 
 ## 📂 Project Structure Highlights
 
-│
-├── components/ // Reusable compound components (UI, Modals, Stars)
-├── hooks/ // Custom hooks for logic abstraction
-├── pages/ // Page-level routes (Diary, Auth, Movie)
-├── services/ // Supabase functions & external integrations
-├── utils/ // Helper functions (formatting, fallbacks, etc.)
-└── styles/ // Tailwind and custom styles
+- components/ - Reusable compound components (UI, Modals, Stars)
+- hooks/ - Custom hooks for logic abstraction
+- pages/ - Page-level routes (Diary, Auth, Movie)
+- services/ - Supabase functions & external integrations
+- utils/ - Helper functions (formatting, fallbacks, etc.)
+- styles/ - Tailwind and custom styles
 
 ---
 
