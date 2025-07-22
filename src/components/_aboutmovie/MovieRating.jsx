@@ -27,8 +27,8 @@ export default function MovieRating({ movieId, movieTitle }) {
 
   return (
     <React.Fragment>
-      <div className='w-1/4 h-full p-6 border border-neutral-500 rounded-lg shadow-sm flex flex-col gap-3 items-start justify-start'>
-        <h6 className='text-start text-lg text-white font-medium tracking-wide'>
+      <div className='w-full lg:w-1/4 h-full p-3 lg:p-6 border border-neutral-500 rounded-md lg:rounded-lg shadow-sm flex flex-col gap-3 items-start justify-start'>
+        <h6 className='text-start text-base lg:text-lg text-white font-medium tracking-wide'>
           Your Rating
         </h6>
 
@@ -37,7 +37,7 @@ export default function MovieRating({ movieId, movieTitle }) {
             <div className='w-full h-auto flex flex-col gap-3 items-center justify-center'>
               {movieRating ? (
                 <React.Fragment>
-                  <p className='text-start text-base text-gray-400 font-normal tracking-wide'>
+                  <p className='text-start text-sm lg:text-base text-gray-400 font-normal tracking-wider lg:tracking-wide'>
                     You rated this title with&nbsp;
                     <span className='text-yellow-500'>{movieRating}</span>/10
                   </p>
@@ -47,7 +47,7 @@ export default function MovieRating({ movieId, movieTitle }) {
                     renderButton={() => (
                       <button
                         type='button'
-                        className='outline-none border border-transparent flex items-center justify-center text-center gap-1.5 py-1 px-3 cursor-pointer text-sm text-white bg-blue-400 font-medium tracking-wider rounded-md shadow-sm hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
+                        className='outline-none border border-transparent flex items-center justify-center text-center gap-1.5 py-1 px-3 cursor-pointer text-xs md:text-sm text-white bg-blue-400 font-medium tracking-wider rounded-sm lg:rounded-md shadow-sm hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
                       >
                         Change Rating
                       </button>
@@ -56,7 +56,7 @@ export default function MovieRating({ movieId, movieTitle }) {
                 </React.Fragment>
               ) : (
                 <React.Fragment>
-                  <p className='text-start text-base text-gray-400 font-normal tracking-wide'>
+                  <p className='text-start text-sm lg:text-base text-gray-400 font-normal tracking-wider lg:tracking-wide'>
                     This title isn't rated yet
                   </p>
 
@@ -65,7 +65,7 @@ export default function MovieRating({ movieId, movieTitle }) {
                     renderButton={() => (
                       <button
                         type='button'
-                        className='outline-none border border-transparent flex items-center justify-center text-center gap-1.5 py-1 px-3 cursor-pointer text-sm text-white bg-blue-400 font-medium tracking-wider rounded-md shadow-sm hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
+                        className='outline-none border border-transparent flex items-center justify-center text-center gap-1.5 py-1 px-3 cursor-pointer text-xs md:text-sm text-white bg-blue-400 font-medium tracking-wider rounded-sm lg:rounded-md shadow-sm hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
                       >
                         Rate Title
                       </button>
@@ -75,7 +75,7 @@ export default function MovieRating({ movieId, movieTitle }) {
               )}
             </div>
           ) : (
-            <p className='text-start text-base text-gray-400 font-normal tracking-wide'>
+            <p className='text-start text-sm lg:text-base text-gray-400 font-normal tracking-wider lg:tracking-wide'>
               If you want to rate this title you will need to log into your
               account
             </p>

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 export default function AlreadyRegistered() {
   return (
-    <div className='w-full max-w-[640px] h-auto flex flex-col items-center justify-center gap-3 p-6 rounded-lg shadow-sm bg-black/75 backdrop-blur-md border border-neutral-500'>
+    <div className='w-full max-w-[640px] h-auto flex flex-col items-center justify-center gap-3 p-3 lg:p-6 rounded-md lg:rounded-lg shadow-sm bg-black/75 backdrop-blur-md border border-neutral-500'>
       <p className='text-lg text-white font-normal tracking-wide text-center'>
         You're already registered! 🎉
         <br />

@@ -39,7 +39,7 @@ export default function MovieTrailer() {
     );
 
   return (
-    <div className='w-full h-[calc(100vh-48px-48px-80px)] flex flex-col gap-6'>
+    <div className='w-full h-auto lg:h-[calc(100vh-48px-48px-80px)] flex flex-col gap-6'>
       <button
         className='outline-none border-none cursor-pointer bg-blue-400 self-start flex items-center justify-center gap-1.5 py-1.5 px-6 text-white text-sm font-normal tracking-wide rounded-md shadow-sm hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
         onClick={() => navigate(-1)}
@@ -50,7 +50,7 @@ export default function MovieTrailer() {
         Go Back
       </button>
 
-      <div className='w-full h-full flex items-center gap-12'>
+      <div className='w-full h-full flex flex-col lg:flex-row items-center gap-12'>
         <Trailer
           movieTrailer={trailerData?.movieTrailer}
           movieName={trailerData?.movieName}

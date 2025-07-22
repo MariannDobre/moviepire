@@ -48,17 +48,17 @@ export default function RegisterForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='w-full max-w-[640px] h-auto flex flex-col items-center justify-center gap-6 p-6 rounded-lg shadow-sm bg-black/75 backdrop-blur-md border border-neutral-500'
+      className='w-full max-w-[640px] h-auto flex flex-col items-center justify-center gap-3 lg:gap-6 p-3 lg:p-6 rounded-md lg:rounded-lg shadow-sm bg-black/75 backdrop-blur-md border border-neutral-500'
     >
-      <div className='w-full h-auto flex flex-col items-center justify-center gap-3'>
-        <h6 className='flex items-center justify-center gap-3 text-xl text-white font-medium tracking-wide'>
-          <span className='w-12 h-12 flex items-center justify-center text-2xl text-white bg-gradient-to-br from-indigo-500 to-blue-400 rounded-lg shadow-sm'>
+      <div className='w-full h-auto flex flex-col items-center justify-center gap-1.5 lg:gap-3'>
+        <h6 className='flex items-center justify-center gap-3 text-base md:text-lg lg:text-xl text-white font-medium tracking-wide'>
+          <span className='w-8 h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12 flex items-center justify-center text-base lg:text-xl xl:text-2xl text-white bg-gradient-to-br from-indigo-500 to-blue-400 rounded-md xl:rounded-lg shadow-sm'>
             <FaFilm />
           </span>
           Create Account
         </h6>
 
-        <p className='text-base text-gray-400 font-normal tracking-wide text-center'>
+        <p className='text-xs md:text-sm lg:text-base text-gray-400 font-normal tracking-wide text-center'>
           Start your cinematic journey today
           <br />
           Join thousands of movie enthusiasts
@@ -69,7 +69,7 @@ export default function RegisterForm() {
         htmlFor='registerUsername'
         className='w-full h-auto flex flex-col gap-1.5'
       >
-        <p className='self-start w-full flex items-center gap-1.5 text-lg text-white font-normal tracking-wide'>
+        <p className='self-start w-full flex items-center gap-1.5 text-sm md:text-base lg:text-lg text-white font-normal tracking-wide'>
           <span className='text-blue-400'>
             <FaUser />
           </span>
@@ -82,7 +82,7 @@ export default function RegisterForm() {
           id='registerUsername'
           placeholder='John Doe'
           disabled={isPending}
-          className='outline-none border border-neutral-500 disabled:border-neutral-500 disabled:cursor-not-allowed disabled:opacity-75 w-full h-auto py-1.5 px-3 rounded-md shadow-sm bg-neutral-800 text-sm text-white font-normal tracking-wider placeholder:text-sm placeholder:text-neutral-500 placeholder:font-normal placeholder:tracking-wider caret-blue-400 hover:border-blue-400 focus-visible:border-blue-400 hover:shadow-lg focus-visible:shadow-lg selection:bg-blue-400 selection:text-white transition-all duration-500'
+          className='outline-none border border-neutral-500 disabled:border-neutral-500 disabled:cursor-not-allowed disabled:opacity-75 w-full h-auto py-1 lg:py-1.5 px-2 lg:px-3 rounded-sm lg:rounded-md shadow-sm bg-neutral-800 text-xs md:text-sm text-white font-normal tracking-wider placeholder:text-xs md:placeholder:text-sm placeholder:text-neutral-500 placeholder:font-normal placeholder:tracking-wider caret-blue-400 hover:border-blue-400 focus-visible:border-blue-400 hover:shadow-lg focus-visible:shadow-lg selection:bg-blue-400 selection:text-white transition-all duration-500'
           {...register('registerUsername', {
             required: 'Username field is required.',
             minLength: {
@@ -96,7 +96,7 @@ export default function RegisterForm() {
           })}
         />
         {errors?.registerUsername && (
-          <span className='my-1.5 ml-3 text-red-500 text-sm font-normal tracking-wider'>
+          <span className='py-0.5 md:my-1.5 ml-2 md:ml-3 text-red-500 text-xs md:text-sm font-normal tracking-wider'>
             {errors?.registerUsername?.message}
           </span>
         )}
@@ -106,7 +106,7 @@ export default function RegisterForm() {
         htmlFor='registerEmail'
         className='w-full h-auto flex flex-col gap-1.5'
       >
-        <p className='self-start w-full flex items-center gap-1.5 text-lg text-white font-normal tracking-wide'>
+        <p className='self-start w-full flex items-center gap-1.5 text-sm md:text-base lg:text-lg text-white font-normal tracking-wide'>
           <span className='text-blue-400'>
             <MdOutlineEmail />
           </span>
@@ -119,7 +119,7 @@ export default function RegisterForm() {
           id='registerEmail'
           placeholder='john_doe@gmail.com'
           disabled={isPending}
-          className='outline-none border border-neutral-500 disabled:border-neutral-500 disabled:cursor-not-allowed disabled:opacity-75 w-full h-auto py-1.5 px-3 rounded-md shadow-sm bg-neutral-800 text-sm text-white font-normal tracking-wider placeholder:text-sm placeholder:text-neutral-500 placeholder:font-normal placeholder:tracking-wider caret-blue-400 hover:border-blue-400 focus-visible:border-blue-400 hover:shadow-lg focus-visible:shadow-lg selection:bg-blue-400 selection:text-white transition-all duration-500'
+          className='outline-none border border-neutral-500 disabled:border-neutral-500 disabled:cursor-not-allowed disabled:opacity-75 w-full h-auto py-1 lg:py-1.5 px-2 lg:px-3 rounded-sm lg:rounded-md shadow-sm bg-neutral-800 text-xs md:text-sm text-white font-normal tracking-wider placeholder:text-xs md:placeholder:text-sm placeholder:text-neutral-500 placeholder:font-normal placeholder:tracking-wider caret-blue-400 hover:border-blue-400 focus-visible:border-blue-400 hover:shadow-lg focus-visible:shadow-lg selection:bg-blue-400 selection:text-white transition-all duration-500'
           {...register('registerEmail', {
             required: 'Email field is required.',
             pattern: {
@@ -129,7 +129,7 @@ export default function RegisterForm() {
           })}
         />
         {errors?.registerEmail && (
-          <span className='my-1.5 ml-3 text-red-500 text-sm font-normal tracking-wider'>
+          <span className='py-0.5 md:my-1.5 ml-2 md:ml-3 text-red-500 text-xs md:text-sm font-normal tracking-wider'>
             {errors?.registerEmail?.message}
           </span>
         )}
@@ -139,7 +139,7 @@ export default function RegisterForm() {
         htmlFor='registerPassword'
         className='w-full h-auto flex flex-col gap-1.5 relative'
       >
-        <p className='self-start w-full flex items-center gap-1.5 text-lg text-white font-normal tracking-wide'>
+        <p className='self-start w-full flex items-center gap-1.5 text-sm md:text-base lg:text-lg text-white font-normal tracking-wide'>
           <span className='text-blue-400'>
             <FaShieldAlt />
           </span>
@@ -152,7 +152,7 @@ export default function RegisterForm() {
           id='registerPassword'
           placeholder='your_strong_password'
           disabled={isPending}
-          className='outline-none border border-neutral-500 disabled:border-neutral-500 disabled:cursor-not-allowed disabled:opacity-75 w-full h-auto py-1.5 px-3 rounded-md shadow-sm bg-neutral-800 text-sm text-white font-normal tracking-wider placeholder:text-sm placeholder:text-neutral-500 placeholder:font-normal placeholder:tracking-wider caret-blue-400 hover:border-blue-400 focus-visible:border-blue-400 hover:shadow-lg focus-visible:shadow-lg selection:bg-blue-400 selection:text-white transition-all duration-500'
+          className='outline-none border border-neutral-500 disabled:border-neutral-500 disabled:cursor-not-allowed disabled:opacity-75 w-full h-auto py-1 lg:py-1.5 px-2 lg:px-3 rounded-sm lg:rounded-md shadow-sm bg-neutral-800 text-xs md:text-sm text-white font-normal tracking-wider placeholder:text-xs md:placeholder:text-sm placeholder:text-neutral-500 placeholder:font-normal placeholder:tracking-wider caret-blue-400 hover:border-blue-400 focus-visible:border-blue-400 hover:shadow-lg focus-visible:shadow-lg selection:bg-blue-400 selection:text-white transition-all duration-500'
           {...register('registerPassword', {
             required: 'Password field is required.',
             minLength: {
@@ -166,7 +166,7 @@ export default function RegisterForm() {
           })}
         />
         {errors?.registerPassword && (
-          <span className='my-1.5 ml-3 text-red-500 text-sm font-normal tracking-wider'>
+          <span className='py-0.5 md:my-1.5 ml-2 md:ml-3 text-red-500 text-xs md:text-sm font-normal tracking-wider'>
             {errors?.registerPassword?.message}
           </span>
         )}
@@ -175,7 +175,9 @@ export default function RegisterForm() {
           type='button'
           onClick={() => setShowPassword((currentValue) => !currentValue)}
           className={`absolute right-3 ${
-            errors?.registerPassword ? 'bottom-[48px]' : 'bottom-2.5'
+            errors?.registerPassword
+              ? 'bottom-[33px] md:bottom-[48px]'
+              : 'bottom-1.5 md:bottom-2.5'
           } border-none outline-none text-base text-neutral-500 hover:text-blue-400 focus-visible:text-blue-400 transition-all duration-500`}
         >
           {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
@@ -186,7 +188,7 @@ export default function RegisterForm() {
         htmlFor='registerConfirmPassword'
         className='w-full h-auto flex flex-col gap-1.5 relative'
       >
-        <p className='self-start w-full flex items-center gap-1.5 text-lg text-white font-normal tracking-wide'>
+        <p className='self-start w-full flex items-center gap-1.5 text-sm md:text-base lg:text-lg text-white font-normal tracking-wide'>
           <span className='text-blue-400'>
             <FaShieldAlt />
           </span>
@@ -199,7 +201,7 @@ export default function RegisterForm() {
           id='registerConfirmPassword'
           placeholder='confirm_your_strong_password'
           disabled={isPending}
-          className='outline-none border border-neutral-500 disabled:border-neutral-500 disabled:cursor-not-allowed disabled:opacity-75 w-full h-auto py-1.5 px-3 rounded-md shadow-sm bg-neutral-800 text-sm text-white font-normal tracking-wider placeholder:text-sm placeholder:text-neutral-500 placeholder:font-normal placeholder:tracking-wider caret-blue-400 hover:border-blue-400 focus-visible:border-blue-400 hover:shadow-lg focus-visible:shadow-lg selection:bg-blue-400 selection:text-white transition-all duration-500'
+          className='outline-none border border-neutral-500 disabled:border-neutral-500 disabled:cursor-not-allowed disabled:opacity-75 w-full h-auto py-1 lg:py-1.5 px-2 lg:px-3 rounded-sm lg:rounded-md shadow-sm bg-neutral-800 text-xs md:text-sm text-white font-normal tracking-wider placeholder:text-xs md:placeholder:text-sm placeholder:text-neutral-500 placeholder:font-normal placeholder:tracking-wider caret-blue-400 hover:border-blue-400 focus-visible:border-blue-400 hover:shadow-lg focus-visible:shadow-lg selection:bg-blue-400 selection:text-white transition-all duration-500'
           {...register('registerConfirmPassword', {
             required: 'Confirm Password field is required.',
             validate: (value) =>
@@ -207,7 +209,7 @@ export default function RegisterForm() {
           })}
         />
         {errors?.registerConfirmPassword && (
-          <span className='my-1.5 ml-3 text-red-500 text-sm font-normal tracking-wider'>
+          <span className='py-0.5 md:my-1.5 ml-2 md:ml-3 text-red-500 text-xs md:text-sm font-normal tracking-wider'>
             {errors?.registerConfirmPassword?.message}
           </span>
         )}
@@ -218,7 +220,9 @@ export default function RegisterForm() {
             setShowConfirmPassword((currentValue) => !currentValue)
           }
           className={`absolute right-3 ${
-            errors?.registerConfirmPassword ? 'bottom-[48px]' : 'bottom-2.5'
+            errors?.registerConfirmPassword
+              ? 'bottom-[33px] md:bottom-[48px]'
+              : 'bottom-1.5 md:bottom-2.5'
           } border-none outline-none text-base text-neutral-500 hover:text-blue-400 focus-visible:text-blue-400 transition-all duration-500`}
         >
           {showConfirmPassword ? <FaRegEyeSlash /> : <FaRegEye />}
@@ -228,7 +232,7 @@ export default function RegisterForm() {
       <button
         type='submit'
         disabled={isPending}
-        className='outline-none border-none w-full h-auto cursor-pointer disabled:bg-neutral-800 disabled:text-neutral-500 disabled:cursor-not-allowed disabled:opacity-75 py-1.5 px-6 text-base text-white font-normal tracking-wide text-center rounded-md shadow-sm bg-blue-400 hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
+        className='outline-none border-none w-full h-auto cursor-pointer disabled:bg-neutral-800 disabled:text-neutral-500 disabled:cursor-not-allowed disabled:opacity-75 py-1 px-3 lg:py-1.5 lg:px-6 text-xs md:text-sm lg:text-base text-white font-normal tracking-wider lg:tracking-wide text-center rounded-sm lg:rounded-md shadow-sm bg-blue-400 hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
       >
         {isPending ? (
           <SmallLoader
@@ -240,10 +244,10 @@ export default function RegisterForm() {
         )}
       </button>
 
-      <div className='w-full h-auto flex items-center justify-center gap-3'>
+      <div className='w-full h-auto flex items-center justify-center gap-1.5 lg:gap-3'>
         <div className='w-full h-px bg-neutral-500' />
 
-        <p className='w-[640px] text-sm text-gray-400 font-normal tracking-wider text-center selection:bg-blue-400 selection:text-white'>
+        <p className='w-[640px] text-xs lg:text-sm text-gray-400 font-normal tracking-wider text-center selection:bg-blue-400 selection:text-white'>
           Already have an account?
         </p>
 
@@ -254,7 +258,7 @@ export default function RegisterForm() {
         type='button'
         disabled={isPending}
         onClick={() => navigate('/login')}
-        className='outline-none border-none w-full h-auto cursor-pointer disabled:bg-neutral-800 disabled:text-neutral-500 disabled:cursor-not-allowed disabled:opacity-75 py-1.5 px-6 text-base text-white font-normal tracking-wide text-center rounded-md shadow-sm bg-blue-400 hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
+        className='outline-none border-none w-full h-auto cursor-pointer disabled:bg-neutral-800 disabled:text-neutral-500 disabled:cursor-not-allowed disabled:opacity-75 py-1 px-3 lg:py-1.5 lg:px-6 text-xs md:text-sm lg:text-base text-white font-normal tracking-wider lg:tracking-wide text-center rounded-sm lg:rounded-md shadow-sm bg-blue-400 hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
       >
         {isPending ? (
           <SmallLoader

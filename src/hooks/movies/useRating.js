@@ -11,6 +11,7 @@ export function useRating(userId, movieId) {
     queryFn: () => getRating(userId, movieId),
     staleTime: 0,
     refetchOnMount: true,
+    enabled: !!userId,
   });
 
   return { rating, isFetching, error };

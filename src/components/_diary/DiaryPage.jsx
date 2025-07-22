@@ -78,8 +78,8 @@ export default function DiaryPage() {
         </p>
       </div>
 
-      <div className='w-full h-auto flex flex-col items-center gap-6 p-6 bg-neutral-50/10 border border-neutral-500 rounded-lg shadow-sm'>
-        <h6 className='text-lg text-blue-400 font-medium tracking-wider self-start'>
+      <div className='w-full h-auto flex flex-col items-center gap-3 md:gap-6 p-3 md:p-6 bg-neutral-50/10 border border-neutral-500 rounded-md lg:rounded-lg shadow-sm'>
+        <h6 className='text-base md:text-lg text-blue-400 font-medium tracking-wider self-start'>
           Filters
         </h6>
 

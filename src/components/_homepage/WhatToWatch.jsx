@@ -12,7 +12,7 @@ export default function WhatToWatch() {
 
   if (error)
     return (
-      <div className='w-full h-96 p-6 flex flex-col items-center justify-center gap-9 bg-neutral-50/10 border border-red-700 rounded-lg shadow-sm'>
+      <div className='w-full h-96 p-6 flex flex-col items-center justify-center gap-9 bg-neutral-50/10 border border-red-700 rounded-md lg:rounded-lg shadow-sm'>
         <p className='text-red-500 text-sm font-normal tracking-wide text-center'>
           There was an error while fetching the movies...
           <br />
@@ -23,7 +23,7 @@ export default function WhatToWatch() {
 
   if (isFetching)
     return (
-      <div className='w-full h-96 p-6 flex flex-col items-center justify-center gap-3 bg-neutral-50/10 border border-yellow-700 rounded-lg shadow-sm'>
+      <div className='w-full h-96 p-6 flex flex-col items-center justify-center gap-3 bg-neutral-50/10 border border-yellow-700 rounded-md lg:rounded-lg shadow-sm'>
         <p className='text-yellow-500 text-lg font-normal tracking-wide text-center'>
           Loading the movies...
         </p>
@@ -36,7 +36,7 @@ export default function WhatToWatch() {
     );
 
   return (
-    <div className='w-full flex flex-col gap-9'>
+    <div className='w-full flex flex-col gap-6 xl:gap-9'>
       <div className='w-full flex flex-col gap-1'>
         <h6 className='text-2xl text-white font-medium tracking-wide'>
           What to Watch
@@ -47,15 +47,15 @@ export default function WhatToWatch() {
         </p>
       </div>
 
-      <div className='w-full grid grid-cols-5 gap-x-6'>
+      <div className='w-full grid place-items-center grid-cols-1 xl:grid-cols-5 gap-x-0 gap-y-3 xl:gap-x-6 xl:gap-y-0'>
         {randomMovies?.map((movie, index) => (
           <div
             key={index}
-            className='flex flex-col items-center justify-between w-full max-w-96 h-[620px] p-1.5 rounded-lg shadow-sm bg-neutral-900/75 border border-neutral-500 hover:border-neutral-400 focus-visible:border-neutral-400 hover:shadow-lg focus-visible:shadow-lg hover:-translate-y-2 focus-visible:-translate-y-2 transition-all duration-500'
+            className='flex flex-col items-center justify-between w-full max-w-96 h-[620px] p-1.5 rounded-md lg:rounded-lg shadow-sm bg-neutral-900/75 border border-neutral-500 hover:border-neutral-400 focus-visible:border-neutral-400 hover:shadow-lg focus-visible:shadow-lg hover:-translate-y-2 focus-visible:-translate-y-2 transition-all duration-500'
           >
-            <div className='w-full max-w-96 h-[480px] flex items-center justify-center rounded-t-lg overflow-hidden'>
+            <div className='w-full max-w-96 h-[480px] flex items-center justify-center rounded-t-md lg:rounded-t-lg overflow-hidden'>
               <LazyLoadImage
-                className='w-full h-full object-cover rounded-t-lg drop-shadow-sm'
+                className='w-full h-full object-cover rounded-t-md lg:rounded-t-lg drop-shadow-sm'
                 width={330}
                 src={movie.moviePoster}
                 alt={`Poster for ${movie.movieName}`}

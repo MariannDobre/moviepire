@@ -97,13 +97,15 @@ export default function GenreFilter({ selectedGenre, setSelectedGenre }) {
   const [showDropdown, setShowDropdown] = useState(false);
 
   return (
-    <div className='w-[440px] h-auto flex flex-col gap-1.5 relative'>
-      <p className='text-base text-white font-medium tracking-wide'>Genre</p>
+    <div className='w-full max-w-[440px] h-auto flex flex-col gap-1.5 relative'>
+      <p className='text-sm md:text-base text-white font-medium tracking-wider md:tracking-wide'>
+        Genre
+      </p>
 
       <button
         type='button'
         onClick={() => setShowDropdown((currentValue) => !currentValue)}
-        className='outline-none border border-neutral-500 cursor-pointer bg-transparent w-full h-auto flex items-center justify-between py-1.5 px-3 rounded-md shadow-sm text-gray-200 text-sm font-medium tracking-wider'
+        className='outline-none border border-neutral-500 cursor-pointer bg-transparent w-full h-auto flex items-center justify-between py-1.5 px-3 rounded-md shadow-sm text-gray-200 text-xs md:text-sm font-medium tracking-wider'
       >
         {selectedGenre}
         <span className='text-sm text-gray-400'>

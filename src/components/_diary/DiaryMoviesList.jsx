@@ -44,13 +44,15 @@ export default function DiaryMoviesList({
     );
 
   return (
-    <div className='w-full h-auto flex flex-col items-center gap-3'>
-      <p className='text-sm text-white font-medium tracking-wider self-start'>
-        <span className='text-base text-blue-400'>{diaryMovies?.length}</span>
+    <div className='w-full h-auto flex flex-col items-center gap-1.5 md:gap-3'>
+      <p className='text-xs md:text-sm text-white font-medium tracking-wider self-start'>
+        <span className='text-sm md:text-base text-blue-400'>
+          {diaryMovies?.length}
+        </span>
         &nbsp;entries found
       </p>
 
-      <div className='w-full h-auto flex flex-col items-center gap-6 p-6 bg-neutral-50/10 border border-neutral-500 rounded-lg shadow-sm'>
+      <div className='w-full h-auto flex flex-col items-center gap-3 md:gap-6 p-3 md:p-6 bg-neutral-50/10 border border-neutral-500 rounded-md lg:rounded-lg shadow-sm'>
         {diaryMovies.length > 0 ? (
           diaryMovies.map((movie, index) => (
             <DiaryMovie
@@ -59,7 +61,7 @@ export default function DiaryMoviesList({
             />
           ))
         ) : (
-          <p className='text-lg text-gray-400 font-medium tracking-wide text-center'>
+          <p className='text-sm sm:text-base md:text-lg text-gray-400 font-medium tracking-wider md:tracking-wide text-center'>
             No title with this filtering options
           </p>
         )}

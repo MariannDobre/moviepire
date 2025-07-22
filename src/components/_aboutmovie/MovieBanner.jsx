@@ -21,7 +21,7 @@ export default function MovieBanner({ children, movieBanner }) {
                 url(${movieBanner}) no-repeat center / cover
               `,
       }}
-      className='w-full h-[800px] flex items-end justify-start p-12 text-white'
+      className='w-full h-[800px] flex items-end justify-start p-3 md:p-6 xl:p-9 2xl:p-12 text-white'
     >
       {children}
     </div>

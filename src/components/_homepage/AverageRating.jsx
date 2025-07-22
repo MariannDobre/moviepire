@@ -4,6 +4,15 @@ import SmallLoader from '../loaders/SmallLoader';
 
 import { FaArrowTrendUp } from 'react-icons/fa6';
 
+const responsiveStyles = {
+  cardDimensions: 'h-40 xl:h-56 p-3 xl:p-6 rounded-md lg:rounded-lg',
+  themeIcon:
+    'w-8 h-8 xl:w-12 xl:h-12 text-lg xl:text-2xl rounded-md lg:rounded-lg',
+  value: 'text-2xl xl:text-4xl',
+  heading: 'text-sm lg:text-base',
+  subheading: 'text-xs lg:text-sm',
+};
+
 function getFeedbackString(average) {
   if (average <= 4) return "You're hard to please...";
   if (average <= 6.5) return 'You enjoy the occasional gem!';
@@ -35,7 +44,9 @@ export default function AverageRating({ userId }) {
 
   if (error)
     return (
-      <div className='w-auto h-56 p-6 flex flex-col items-center justify-center bg-neutral-900/75 border border-red-700 rounded-lg shadow-sm'>
+      <div
+        className={`${responsiveStyles.cardDimensions} w-auto flex flex-col items-center justify-center bg-neutral-900/75 border border-red-700 shadow-sm`}
+      >
         <p className='text-red-500 text-lg font-normal tracking-wide text-center'>
           There was an error while fetching the data...
           <br />
@@ -46,7 +57,9 @@ export default function AverageRating({ userId }) {
 
   if (isFetching)
     return (
-      <div className='w-auto h-56 p-6 flex flex-col items-center justify-center bg-neutral-900/75 border border-yellow-700 rounded-lg shadow-sm'>
+      <div
+        className={`${responsiveStyles.cardDimensions} w-auto flex flex-col items-center justify-center bg-neutral-900/75 border border-yellow-700 shadow-sm`}
+      >
         <p className='text-yellow-500 text-lg font-normal tracking-wide text-center'>
           Loading your average rating...
         </p>
@@ -59,23 +72,33 @@ export default function AverageRating({ userId }) {
     );
 
   return (
-    <div className='w-auto h-56 p-6 flex flex-col bg-neutral-900/75 border border-neutral-500 rounded-lg shadow-sm hover:border-neutral-400 focus-visible:border-neutral-400 hover:shadow-lg focus-visible:shadow-lg hover:-translate-y-2 focus-visible:-translate-y-2 transition-all duration-500'>
+    <div
+      className={`${responsiveStyles.cardDimensions} w-auto flex flex-col bg-neutral-900/75 border border-neutral-500 shadow-sm hover:border-neutral-400 focus-visible:border-neutral-400 hover:shadow-lg focus-visible:shadow-lg hover:-translate-y-2 focus-visible:-translate-y-2 transition-all duration-500`}
+    >
       <div className='w-full flex items-center justify-between'>
-        <span className='w-12 h-12 flex items-center justify-center bg-violet-700/35 text-2xl text-violet-500 rounded-lg shadow-sm drop-shadow-sm'>
+        <span
+          className={`${responsiveStyles.themeIcon} flex items-center justify-center bg-violet-700/35 text-violet-500 shadow-sm drop-shadow-sm`}
+        >
           <FaArrowTrendUp />
         </span>
       </div>
 
       <div className='w-full flex flex-col mt-auto'>
-        <span className='text-4xl text-white font-semibold tracking-wide'>
+        <span
+          className={`${responsiveStyles.value} text-white font-semibold tracking-wide`}
+        >
           {average ?? 'N/A'}
         </span>
 
-        <p className='text-base text-gray-400 font-medium tracking-wide'>
+        <p
+          className={`${responsiveStyles.heading} text-gray-400 font-medium tracking-wide`}
+        >
           Average Rating
         </p>
 
-        <p className='text-sm text-violet-500 font-normal tracking-wide'>
+        <p
+          className={`${responsiveStyles.subheading} text-violet-500 font-normal tracking-wide`}
+        >
           {average ? getFeedbackString(average) : 'No ratings yet.'}
         </p>
       </div>

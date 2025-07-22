@@ -16,7 +16,7 @@ export default function TrailerDetails({
   const navigate = useNavigate();
 
   return (
-    <div className='border border-neutral-800 w-full max-w-[calc(1816px-1280px-48px-2px)] h-full p-6 flex flex-col gap-6 bg-neutral-900/75 rounded-lg shadow-sm'>
+    <div className='border border-neutral-800 w-full max-w-full lg:max-w-[calc(1816px-1280px-48px-2px)] h-full p-6 flex flex-col gap-6 bg-neutral-900/75 rounded-lg shadow-sm'>
       <div className='flex gap-3'>
         <LazyLoadImage
           src={moviePoster}

@@ -68,10 +68,10 @@ export default function AddToDiary({ movie }) {
       type='button'
       onClick={handleToggleDiary}
       disabled={isAddingToDiary || isRemovingFromDiary}
-      className='outline-none border border-transparent flex items-center justify-center text-center gap-1.5 py-1.5 px-6 cursor-pointer text-sm text-white bg-blue-400 font-normal tracking-wide rounded-md shadow-sm hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
+      className='outline-none border border-transparent flex items-center justify-center text-center gap-1 md:gap-1.5 py-1 px-4 md:py-1.5 md:px-6 cursor-pointer text-xs md:text-sm text-white bg-blue-400 font-normal tracking-wide rounded-sm md:rounded-md shadow-sm hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
     >
       <span>{status ? <FaMinus /> : <FaPlus />}</span>
-      {status ? 'Remove from Diary' : 'Add to Diary'}
+      {status ? 'Remove from Diary' : 'Add Diary'}
     </button>
   );
 }

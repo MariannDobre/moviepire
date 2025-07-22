@@ -47,10 +47,10 @@ export default function MoviePage() {
     <div className='w-full h-auto flex flex-col gap-9 relative'>
       <button
         type='button'
-        className='outline-none border-none cursor-pointer absolute top-0 left-12 flex items-center justify-center text-center gap-1.5 py-1.5 px-6 text-sm text-white bg-blue-400 font-normal tracking-wide rounded-md shadow-sm hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
+        className='outline-none border-none cursor-pointer absolute top-0 left-3 md:left-6 xl:left-9 2xl:left-12 flex items-center justify-center text-center gap-1.5 py-1 px-4 md:py-1.5 md:px-6 text-xs md:text-sm text-white bg-blue-400 font-normal tracking-wide rounded-sm md:rounded-md shadow-sm hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
         onClick={() => navigate('/')}
       >
-        <span className='text-lg'>
+        <span className='text-base md:text-lg'>
           <BsBoxArrowInLeft />
         </span>
         Back to Home Page
@@ -60,7 +60,7 @@ export default function MoviePage() {
         <MovieBannerDetails movie={movieDetails} />
       </MovieBanner>
 
-      <div className='w-full h-40 flex items-center justify-between gap-9'>
+      <div className='w-full h-auto lg:h-40 flex flex-col lg:flex-row items-center justify-between gap-3 md:gap-6 lg:gap-9'>
         <MoviePlot plot={movieDetails?.movieDescription} />
 
         <Modal>
@@ -71,7 +71,7 @@ export default function MoviePage() {
         </Modal>
       </div>
 
-      <div className='w-full h-64 flex items-center justify-between gap-9'>
+      <div className='w-full h-auto lg:h-64 flex flex-col lg:flex-row items-center justify-between gap-3 md:gap-6 lg:gap-9'>
         <MovieCast
           movieDirector={movieDetails?.movieDirector}
           movieWriters={movieDetails?.movieWriters}

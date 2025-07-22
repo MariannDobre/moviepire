@@ -1,7 +1,14 @@
-import { startTransition, useState } from 'react';
+import React, { startTransition, useState } from 'react';
 import { useClickOutside } from '../../hooks/assets/useClickOutside';
 import { FaSearch } from 'react-icons/fa';
 import Results from './Results';
+
+const responsiveStyles = {
+  label: '',
+  icon: '',
+  input:
+    'w-24 group-hover:w-40 focus-visible:w-40 2xl:w-80 2xl:group-hover:w-[480px] 2xl:focus-visible:w-[480px]',
+};
 
 function SearchMovie() {
   const [query, setQuery] = useState('');
@@ -12,7 +19,7 @@ function SearchMovie() {
   const inputRect = searchInputRef?.current?.getBoundingClientRect();
 
   return (
-    <div className=''>
+    <React.Fragment>
       <label
         htmlFor='search-movie'
         className='relative group w-auto h-8 bg-neutral-800 flex items-center rounded-md shadow-sm'
@@ -23,11 +30,11 @@ function SearchMovie() {
 
         <input
           ref={searchInputRef}
-          className='outline-none border border-transparent bg-neutral-800 w-80 h-8 pr-2 pl-8 placeholder:text-neutral-500 placeholder:font-normal placeholder:tracking-wide placeholder:text-sm caret-blue-400 text-sm text-white font-normal tracking-wide rounded-md shadow-none group-hover:w-[480px] focus-visible:w-[480px] group-hover:border-blue-400 focus-visible:border-blue-400 selection:bg-blue-400 selection:text-white transition-all duration-500'
+          className={`${responsiveStyles.input} w-40 group-hover:w-56 focus-visible:w-56 sm:w-48 sm:group-hover:w-64 sm:focus-visible:w-64 md:w-56 md:group-hover:w-72 md:focus-visible:w-72 lg:w-64 lg:group-hover:w-80 lg:focus-visible:w-80 xl:w-72 xl:group-hover:w-[352px] xl:focus-visible:w-[352px] 2xl:w-80 2xl:group-hover:w-[384px] 2xl:focus-visible:w-[384px] outline-none border border-transparent bg-neutral-800 h-8 pr-2 pl-8 placeholder:text-neutral-500 placeholder:font-normal placeholder:tracking-wide placeholder:text-sm caret-blue-400 text-sm text-white font-normal tracking-wide rounded-md shadow-none group-hover:border-blue-400 focus-visible:border-blue-400 selection:bg-blue-400 selection:text-white transition-all duration-500`}
           type='text'
           id='search-movie'
           name='search-movie'
-          placeholder='Search for movie/series title...'
+          placeholder='Search moviepire'
           autoComplete='off'
           aria-label='Search for movie/series title'
           minLength={1}
@@ -45,7 +52,7 @@ function SearchMovie() {
         setIsInputFocused={setIsInputFocused}
         inputRect={inputRect}
       />
-    </div>
+    </React.Fragment>
   );
 }
 

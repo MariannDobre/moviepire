@@ -1,7 +1,7 @@
 export default function Trailer({ movieTrailer, movieName }) {
   return (
     <iframe
-      className='w-full max-w-[1280px] h-full'
+      className='w-full max-w-[1280px] h-[760px] lg:h-full'
       src={`${movieTrailer}?autoplay=1`}
       sandbox='allow-scripts allow-same-origin allow-presentation'
       allow='autoplay'

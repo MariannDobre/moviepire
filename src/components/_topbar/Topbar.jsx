@@ -11,6 +11,13 @@ import SmallLoader from '../loaders/SmallLoader';
 
 import { BsFillJournalBookmarkFill } from 'react-icons/bs';
 
+const responsiveStyles = {
+  componentWrapper: 'py-0 px-3 md:px-6 xl:px-9 2xl:px-12',
+  diaryLink:
+    'w-8 h-8 2xl:w-12 2xl:h-12 text-base xl:text-2xl rounded-md xl:rounded-lg',
+  diaryLinkIcon: 'w-8 h-8 2xl:w-12 2xl:h-12 text-base xl:text-xl',
+};
+
 export default function Topbar() {
   const { user, isAuthenticated } = useUser();
   const { diaryMovies, isFetching } = useDiaryMovies(user?.id);
@@ -27,35 +34,38 @@ export default function Topbar() {
 
   return (
     <div
-      className={`border-b ${
+      className={`${responsiveStyles.componentWrapper} border-b ${
         isNavFixed
           ? 'bg-black/50 backdrop-blur-md border-neutral-500'
           : 'bg-black backdrop-blur-0 border-neutral-800'
-      } w-full h-20 py-0 px-12 fixed top-0 left-0 z-50 flex items-center justify-between transition-all duration-500`}
+      } w-full h-20 fixed top-0 left-0 z-50 flex items-center justify-between transition-all duration-500`}
     >
-      <Logo width='w-1/4' />
+      <Logo />
 
       <SearchMovie />
 
       <div
         className={`w-1/4 h-12 flex items-center justify-end ${
-          isAuthenticated ? 'gap-3' : 'gap-0'
+          isAuthenticated ? 'gap-1.5 2xl:gap-3' : 'gap-0'
         }`}
       >
+        {/* diaryLink:
+    'w-8 h-8 2xl:w-12 2xl:h-12 text-base xl:text-2xl rounded-md xl:rounded-lg',
+  diaryLinkIcon: 'w-8 h-8 2xl:w-12 2xl:h-12 text-base xl:text-xl', */}
         {isAuthenticated ? (
           <Link
             to='/diary'
-            className='group outline-none border-none cursor-pointer w-12 h-12 flex items-center justify-center rounded-lg shadow-sm relative'
+            className='w-8 h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12 group outline-none border-none cursor-pointer flex items-center justify-center rounded-md xl:rounded-lg shadow-sm relative'
           >
-            <span className='w-12 h-12 flex items-center justify-center text-xl text-white bg-neutral-800 rounded-lg drop-shadow-sm group-hover:text-blue-500 group-focus-visible:text-blue-500 transition-all duration-500'>
+            <span className='w-8 h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12 text-base lg:text-xl xl:text-2xl flex items-center justify-center text-white bg-neutral-800 rounded-md xl:rounded-lg drop-shadow-sm group-hover:text-blue-500 group-focus-visible:text-blue-500 transition-all duration-500'>
               <BsFillJournalBookmarkFill />
             </span>
 
-            <div className='w-6 h-6 bg-blue-400 absolute -top-2 -left-2 flex items-center justify-center rounded-full shadow-sm'>
+            <div className='w-5 h-5 sm:w-[22px] sm:h-[22px] lg:w-6 lg:h-6 xl:w-7 xl:h-7 bg-blue-400 absolute -top-2 -left-2 flex items-center justify-center rounded-full shadow-sm'>
               {isAuthenticated && isFetching ? (
-                <SmallLoader size='text-lg' />
+                <SmallLoader size='text-lg md:text-xl' />
               ) : (
-                <span className='w-full h-full text-sm text-white font-medium tracking-wide flex items-center justify-center rounded-full bg-transparent'>
+                <span className='w-full h-full text-[10px] sm:text-[11px] md:text-xs lg:text-sm text-white font-medium tracking-wide flex items-center justify-center rounded-full bg-transparent'>
                   {diaryMovies ? diaryMovies?.length : '-'}
                 </span>
               )}
