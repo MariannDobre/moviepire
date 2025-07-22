@@ -1,70 +1,111 @@
-# Getting Started with Create React App
+# 🎬 Moviepire — Your Personal Movie & Series Diary
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to **Moviepire** — a sleek, fullstack application crafted for movie and series lovers who want to track, reflect, and personalize their watching experience. Inspired by IMDb, but redesigned for **your eyes only**, Moviepire transforms film discovery into a private journey of memory and taste.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 What is Moviepire?
 
-### `npm start`
+**Moviepire** is a **personal diary for movies and TV shows**. It allows you to:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- 📝 Log and rate films or series you’ve watched
+- 🧠 Remember why something resonated with you
+- 🎯 Filter your watch history by genre, year, or type
+- 🔐 Keep your ratings and thoughts private
+- 🔄 Seamlessly update account info and revisit entries
+- 📥 Authenticate securely and confirm your email
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Built from scratch with inspiration from IMDb, Moviepire flips the script — offering an **introspective and fully private film journal** tailored for movie buffs and series enthusiasts alike.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🛠️ Tech Stack
 
-### `npm run build`
+> Carefully selected tools to offer a fast, reliable, and extensible user experience:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Technology                                                                  | Description                                               |
+| --------------------------------------------------------------------------- | --------------------------------------------------------- |
+| [**React**](https://reactjs.org)                                            | UI library for interactive components                     |
+| [**Supabase**](https://supabase.com)                                        | Backend-as-a-Service (PostgreSQL DB + Auth)               |
+| [**React Router DOM**](https://reactrouter.com)                             | Declarative client-side routing                           |
+| [**React Hook Form**](https://react-hook-form.com)                          | Form management with validation                           |
+| [**React Query**](https://tanstack.com/query)                               | Data fetching and caching                                 |
+| [**React Error Boundary**](https://github.com/bvaughn/react-error-boundary) | Graceful error handling                                   |
+| [**React Hot Toast**](https://react-hot-toast.com)                          | Elegant and accessible toast notifications                |
+| 🧱 Compound Components                                                      | Shared logic between deeply nested UI parts               |
+| 🧠 Custom Hooks                                                             | DRY and scalable logic for async, form, and state control |
+| 🎨 [Tailwind CSS](https://tailwindcss.com)                                  | Utility-first styling for rapid UI development            |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🔐 Authentication Features
 
-### `npm run eject`
+Moviepire includes a complete **auth flow** with:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- ✅ Registration & Login
+- 📩 Email Confirmation (verified via Supabase)
+- 🔒 Secure Session Handling
+- 👤 Account Data Editing (username, avatar, password)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 📓 Diary Features
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- ⭐ Interactive star rating system with hover/select states
+- 📅 Watched date & IMDb info tracking
+- 🧹 Server-side filters (genre, type, and year range)
+- 🔄 Instant data updates using React Query + Supabase
+- 🧩 Compound modals and components for scalable UI logic
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## ✨ Why Moviepire?
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+📍 This project began as a **frontend IMDb clone**, but quickly evolved into a **private-first, personalized fullstack experience**. The goal? Give users a space to **document and rediscover** their movie and series watching habits.
 
-### Code Splitting
+Built with a **performance-first mindset** and using only the **best-in-class libraries**, Moviepire showcases modern React development principles with a clean and maintainable codebase.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## 📂 Project Structure Highlights
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+│
+├── components/ // Reusable compound components (UI, Modals, Stars)
+├── hooks/ // Custom hooks for logic abstraction
+├── pages/ // Page-level routes (Diary, Auth, Movie)
+├── services/ // Supabase functions & external integrations
+├── utils/ // Helper functions (formatting, fallbacks, etc.)
+└── styles/ // Tailwind and custom styles
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 🧠 Lessons & Concepts
 
-### Advanced Configuration
+- 📌 Separation of concerns with hooks and compound components
+- 📡 Fullstack data flow: Supabase ↔ React Query ↔ UI
+- 🛠 Declarative state-driven modals (with URL query-based opening)
+- 🔁 Optimistic UI updates & cache invalidation
+- 🚦 Conditional rendering logic for verified vs. unverified accounts
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+Made with ☕, 🎬 and lots of `console.log()` — by [Mariann Dobre](https://github.com/MariannDobre)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## 💡 Why I Built This
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project isn’t just a technical showcase — it’s **a labor of passion**.
+
+I created **Moviepire** to:
+
+- Demonstrate what I’ve learned so far in React and fullstack development
+- Sharpen my skills by building something real, polished, and complete
+- Show that I care about detail, structure, performance, and user experience
+- Express my love for web applications and the creative process behind them
+- Open the door to job opportunities, internships, or collaborations
+
+If you’re someone hiring or scouting talent:  
+👉 I may not have a traditional background, but I’ve **put in the work** and I’m eager to keep learning, building, and contributing — wherever that may be.
+
+**Thanks for reading — and giving people like me a shot.**
