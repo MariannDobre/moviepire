@@ -11,13 +11,6 @@ import SmallLoader from '../loaders/SmallLoader';
 
 import { BsFillJournalBookmarkFill } from 'react-icons/bs';
 
-const responsiveStyles = {
-  componentWrapper: 'py-0 px-3 md:px-6 xl:px-9 2xl:px-12',
-  diaryLink:
-    'w-8 h-8 2xl:w-12 2xl:h-12 text-base xl:text-2xl rounded-md xl:rounded-lg',
-  diaryLinkIcon: 'w-8 h-8 2xl:w-12 2xl:h-12 text-base xl:text-xl',
-};
-
 export default function Topbar() {
   const { user, isAuthenticated } = useUser();
   const { diaryMovies, isFetching } = useDiaryMovies(user?.id);
@@ -34,7 +27,7 @@ export default function Topbar() {
 
   return (
     <div
-      className={`${responsiveStyles.componentWrapper} border-b ${
+      className={`py-0 px-3 md:px-6 xl:px-9 2xl:px-12 border-b ${
         isNavFixed
           ? 'bg-black/50 backdrop-blur-md border-neutral-500'
           : 'bg-black backdrop-blur-0 border-neutral-800'
@@ -49,9 +42,6 @@ export default function Topbar() {
           isAuthenticated ? 'gap-1.5 2xl:gap-3' : 'gap-0'
         }`}
       >
-        {/* diaryLink:
-    'w-8 h-8 2xl:w-12 2xl:h-12 text-base xl:text-2xl rounded-md xl:rounded-lg',
-  diaryLinkIcon: 'w-8 h-8 2xl:w-12 2xl:h-12 text-base xl:text-xl', */}
         {isAuthenticated ? (
           <Link
             to='/diary'

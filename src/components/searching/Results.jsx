@@ -46,7 +46,7 @@ function Results({
       className={`bg-neutral-800 fixed flex flex-col z-50 ${
         isInputFocused
           ? 'block w-56 sm:w-64 md:w-72 lg:w-80 xl:w-[352px] 2xl:w-[384px]'
-          : 'hidden w-0'
+          : 'hidden'
       } border border-neutral-500 rounded-md shadow-sm max-h-96 overflow-y-auto`}
     >
       {movies?.map((movie, index) => (
