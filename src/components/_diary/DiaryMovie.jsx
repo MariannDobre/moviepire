@@ -55,12 +55,12 @@ export default function DiaryMovie({ movie }) {
   //   findCurrentRating.length > 0 ? findCurrentRating[0]?.ratings : 0;
 
   return (
-    <div className='w-full h-[560px] md:h-[520px] lg:h-[420px] flex gap-3 md:gap-6 relative'>
+    <div className='w-full flex flex-col gap-1.5 lg:gap-3 relative'>
       <button
         type='button'
         onClick={removeFromDiary}
         disabled={isRemovingFromDiary}
-        className='group absolute top-0 right-0 w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 outline-none border border-neutral-500 cursor-pointer disabled:cursor-not-allowed disabled:opacity-75 bg-transparent flex items-center justify-center rounded-md shadow-sm hover:border-red-700 focus-visible:border-red-700 hover:bg-red-100/10 focus-visible:bg-red-100/10 transition-all duration-500'
+        className='group absolute top-0 right-0 w-8 h-8 md:w-10 md:h-10 outline-none border border-neutral-500 cursor-pointer disabled:cursor-not-allowed disabled:opacity-75 bg-transparent flex items-center justify-center rounded-md shadow-sm hover:border-red-700 focus-visible:border-red-700 hover:bg-red-100/10 focus-visible:bg-red-100/10 transition-all duration-500'
       >
         {isRemovingFromDiary ? (
           <SmallLoader
@@ -74,44 +74,48 @@ export default function DiaryMovie({ movie }) {
         )}
       </button>
 
-      <div className='w-[120px] sm:w-[160px] md:w-[200px] lg:w-[240px] xl:w-[280px] h-full'>
-        <LazyLoadImage
-          style={{
-            width: '100%',
-            height: '100%',
-            maxWidth: '100%',
-            maxHeight: '100%',
-          }}
-          className='w-full h-full object-cover rounded-t-md lg:rounded-t-lg drop-shadow-sm opacity-85'
-          src={moviePoster}
-          alt={`Poster for ${movieName}`}
-          effect='opacity'
-          delayMethod='debounce'
-          delayTime={500}
-        />
+      <div className='w-full h-auto flex items-start justify-start gap-3'>
+        <div className='w-[72px] xl:w-[172px] h-auto'>
+          <LazyLoadImage
+            style={{
+              width: '100%',
+              height: '100%',
+            }}
+            className='w-full h-full object-cover drop-shadow-sm opacity-85'
+            src={moviePoster}
+            alt={`Poster for ${movieName}`}
+            effect='opacity'
+            delayMethod='debounce'
+            delayTime={500}
+          />
+        </div>
+
+        <div className='w-[calc(100%-12px-72px-32px-12px)] xl:w-[calc(100%-12px-172px-40px-12px)] h-full flex flex-col gap-1.5 lg:gap-3'>
+          {/* HEADING */}
+          <MovieHeading
+            id={id}
+            movieName={movieName}
+            movieYear={movieYear}
+            movieDuration={movieDuration}
+          />
+
+          {/* GENRES + TYPES */}
+          <MovieGenres
+            movieGenre={movieGenre}
+            type={type}
+          />
+
+          {/* CAST */}
+          <MovieCast movieStars={movieStars} />
+        </div>
       </div>
 
-      <div className='w-[calc(100%-120px-12px)] sm:w-[calc(100%-160px-12px)] md:w-[calc(100%-200px-24px)] lg:w-[calc(100%-240px-24px)] xl:w-[calc(100%-280px-24px)] h-auto flex flex-col gap-3'>
-        {/* HEADING */}
-        <MovieHeading
-          id={id}
-          movieName={movieName}
-          movieYear={movieYear}
-          movieDuration={movieDuration}
-        />
-
-        {/* GENRES + TYPES */}
-        <MovieGenres
-          movieGenre={movieGenre}
-          type={type}
-        />
-
-        {/* CAST */}
-        <MovieCast movieStars={movieStars} />
-
+      <div className='w-full h-auto'>
         {/* DESCRIPTION */}
         <MovieDescription movieDescription={movieDescription} />
+      </div>
 
+      <div className='w-full h-auto'>
         {/* CONTROL PANEL */}
         <MovieControlPanel
           id={id}

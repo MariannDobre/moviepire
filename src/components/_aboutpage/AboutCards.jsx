@@ -32,19 +32,21 @@ const cardsData = [
 
 export default function AboutCards() {
   return (
-    <div className='w-full h-auto grid grid-cols-4 gap-6'>
+    <div className='w-full h-auto grid grid-cols-1 gap-x-0 gap-y-3 sm:grid-cols-2 sm:gap-x-3 sm:gap-y-3 lg:gap-x-6 lg:gap-y-6 xl:grid-cols-4'>
       {cardsData.map((card, index) => (
         <div
           key={index}
-          className='w-full h-auto p-6 flex flex-col gap-3 rounded-lg shadow-sm bg-gradient-to-br from-transparent to-gray-50/10 border border-neutral-500'
+          className='w-full h-auto p-3 lg:p-6 flex flex-col gap-1.5 lg:gap-3 rounded-lg shadow-sm bg-gradient-to-br from-transparent to-gray-50/10 border border-neutral-500'
         >
-          <span className='text-3xl text-blue-400 self-start'>{card.icon}</span>
+          <span className='text-lg md:text-xl lg:text-2xl xl:text-3xl text-blue-400 self-start'>
+            {card.icon}
+          </span>
 
-          <h6 className='text-2xl text-white font-medium tracking-wide'>
+          <h6 className='text-base md:text-lg lg:text-xl xl:text-2xl text-white font-medium tracking-wide'>
             {card.title}
           </h6>
 
-          <p className='w-full self-start text-start text-lg text-gray-400 font-normal tracking-wide'>
+          <p className='w-full self-start text-start text-xs sm:text-sm md:text-base lg:text-lg text-gray-400 font-normal tracking-wider lg:tracking-wide'>
             {card.body}
           </p>
         </div>

@@ -52,7 +52,7 @@ function Results({
       {movies?.map((movie, index) => (
         <div
           key={index}
-          className='flex items-start justify-start gap-3 p-1.5 md:p-3 cursor-pointer hover:bg-gray-50/10 transition-all duration-500'
+          className='flex items-start justify-start gap-1.5 lg:gap-3 p-1.5 lg:p-3 cursor-pointer hover:bg-gray-50/10 transition-all duration-500'
           onClick={() => {
             navigate(`/about/${movie.id}`);
             setQuery('');
@@ -62,14 +62,14 @@ function Results({
           {isFetching ? (
             <SmallLoader
               width='w-full'
-              height='h-20 2xl:h-28'
+              height='h-20 xl:h-24 2xl:h-28'
               color='text-white'
               size='text-xl'
             />
           ) : (
             <React.Fragment>
               <LazyLoadImage
-                className='w-14 h-20 2xl:w-18 2xl:h-28'
+                className='w-16 h-20 2xl:w-18 2xl:h-28'
                 src={movie.moviePoster}
                 alt={`Poster for ${movie.movieName}`}
                 effect='opacity'
@@ -78,7 +78,7 @@ function Results({
               />
 
               <div className='flex flex-col items-start gap-0.5 md:gap-1'>
-                <h6 className='text-sm md:text-base text-white font-medium md:font-normal tracking-wider md:tracking-wide'>
+                <h6 className='text-xs md:text-sm lg:text-base text-white font-medium md:font-normal tracking-wider lg:tracking-wide'>
                   {movie.movieName}
                 </h6>
 
@@ -95,7 +95,7 @@ function Results({
         </div>
       ))}
 
-      <div className='p-1.5 md:p-3'>
+      <div className='p-1 md:p-1.5 lg:p-3'>
         {query === '' ? (
           <p className='flex items-center gap-1.5 text-neutral-400 text-xs md:text-sm font-medium md:font-normal tracking-wider md:tracking-wide'>
             Waiting for user input...

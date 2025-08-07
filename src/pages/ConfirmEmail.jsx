@@ -12,8 +12,8 @@ export default function ConfirmEmail() {
 
   if (isFetching)
     return (
-      <div className='w-full h-[calc(100vh-48px-48px-80px)] p-6 flex flex-col items-center justify-center gap-3 bg-neutral-50/10 border border-yellow-700 rounded-lg shadow-sm'>
-        <p className='text-yellow-500 text-lg font-normal tracking-wide text-center'>
+      <div className='w-full h-[calc(100vh-48px-48px-80px)] p-3 lg:p-6 flex flex-col items-center justify-center gap-3 bg-neutral-50/10 border border-yellow-700 rounded-lg shadow-sm'>
+        <p className='text-yellow-500 text-sm md:text-base lg:text-lg font-medium md:font-normal tracking-wider lg:tracking-wide text-center'>
           Checking if there is any user session...
         </p>
 
@@ -49,19 +49,19 @@ export default function ConfirmEmail() {
       className='w-full h-[calc(100vh-80px-48px-48px)] flex flex-col items-center justify-center'
     >
       {user && isAuthenticated ? (
-        <div className='w-full max-w-[760px] h-auto flex flex-col items-center justify-center gap-6 p-6 rounded-lg shadow-sm bg-black/75 backdrop-blur-md border border-neutral-500'>
-          <div className='w-16 h-16 flex items-center justify-center rounded-full shadow-sm'>
-            <span className='w-full h-full flex items-center justify-center rounded-full drop-shadow-sm bg-blue-400 text-3xl text-white'>
+        <div className='w-full max-w-[760px] h-auto flex flex-col items-center justify-center gap-1.5 md:gap-3 lg:gap-6 p-3 lg:p-6 rounded-lg shadow-sm bg-black/75 backdrop-blur-md border border-neutral-500'>
+          <div className='w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14 2xl:w-16 2xl:h-16 flex items-center justify-center rounded-full shadow-sm'>
+            <span className='w-full h-full flex items-center justify-center rounded-full drop-shadow-sm bg-blue-400 text-lg lg:text-xl xl:text-2xl 2xl:text-3xl text-white'>
               <MdOutlineEmail />
             </span>
           </div>
 
           <div className='w-full h-auto flex flex-col items-center gap-1.5'>
-            <h6 className='text-2xl text-white font-medium tracking-wide text-center'>
+            <h6 className='text-base lg:text-lg xl:text-xl 2xl:text-2xl text-white font-medium tracking-wide text-center'>
               Email already verified
             </h6>
 
-            <p className='text-neutral-400 text-base font-normal tracking-wide text-center'>
+            <p className='text-neutral-400 text-sm lg:text-base font-normal tracking-wider lg:tracking-wide text-center'>
               The email for the account name&nbsp;
               <span className='text-blue-400 italic'>
                 "{user?.user_metadata?.username}"
@@ -73,25 +73,25 @@ export default function ConfirmEmail() {
           <button
             type='button'
             onClick={() => navigate('/')}
-            className='outline-none border-none w-auto h-auto flex items-center justify-center text-center cursor-pointer bg-blue-400 text-white text-base font-normal tracking-wide py-1.5 px-6 rounded-md shadow-sm hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
+            className='outline-none border-none w-auto h-auto flex items-center justify-center text-center cursor-pointer bg-blue-400 text-white text-sm lg:text-base font-normal tracking-wide py-1 px-3 lg:py-1.5 lg:px-6 rounded-md shadow-sm hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
           >
             Home Page
           </button>
         </div>
       ) : !user ? (
-        <div className='w-full max-w-[760px] h-auto flex flex-col items-center justify-center gap-6 p-6 rounded-lg shadow-sm bg-black/75 backdrop-blur-md border border-neutral-500'>
-          <div className='w-16 h-16 flex items-center justify-center rounded-full shadow-sm'>
-            <span className='w-full h-full flex items-center justify-center rounded-full drop-shadow-sm bg-blue-400 text-3xl text-white'>
+        <div className='w-full max-w-[760px] h-auto flex flex-col items-center justify-center gap-1.5 md:gap-3 lg:gap-6 p-3 lg:p-6  rounded-lg shadow-sm bg-black/75 backdrop-blur-md border border-neutral-500'>
+          <div className='w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14 2xl:w-16 2xl:h-16 flex items-center justify-center rounded-full shadow-sm'>
+            <span className='w-full h-full flex items-center justify-center rounded-full drop-shadow-sm bg-blue-400 text-lg lg:text-xl xl:text-2xl 2xl:text-3xl text-white'>
               <MdOutlineEmail />
             </span>
           </div>
 
           <div className='w-full h-auto flex flex-col items-center gap-1.5'>
-            <h6 className='text-2xl text-white font-medium tracking-wide text-center'>
+            <h6 className='text-base lg:text-lg xl:text-xl 2xl:text-2xl text-white font-medium tracking-wide text-center'>
               Join to unlock all features
             </h6>
 
-            <p className='text-neutral-400 text-base font-normal tracking-wide text-center'>
+            <p className='text-neutral-400 text-sm lg:text-base font-normal tracking-wider lg:tracking-wide text-center'>
               You haven't created an account yet. To unlock diary, rating,
               favorites, and profile features, please create an account and
               confirm your email address.
@@ -103,25 +103,25 @@ export default function ConfirmEmail() {
           <button
             type='button'
             onClick={() => navigate('/register')}
-            className='outline-none border-none w-auto h-auto flex items-center justify-center text-center cursor-pointer bg-blue-400 text-white text-base font-normal tracking-wide py-1.5 px-6 rounded-md shadow-sm hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
+            className='outline-none border-none w-auto h-auto flex items-center justify-center text-center cursor-pointer bg-blue-400 text-white text-sm lg:text-base font-normal tracking-wide py-1 px-3 lg:py-1.5 lg:px-6 rounded-md shadow-sm hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
           >
             Create Account
           </button>
         </div>
       ) : (
-        <div className='w-full max-w-[760px] h-auto flex flex-col items-center justify-center gap-6 p-6 rounded-lg shadow-sm bg-black/75 backdrop-blur-md border border-neutral-500'>
-          <div className='w-16 h-16 flex items-center justify-center rounded-full shadow-sm'>
-            <span className='w-full h-full flex items-center justify-center rounded-full drop-shadow-sm bg-blue-400 text-3xl text-white'>
+        <div className='w-full max-w-[760px] h-auto flex flex-col items-center justify-center gap-1.5 md:gap-3 lg:gap-6 p-3 lg:p-6 rounded-lg shadow-sm bg-black/75 backdrop-blur-md border border-neutral-500'>
+          <div className='w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14 2xl:w-16 2xl:h-16 flex items-center justify-center rounded-full shadow-sm'>
+            <span className='w-full h-full flex items-center justify-center rounded-full drop-shadow-sm bg-blue-400 text-lg lg:text-xl xl:text-2xl 2xl:text-3xl text-white'>
               <MdOutlineEmail />
             </span>
           </div>
 
           <div className='w-full h-auto flex flex-col items-center gap-1.5'>
-            <h6 className='text-2xl text-white font-medium tracking-wide text-center'>
+            <h6 className='text-base lg:text-lg xl:text-xl 2xl:text-2xl text-white font-medium tracking-wide text-center'>
               Email verification required
             </h6>
 
-            <p className='text-neutral-400 text-base font-normal tracking-wide text-center'>
+            <p className='text-neutral-400 text-sm lg:text-base font-normal tracking-wider lg:tracking-wide text-center'>
               Visit your email inbox and confirm your email to proceed
               <br />
               We've sent a confirmation link to your email address. Click the
@@ -134,7 +134,7 @@ export default function ConfirmEmail() {
           <button
             type='button'
             onClick={() => navigate('/')}
-            className='outline-none border-none w-auto h-auto flex items-center justify-center text-center cursor-pointer bg-blue-400 text-white text-base font-normal tracking-wide py-1.5 px-6 rounded-md shadow-sm hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
+            className='outline-none border-none w-auto h-auto flex items-center justify-center text-center cursor-pointer bg-blue-400 text-white text-sm lg:text-base font-normal tracking-wide py-1 px-3 lg:py-1.5 lg:px-6 rounded-md shadow-sm hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
           >
             Home Page
           </button>

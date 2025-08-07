@@ -23,7 +23,7 @@ function SearchMovie() {
 
         <input
           ref={searchInputRef}
-          className='w-40 group-hover:w-56 focus-visible:w-56 sm:w-48 sm:group-hover:w-64 sm:focus-visible:w-64 md:w-56 md:group-hover:w-72 md:focus-visible:w-72 lg:w-64 lg:group-hover:w-80 lg:focus-visible:w-80 xl:w-72 xl:group-hover:w-[352px] xl:focus-visible:w-[352px] 2xl:w-80 2xl:group-hover:w-[384px] 2xl:focus-visible:w-[384px] outline-none border border-transparent bg-neutral-800 h-8 pr-2 pl-8 placeholder:text-neutral-500 placeholder:font-normal placeholder:tracking-wide placeholder:text-sm caret-blue-400 text-sm text-white font-normal tracking-wide rounded-md shadow-none group-hover:border-blue-400 focus-visible:border-blue-400 selection:bg-blue-400 selection:text-white transition-all duration-500'
+          className='w-44 group-hover:w-56 focus-visible:w-56 sm:w-48 sm:group-hover:w-64 sm:focus-visible:w-64 md:w-56 md:group-hover:w-72 md:focus-visible:w-72 lg:w-64 lg:group-hover:w-80 lg:focus-visible:w-80 xl:w-72 xl:group-hover:w-[352px] xl:focus-visible:w-[352px] 2xl:w-80 2xl:group-hover:w-[384px] 2xl:focus-visible:w-[384px] outline-none border border-transparent bg-neutral-800 h-8 pr-2 pl-8 placeholder:text-neutral-500 placeholder:font-normal placeholder:tracking-wide placeholder:text-sm caret-blue-400 text-sm text-white font-normal tracking-wide rounded-md shadow-none group-hover:border-blue-400 focus-visible:border-blue-400 selection:bg-blue-400 selection:text-white transition-all duration-500'
           type='text'
           id='search-movie'
           name='search-movie'

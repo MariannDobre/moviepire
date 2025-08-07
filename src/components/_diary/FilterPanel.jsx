@@ -11,7 +11,7 @@ export default function FilterPanel({
   setSelectedYearRange,
 }) {
   return (
-    <div className='w-full h-auto flex items-center gap-3 md:gap-6'>
+    <div className='w-full h-auto flex items-center gap-1.5 md:gap-3 lg:gap-6'>
       <GenreFilter
         selectedGenre={selectedGenre}
         setSelectedGenre={setSelectedGenre}

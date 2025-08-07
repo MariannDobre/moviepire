@@ -31,7 +31,7 @@ export default function Topbar() {
         isNavFixed
           ? 'bg-black/50 backdrop-blur-md border-neutral-500'
           : 'bg-black backdrop-blur-0 border-neutral-800'
-      } w-full h-20 fixed top-0 left-0 z-50 flex items-center justify-between transition-all duration-500`}
+      } w-full h-20 fixed top-0 left-0 z-[99] flex items-center justify-between transition-all duration-500`}
     >
       <Logo />
 
