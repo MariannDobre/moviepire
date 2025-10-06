@@ -38,7 +38,7 @@ function App() {
             />
 
             <Route
-              path='/login'
+              path='/log-in'
               element={<LoginPage />}
             />
 
@@ -48,22 +48,17 @@ function App() {
             />
 
             <Route
-              path='/about-moviepire'
-              element={<AboutPage />}
-            />
-
-            <Route
-              path='/about/:movieId'
+              path='/about-movie/:movieId'
               element={<MoviePage />}
             />
 
             <Route
-              path='/trailer-for/:movieId'
+              path='/trailer-for-movie/:movieId'
               element={<MovieTrailerPage />}
             />
 
             <Route
-              path='/clip-for/:movieId'
+              path='/clip-for-movie/:movieId'
               element={<ClipPage />}
             />
 

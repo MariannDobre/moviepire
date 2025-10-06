@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useUser } from '../../hooks/auth/useUser';
 
 import AddToDiary from './AddToDiary';
@@ -12,8 +11,6 @@ import {
   FaExclamation,
 } from 'react-icons/fa';
 
-import 'react-lazy-load-image-component/src/effects/opacity.css';
-
 export default function MovieBannerDetails({ movie }) {
   const navigate = useNavigate();
   const { isAuthenticated } = useUser();
@@ -21,7 +18,7 @@ export default function MovieBannerDetails({ movie }) {
   return (
     <div className='w-full h-auto md:h-[420px] flex flex-col md:flex-row items-start justify-end md:items-center md:justify-start gap-3 md:gap-6'>
       <div className='w-full max-w-[220px] h-[320px] md:max-w-[280px] md:h-full flex items-end justify-end md:items-center md:justify-center rounded-t-lg overflow-hidden'>
-        <LazyLoadImage
+        <img
           style={{
             width: '100%',
             height: '100%',

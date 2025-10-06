@@ -1,4 +1,3 @@
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useUser } from '../../hooks/auth/useUser';
 import { useRemoveFromDiary } from '../../hooks/movies/mutations/useRemoveFromDiary';
 import { useRating } from '../../hooks/movies/useRating';
@@ -11,8 +10,6 @@ import MovieControlPanel from './MovieControlPanel';
 import SmallLoader from '../loaders/SmallLoader';
 
 import { FaTrashAlt } from 'react-icons/fa';
-
-import 'react-lazy-load-image-component/src/effects/opacity.css';
 
 export default function DiaryMovie({ movie }) {
   const { user } = useUser();
@@ -76,7 +73,7 @@ export default function DiaryMovie({ movie }) {
 
       <div className='w-full h-auto flex items-start justify-start gap-3'>
         <div className='w-[72px] xl:w-[172px] h-auto'>
-          <LazyLoadImage
+          <img
             style={{
               width: '100%',
               height: '100%',

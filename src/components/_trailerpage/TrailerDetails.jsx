@@ -1,10 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import { BsHouse } from 'react-icons/bs';
 import { SlArrowRight } from 'react-icons/sl';
-
-import 'react-lazy-load-image-component/src/effects/opacity.css';
 
 export default function TrailerDetails({
   moviePoster,
@@ -18,7 +15,7 @@ export default function TrailerDetails({
   return (
     <div className='border border-neutral-800 w-full max-w-full lg:max-w-[calc(1816px-1280px-48px-2px)] h-full p-6 flex flex-col gap-6 bg-neutral-900/75 rounded-lg shadow-sm'>
       <div className='flex gap-3'>
-        <LazyLoadImage
+        <img
           src={moviePoster}
           alt={`Poster of ${movieName}`}
           effect='opacity'

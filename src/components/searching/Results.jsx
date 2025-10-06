@@ -1,10 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useMovieByTitle } from '../../hooks/movies/useMovieByTitle';
 import SmallLoader from '../loaders/SmallLoader';
-
-import 'react-lazy-load-image-component/src/effects/opacity.css';
 
 function Results({
   query,
@@ -68,7 +65,7 @@ function Results({
             />
           ) : (
             <React.Fragment>
-              <LazyLoadImage
+              <img
                 className='w-16 h-20 2xl:w-18 2xl:h-28'
                 src={movie.moviePoster}
                 alt={`Poster for ${movie.movieName}`}
