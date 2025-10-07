@@ -8,7 +8,6 @@ import PageNotFound from './pages/PageNotFound';
 import HomePage from './pages/HomePage';
 import MovieTrailerPage from './components/_trailerpage/MovieTrailerPage';
 import MoviePage from './components/_aboutmovie/MoviePage';
-import AboutPage from './components/_aboutpage/AboutPage';
 import RegisterPage from './pages/RegisterPage';
 import ClipPage from './components/_clippage/ClipPage';
 import DiaryPage from './components/_diary/DiaryPage';

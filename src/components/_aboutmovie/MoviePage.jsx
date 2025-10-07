@@ -1,7 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useMovieDetails } from '../../hooks/movies/useMovieDetails';
 
-import Modal from '../../interface/compound components/Modal';
 import MovieBanner from './MovieBanner';
 import MovieBannerDetails from './MovieBannerDetails';
 import MoviePlot from './MoviePlot';
@@ -63,12 +62,10 @@ export default function MoviePage() {
       <div className='w-full h-auto lg:h-40 flex flex-col lg:flex-row items-center justify-between gap-3 md:gap-6 lg:gap-9'>
         <MoviePlot plot={movieDetails?.movieDescription} />
 
-        <Modal>
-          <MovieRating
-            movieId={Number(movieId)}
-            movieTitle={movieDetails?.movieName}
-          />
-        </Modal>
+        <MovieRating
+          movieId={Number(movieId)}
+          movieTitle={movieDetails?.movieName}
+        />
       </div>
 
       <div className='w-full h-auto lg:h-64 flex flex-col lg:flex-row items-center justify-between gap-3 md:gap-6 lg:gap-9'>

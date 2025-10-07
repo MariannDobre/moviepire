@@ -1,11 +1,13 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary';
+
 import App from './App';
 import PageLoader from './components/loaders/PageLoader';
+import ErrorFallback from './interface/ErrorFallback';
+
 import { BsExclamationCircleFill } from 'react-icons/bs';
 import './index.css';
-import ErrorFallback from './interface/ErrorFallback';
 
 function FallbackError({ error, resetErrorBoundary }) {
   // Call resetErrorBoundary() to reset the error boundary and retry the render.
