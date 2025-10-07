@@ -1,17 +1,25 @@
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
 
+import LazyImage from '../../../utils/LazyImage';
+
 import { BsBoxArrowRight } from 'react-icons/bs';
 
 const SliderCard = memo(({ item }) => {
   return (
     <div className='group w-full h-[476px] rounded-md border border-neutral-700 relative cursor-pointer'>
-      <img
+      <LazyImage
+        src={item.moviePoster}
+        alt={`Poster of ${item.movieName}`}
+        className='w-full h-full rounded-md object-cover'
+      />
+
+      {/* <img
         src={item.moviePoster}
         alt={item.movieName}
         className='w-full h-full rounded-md object-cover'
         loading='lazy'
-      />
+      /> */}
 
       <div className='absolute top-[calc(100%+1px)] z-[5] w-full h-full flex flex-col gap-3 p-6 rounded-md bg-black/65 backdrop-blur-lg group-hover:top-0 group-focus-visible:top-0 transition-all duration-500'>
         <h1 className='w-full h-auto text-white text-xl font-medium tracking-wide'>
