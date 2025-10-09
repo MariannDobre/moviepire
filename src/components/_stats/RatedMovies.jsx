@@ -8,6 +8,31 @@ import SmallLoader from '../loaders/SmallLoader';
 export default function RatedMovies({ userId }) {
   const { allRatings, isFetching, error } = useAllRatings(userId);
 
+  if (isFetching)
+    return (
+      <div className='w-full h-full p-6 flex flex-col items-center justify-center gap-3 bg-yellow-950/45 border border-yellow-500 rounded-md'>
+        <p className='text-yellow-500 text-base font-normal tracking-wider text-center'>
+          Loading the stats for your rated movies...
+        </p>
+
+        <SmallLoader
+          size='text-2xl'
+          color='text-yellow-500'
+        />
+      </div>
+    );
+
+  if (error)
+    return (
+      <div className='w-full h-full p-6 flex flex-col items-center justify-center bg-red-950/35 border border-red-500 rounded-md'>
+        <p className='text-red-500 text-base font-normal tracking-wider text-center'>
+          There was an error while fetching the stats for your rated movies...
+          <br />
+          {error?.message}
+        </p>
+      </div>
+    );
+
   const watchedThisMonth = allRatings
     ? getMoviesWatchedThisMonth(allRatings)
     : 0;
@@ -26,60 +51,35 @@ export default function RatedMovies({ userId }) {
     }).length;
   }
 
-  if (error)
-    return (
-      <div className='h-40 xl:h-56 p-3 xl:p-6 rounded-md lg:rounded-lg w-auto flex flex-col items-center justify-center bg-neutral-900/75 border border-red-700 shadow-sm'>
-        <p className='text-red-500 text-lg font-normal tracking-wide text-center'>
-          There was an error while fetching the data...
-          <br />
-          {error?.message}
-        </p>
-      </div>
-    );
-
-  if (isFetching)
-    return (
-      <div className='h-40 xl:h-56 p-3 xl:p-6 rounded-md lg:rounded-lg w-auto flex flex-col items-center justify-center bg-neutral-900/75 border border-yellow-700 shadow-sm'>
-        <p className='text-yellow-500 text-lg font-normal tracking-wide text-center'>
-          Loading the rated movies stats...
-        </p>
-
-        <SmallLoader
-          size='text-2xl'
-          color='text-yellow-700'
-        />
-      </div>
-    );
-
   return (
-    <div className='h-40 xl:h-56 p-3 xl:p-6 rounded-md lg:rounded-lg w-auto flex flex-col bg-neutral-900/75 border border-neutral-500 shadow-sm hover:border-neutral-400 focus-visible:border-neutral-400 hover:shadow-lg focus-visible:shadow-lg hover:-translate-y-2 focus-visible:-translate-y-2 transition-all duration-500'>
+    <div className='w-full h-full flex flex-col border border-neutral-700 p-6 rounded-md shadow-md'>
       <div className='w-full flex items-center justify-between'>
-        <span className='w-8 h-8 xl:w-12 xl:h-12 text-lg xl:text-2xl rounded-md lg:rounded-lg flex items-center justify-center bg-yellow-700/35 text-yellow-500 shadow-sm drop-shadow-sm'>
+        <span className='w-12 h-12 flex items-center justify-center text-2xl bg-amber-700/35 text-amber-400 rounded-md drop-shadow-sm'>
           <FaRegStar />
         </span>
 
         <span
-          className={`w-8 h-8 xl:w-12 xl:h-12 text-base xl:text-xl rounded-md lg:rounded-lg ${
+          className={`w-12 h-12 flex items-center justify-center text-2xl bg-transparent rounded-md drop-shadow-sm ${
             watchedThisMonth > 0 ? 'text-emerald-500' : 'text-red-500'
-          } flex items-center justify-center bg-transparent shadow-none drop-shadow-sm`}
+          }`}
         >
           {watchedThisMonth > 0 ? <FaArrowTrendUp /> : <FaArrowTrendDown />}
         </span>
       </div>
 
-      <div className='w-full flex flex-col mt-auto'>
-        <span className='text-2xl xl:text-4xl text-white font-semibold tracking-wide'>
+      <div className='w-full flex flex-col gap-0.5 mt-auto'>
+        <span className='text-4xl text-white font-semibold tracking-wide'>
           {allRatings?.length}
         </span>
 
-        <p className='text-sm lg:text-base text-gray-400 font-medium tracking-wide'>
+        <p className='text-lg text-neutral-400 font-medium tracking-wide'>
           Movies Rated
         </p>
 
         <p
-          className={`text-xs lg:text-sm ${
+          className={`text-xs font-normal tracking-widest ${
             watchedThisMonth > 0 ? 'text-emerald-500' : 'text-red-500'
-          } font-normal tracking-wide`}
+          }`}
         >
           {watchedThisMonth > 0
             ? `+${watchedThisMonth} this month`

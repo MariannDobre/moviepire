@@ -6,9 +6,14 @@ const LazyImage = ({
   className = '',
   placeholderClassName = '',
   asBackground = false,
+  gradient = null,
+  backgroundSize = 'cover',
+  backgroundPosition = 'center',
+  backgroundRepeat = 'no-repeat',
   children,
   threshold = 0.01,
   rootMargin = '50px',
+  style = {},
   ...props
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -48,6 +53,12 @@ const LazyImage = ({
   }, [isInView, src]);
 
   if (asBackground) {
+    const background = isLoaded
+      ? gradient
+        ? `${gradient}, url(${src})`
+        : `url(${src})`
+      : undefined;
+
     return (
       <div
         ref={ref}
@@ -56,7 +67,15 @@ const LazyImage = ({
             ? placeholderClassName || 'bg-neutral-400 animate-pulse'
             : ''
         } ${className}`}
-        style={isLoaded ? { backgroundImage: `url(${src})` } : {}}
+        style={{
+          ...style,
+          ...(background && {
+            background,
+            backgroundSize,
+            backgroundPosition,
+            backgroundRepeat,
+          }),
+        }}
         {...props}
       >
         {children}

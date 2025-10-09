@@ -1,17 +1,20 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+
 import Layout from './interface/Layout';
+import HomePage from './pages/HomePage';
+import DiscoveryPage from './pages/DiscoveryPage';
 import LoginPage from './pages/LoginPage';
 import ConfirmEmail from './pages/ConfirmEmail';
 import PageNotFound from './pages/PageNotFound';
-import HomePage from './pages/HomePage';
 import MovieTrailerPage from './components/_trailerpage/MovieTrailerPage';
 import MoviePage from './components/_aboutmovie/MoviePage';
 import RegisterPage from './pages/RegisterPage';
 import ClipPage from './components/_clippage/ClipPage';
 import DiaryPage from './components/_diary/DiaryPage';
 import Account from './pages/Account';
+import StatsPage from './pages/StatsPage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -37,7 +40,17 @@ function App() {
             />
 
             <Route
-              path='/log-in'
+              path='/discovery'
+              element={<DiscoveryPage />}
+            />
+
+            <Route
+              path='/account-stats'
+              element={<StatsPage />}
+            />
+
+            <Route
+              path='/login'
               element={<LoginPage />}
             />
 

@@ -2,10 +2,13 @@ import { useRandomMovies } from '../../hooks/movies/useRandomMovies';
 
 import SmallLoader from '../loaders/SmallLoader';
 import SectionHeader from './SectionHeader';
-import HomeSlider from './_slider/HomeSlider';
+import Slider from '../../utils/_slider/Slider';
+
+const limit = 12;
+const type = 'all movies';
 
 export default function WhatToWatch() {
-  const { randomMovies, isFetching, error } = useRandomMovies();
+  const { randomMovies, isFetching, error } = useRandomMovies(limit, type);
 
   if (isFetching)
     return (
@@ -54,7 +57,13 @@ export default function WhatToWatch() {
       />
 
       <div className='w-full h-[476px]'>
-        <HomeSlider data={randomMovies} />
+        <Slider
+          data={randomMovies}
+          itemsPerSlide={4}
+          maxSlides={3}
+          heightTAG='home-page'
+          columns={4}
+        />
       </div>
     </div>
   );

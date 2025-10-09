@@ -2,7 +2,7 @@ import { useLatestMovies } from '../../hooks/movies/useLatestMovies';
 
 import SmallLoader from '../loaders/SmallLoader';
 import SectionHeader from './SectionHeader';
-import HomeSlider from './_slider/HomeSlider';
+import Slider from '../../utils/_slider/Slider';
 
 export default function LatestThisYear() {
   const { latestMovies, isFetching, error } = useLatestMovies();
@@ -54,7 +54,13 @@ export default function LatestThisYear() {
       />
 
       <div className='w-full h-[476px]'>
-        <HomeSlider data={latestMovies} />
+        <Slider
+          data={latestMovies}
+          itemsPerSlide={4}
+          maxSlides={3}
+          heightTAG='home-page'
+          columns={4}
+        />
       </div>
     </div>
   );

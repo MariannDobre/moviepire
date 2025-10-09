@@ -24,7 +24,7 @@ const generalLinks = [
   },
   {
     id: 3,
-    value: '/stats',
+    value: '/account-stats',
     label: 'Stats',
     icon: <FaChartBar />,
   },

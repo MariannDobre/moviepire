@@ -1,13 +1,15 @@
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
 
-import LazyImage from '../../../utils/LazyImage';
+import LazyImage from '../LazyImage';
 
 import { BsBoxArrowRight } from 'react-icons/bs';
 
-const SliderCard = memo(({ item }) => {
+const SliderCard = memo(({ item, cardHeight }) => {
   return (
-    <div className='group w-full h-[476px] rounded-md border border-neutral-700 relative cursor-pointer'>
+    <div
+      className={`group w-full ${cardHeight} rounded-md border border-neutral-700 relative cursor-pointer`}
+    >
       <LazyImage
         src={item.moviePoster}
         alt={`Poster of ${item.movieName}`}
