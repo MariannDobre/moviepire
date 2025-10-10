@@ -14,6 +14,17 @@ function getFeedbackString(average) {
 export default function AverageRating({ userId }) {
   const { allRatings, isFetching, error } = useAllRatings(userId);
 
+  if (error)
+    return (
+      <div className='w-full h-full p-6 flex flex-col items-center justify-center bg-red-950/35 border border-red-500 rounded-md'>
+        <p className='text-red-500 text-base font-normal tracking-wider text-center'>
+          There was an error while fetching the stats for your average rating...
+          <br />
+          {error?.message}
+        </p>
+      </div>
+    );
+
   if (isFetching)
     return (
       <div className='w-full h-full p-6 flex flex-col items-center justify-center gap-3 bg-yellow-950/45 border border-yellow-500 rounded-md'>
@@ -25,17 +36,6 @@ export default function AverageRating({ userId }) {
           size='text-2xl'
           color='text-yellow-500'
         />
-      </div>
-    );
-
-  if (error)
-    return (
-      <div className='w-full h-full p-6 flex flex-col items-center justify-center bg-red-950/35 border border-red-500 rounded-md'>
-        <p className='text-red-500 text-base font-normal tracking-wider text-center'>
-          There was an error while fetching the stats for your average rating...
-          <br />
-          {error?.message}
-        </p>
       </div>
     );
 

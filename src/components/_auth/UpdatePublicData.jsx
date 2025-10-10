@@ -1,9 +1,9 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useUser } from '../hooks/auth/useUser';
-import { useUpdatePublicData } from '../hooks/auth/mutations/useUpdatePublicData';
+import { useUser } from '../../hooks/auth/useUser';
+import { useUpdatePublicData } from '../../hooks/auth/mutations/useUpdatePublicData';
 
-import SmallLoader from '../components/loaders/SmallLoader';
+import SmallLoader from '../loaders/SmallLoader';
 
 import { FaRegUser } from 'react-icons/fa6';
 
@@ -47,7 +47,7 @@ function UpdatePublicData() {
           Public Profile
         </h6>
 
-        <p className='text-base text-gray-400 font-normal tracking-wide'>
+        <p className='text-base text-neutral-400 font-normal tracking-wide'>
           Manage your public profile information
         </p>
       </header>
@@ -67,7 +67,7 @@ function UpdatePublicData() {
                 />
               </div>
             ) : (
-              <span className='w-full h-full flex items-center justify-center rounded-full drop-shadow-sm bg-black/75 text-xl text-white font-medium'>
+              <span className='w-full h-full flex items-center justify-center rounded-full drop-shadow-sm bg-black/75 text-2xl text-white font-medium'>
                 {user?.user_metadata?.username
                   ?.trim()
                   ?.charAt(0)
@@ -82,7 +82,7 @@ function UpdatePublicData() {
             id='newAvatar'
             name='newAvatar'
             disabled={isPending}
-            className='w-[calc(100%-64px-12px)] h-auto outline-none border-none py-1.5 px-3 bg-transparent text-neutral-500 text-base font-normal tracking-wider file:mr-3 file:rounded-md file:shadow-sm file:outline-none file:border-none file:cursor-pointer file:bg-blue-400 file:text-white file:text-sm file:font-medium file:tracking-wider file:py-1 file:px-3 file:hover:bg-blue-500 file:focus-visible:bg-blue-500 file:hover:shadow-lg file:focus-visible:shadow-lg file:transition-all file:duration-500 file:disabled:cursor-not-allowed file:disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-500'
+            className='w-auto h-auto outline-none border-none py-1.5 px-3 bg-transparent text-neutral-400 text-base font-normal tracking-wider file:mr-3 file:rounded-md file:outline-none file:border-none file:cursor-pointer file:bg-amber-400 file:text-black file:text-sm file:font-medium file:tracking-wider file:py-1 file:px-3 file:hover:bg-amber-500 file:focus-visible:bg-amber-500 file:transition-colors file:duration-300 file:disabled:cursor-not-allowed file:disabled:opacity-50 disabled:cursor-not-allowed'
             {...register('newAvatar')}
           />
           {errors?.newAvatar && (
@@ -96,8 +96,8 @@ function UpdatePublicData() {
           htmlFor='currentUsername'
           className='w-full h-auto flex flex-col gap-1.5 items-start justify-start'
         >
-          <p className='flex items-center gap-2 text-sm text-blue-400 font-medium tracking-wider self-start text-start'>
-            <span>
+          <p className='flex items-center gap-2 text-sm text-neutral-200 font-medium tracking-wider self-start text-start'>
+            <span className='text-base text-amber-400'>
               <FaRegUser />
             </span>
             Current Username
@@ -109,7 +109,7 @@ function UpdatePublicData() {
             name='currentUsername'
             placeholder={user?.user_metadata?.username}
             disabled
-            className='outline-none border border-neutral-500 w-full h-auto py-1.5 px-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:border-neutral-500 placeholder:text-neutral-500 bg-neutral-900 text-white text-balance font-normal tracking-wider caret-blue-400 rounded-md shadow-sm hover:border-blue-400 focus-visible:border-blue-400 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500 selection:bg-blue-400 selection:text-white'
+            className='outline-none border border-neutral-700 w-full h-auto py-1.5 px-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:border-neutral-700 placeholder:text-neutral-400 placeholder:text-base placeholder:font-medium placeholder:tracking-wider bg-black/75 rounded-md'
           />
         </label>
 
@@ -117,8 +117,8 @@ function UpdatePublicData() {
           htmlFor='newUsername'
           className='w-full h-auto flex flex-col gap-1.5 items-start justify-start'
         >
-          <p className='flex items-center gap-2 text-sm text-blue-400 font-medium tracking-wider self-start text-start'>
-            <span>
+          <p className='flex items-center gap-2 text-sm text-neutral-200 font-medium tracking-wider self-start text-start'>
+            <span className='text-base text-amber-400'>
               <FaRegUser />
             </span>
             New Username
@@ -128,9 +128,9 @@ function UpdatePublicData() {
             type='text'
             id='newUsername'
             name='newUsername'
-            placeholder='Your fresh desired username'
+            placeholder='Your new desired username'
             disabled={isPending}
-            className='outline-none border border-neutral-500 w-full h-auto py-1.5 px-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:border-neutral-500 placeholder:text-neutral-500 bg-neutral-900 text-white text-balance font-normal tracking-wider caret-blue-400 rounded-md shadow-sm hover:border-blue-400 focus-visible:border-blue-400 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500 selection:bg-blue-400 selection:text-white'
+            className='outline-none border border-neutral-700 w-full h-auto py-1.5 px-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:border-neutral-700 placeholder:text-neutral-400 placeholder:text-base placeholder:font-medium placeholder:tracking-wider bg-black/75 text-white text-base font-medium tracking-wider caret-amber-400 rounded-md hover:border-amber-400 focus-visible:border-amber-400 transition-all duration-300'
             {...register('newUsername', {
               minLength: {
                 value: 3,
@@ -149,22 +149,29 @@ function UpdatePublicData() {
           )}
         </label>
 
-        <div className='w-full h-auto grid grid-cols-2 gap-x-3'>
+        <div className='w-full h-auto grid grid-cols-2 gap-x-3 gap-y-0'>
           <button
             type='submit'
             disabled={
               (isUpdatedUsernameEmpty && isUpdatedAvatarEmpty) || isPending
             }
-            className='w-full h-auto outline-none border-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-blue-400 disabled:shadow-sm py-1.5 px-6 flex items-center justify-center text-center rounded-md shadow-sm bg-blue-400 text-white text-sm font-medium tracking-wider hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
+            className='w-full h-auto outline-none border-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-amber-400 py-1.5 px-6 flex items-center justify-center text-center rounded-md shadow-sm bg-amber-400 text-black text-sm font-medium tracking-wider hover:bg-amber-500 focus-visible:bg-amber-500 transition-colors duration-300'
           >
-            {isPending ? <SmallLoader /> : 'Update'}
+            {isPending ? (
+              <SmallLoader
+                size='text-xl'
+                color='text-black'
+              />
+            ) : (
+              'Update'
+            )}
           </button>
 
           <button
             type='button'
             onClick={handleCancelSubmit}
             disabled={isPending}
-            className='w-full h-auto outline-none border-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-75 disabled:bg-red-400 disabled:shadow-sm py-1.5 px-6 flex items-center justify-center text-center rounded-md shadow-sm bg-red-400 text-white text-sm font-medium tracking-wider hover:bg-red-500 focus-visible:bg-red-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
+            className='w-full h-auto outline-none border-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-red-500 py-1.5 px-6 flex items-center justify-center text-center rounded-md bg-red-500 text-white text-sm font-medium tracking-wider hover:bg-red-700 focus-visible:bg-red-700 transition-colors duration-300'
           >
             Cancel
           </button>

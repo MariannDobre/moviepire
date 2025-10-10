@@ -6,20 +6,20 @@ import Layout from './interface/Layout';
 import HomePage from './pages/HomePage';
 import DiscoveryPage from './pages/DiscoveryPage';
 import LoginPage from './pages/LoginPage';
-import ConfirmEmail from './pages/ConfirmEmail';
+import ConfirmPage from './pages/ConfirmPage';
 import PageNotFound from './pages/PageNotFound';
 import MovieTrailerPage from './components/_trailerpage/MovieTrailerPage';
 import MoviePage from './components/_aboutmovie/MoviePage';
 import RegisterPage from './pages/RegisterPage';
 import ClipPage from './components/_clippage/ClipPage';
 import DiaryPage from './components/_diary/DiaryPage';
-import Account from './pages/Account';
+import AccountPage from './pages/AccountPage';
 import StatsPage from './pages/StatsPage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 0,
+      staleTime: 60000,
       suspense: true,
     },
   },
@@ -76,12 +76,12 @@ function App() {
 
             <Route
               path='/account'
-              element={<Account />}
+              element={<AccountPage />}
             />
 
             <Route
               path='/confirm-email'
-              element={<ConfirmEmail />}
+              element={<ConfirmPage />}
             />
 
             <Route

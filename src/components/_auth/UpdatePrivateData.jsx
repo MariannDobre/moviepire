@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useUpdatePrivateData } from '../hooks/auth/mutations/useUpdatePrivateData';
+import { useUpdatePrivateData } from '../../hooks/auth/mutations/useUpdatePrivateData';
 
-import SmallLoader from '../components/loaders/SmallLoader';
+import SmallLoader from '../loaders/SmallLoader';
 
 import { FaShieldHalved } from 'react-icons/fa6';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
@@ -44,7 +44,7 @@ function UpdatePrivateData() {
           Change Password
         </h6>
 
-        <p className='text-base text-gray-400 font-normal tracking-wide'>
+        <p className='text-base text-neutral-400 font-normal tracking-wide'>
           Update your password to keep your account secure
         </p>
       </header>
@@ -57,8 +57,8 @@ function UpdatePrivateData() {
           htmlFor='newPassword'
           className='w-full h-auto flex flex-col gap-1.5 items-start justify-start relative'
         >
-          <p className='flex items-center gap-2 text-sm text-blue-400 font-medium tracking-wider self-start text-start'>
-            <span>
+          <p className='flex items-center gap-2 text-sm text-neutral-200 font-medium tracking-wider self-start text-start'>
+            <span className='text-base text-amber-400'>
               <FaShieldHalved />
             </span>
             New Password
@@ -68,9 +68,9 @@ function UpdatePrivateData() {
             type={showNewPassword ? 'text' : 'password'}
             id='newPassword'
             name='newPassword'
-            placeholder='Your fresh desired password'
+            placeholder='Your new desired password'
             disabled={isPending}
-            className='outline-none border border-neutral-500 w-full h-auto py-1.5 px-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:border-neutral-500 placeholder:text-neutral-500 bg-neutral-900 text-white text-balance font-normal tracking-wider caret-blue-400 rounded-md shadow-sm hover:border-blue-400 focus-visible:border-blue-400 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500 selection:bg-blue-400 selection:text-white'
+            className='outline-none border border-neutral-700 w-full h-auto py-1.5 px-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:border-neutral-700 placeholder:text-neutral-400 placeholder:text-base placeholder:font-medium placeholder:tracking-wider bg-black/75 text-white text-base font-medium tracking-wider caret-amber-400 rounded-md hover:border-amber-400 focus-visible:border-amber-400 transition-all duration-300'
             {...register('newPassword', {
               required: 'New password field is required.',
               minLength: {
@@ -96,7 +96,7 @@ function UpdatePrivateData() {
             }
             className={`absolute right-3 ${
               errors?.newPassword ? 'bottom-[50px]' : 'bottom-3'
-            } border-none outline-none text-base text-neutral-500 hover:text-blue-400 focus-visible:text-blue-400 transition-all duration-500`}
+            } border-none outline-none text-base text-neutral-400 hover:text-amber-400 focus-visible:text-amber-400 transition-colors duration-300`}
           >
             {showNewPassword ? <FaRegEyeSlash /> : <FaRegEye />}
           </button>
@@ -106,8 +106,8 @@ function UpdatePrivateData() {
           htmlFor='newConfirmPassword'
           className='w-full h-auto flex flex-col gap-1.5 items-start justify-start relative'
         >
-          <p className='flex items-center gap-2 text-sm text-blue-400 font-medium tracking-wider self-start text-start'>
-            <span>
+          <p className='flex items-center gap-2 text-sm text-neutral-200 font-medium tracking-wider self-start text-start'>
+            <span className='text-base text-amber-400'>
               <FaShieldHalved />
             </span>
             Confirm New Password
@@ -117,9 +117,9 @@ function UpdatePrivateData() {
             type={showConfirmNewPassword ? 'text' : 'password'}
             id='newConfirmPassword'
             name='newConfirmPassword'
-            placeholder='Confirm your fresh desired password'
+            placeholder='Confirm your new desired password'
             disabled={isPending}
-            className='outline-none border border-neutral-500 w-full h-auto py-1.5 px-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:border-neutral-500 placeholder:text-neutral-500 bg-neutral-900 text-white text-balance font-normal tracking-wider caret-blue-400 rounded-md shadow-sm hover:border-blue-400 focus-visible:border-blue-400 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500 selection:bg-blue-400 selection:text-white'
+            className='outline-none border border-neutral-700 w-full h-auto py-1.5 px-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:border-neutral-700 placeholder:text-neutral-400 placeholder:text-base placeholder:font-medium placeholder:tracking-wider bg-black/75 text-white text-base font-medium tracking-wider caret-amber-400 rounded-md hover:border-amber-400 focus-visible:border-amber-400 transition-all duration-300'
             {...register('newConfirmPassword', {
               required: 'Confirm password field is required.',
               validate: (value) =>
@@ -141,7 +141,7 @@ function UpdatePrivateData() {
             }
             className={`absolute right-3 ${
               errors?.newConfirmPassword ? 'bottom-[50px]' : 'bottom-3'
-            } border-none outline-none text-base text-neutral-500 hover:text-blue-400 focus-visible:text-blue-400 transition-all duration-500`}
+            } border-none outline-none text-base text-neutral-400 hover:text-amber-400 focus-visible:text-amber-400 transition-colors duration-300`}
           >
             {showConfirmNewPassword ? <FaRegEyeSlash /> : <FaRegEye />}
           </button>
@@ -160,16 +160,23 @@ function UpdatePrivateData() {
               watchPassword !== watchConfirmPassword ||
               isPending
             }
-            className='w-full h-auto outline-none border-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-blue-400 disabled:shadow-sm py-1.5 px-6 flex items-center justify-center text-center rounded-md shadow-sm bg-blue-400 text-white text-sm font-medium tracking-wider hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
+            className='w-full h-auto outline-none border-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-amber-400 py-1.5 px-6 flex items-center justify-center text-center rounded-md shadow-sm bg-amber-400 text-black text-sm font-medium tracking-wider hover:bg-amber-500 focus-visible:bg-amber-500 transition-colors duration-300'
           >
-            {isPending ? <SmallLoader /> : 'Update'}
+            {isPending ? (
+              <SmallLoader
+                size='text-xl'
+                color='text-black'
+              />
+            ) : (
+              'Update'
+            )}
           </button>
 
           <button
             type='button'
             onClick={handleCancelSubmit}
             disabled={isPending}
-            className='w-full h-auto outline-none border-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-75 disabled:bg-red-400 disabled:shadow-sm py-1.5 px-6 flex items-center justify-center text-center rounded-md shadow-sm bg-red-400 text-white text-sm font-medium tracking-wider hover:bg-red-500 focus-visible:bg-red-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
+            className='w-full h-auto outline-none border-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-red-500 py-1.5 px-6 flex items-center justify-center text-center rounded-md bg-red-500 text-white text-sm font-medium tracking-wider hover:bg-red-700 focus-visible:bg-red-700 transition-colors duration-300'
           >
             Cancel
           </button>

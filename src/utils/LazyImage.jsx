@@ -38,7 +38,7 @@ const LazyImage = ({
   }, [threshold, rootMargin]);
 
   useEffect(() => {
-    if (!isInView || !src) return;
+    if (!isInView || !src || isLoaded) return;
 
     const img = new Image();
     img.src = src;
@@ -50,10 +50,10 @@ const LazyImage = ({
         imgRef.current.onload = null;
       }
     };
-  }, [isInView, src]);
+  }, [isInView, src, isLoaded]);
 
   if (asBackground) {
-    const background = isLoaded
+    const computedBackground = isLoaded
       ? gradient
         ? `${gradient}, url(${src})`
         : `url(${src})`
@@ -69,8 +69,8 @@ const LazyImage = ({
         } ${className}`}
         style={{
           ...style,
-          ...(background && {
-            background,
+          ...(computedBackground && {
+            backgroundImage: computedBackground,
             backgroundSize,
             backgroundPosition,
             backgroundRepeat,
