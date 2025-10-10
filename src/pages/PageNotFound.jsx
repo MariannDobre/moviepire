@@ -1,44 +1,40 @@
-import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import LazyImage from '../utils/LazyImage';
 
 function PageNotFound() {
-  const location = useLocation();
-  const navigate = useNavigate();
-
   return (
-    <div
-      style={{
-        background: `radial-gradient(
-                         circle,
-                       rgba(0, 0, 0, 0.6),
-                       rgba(0, 0, 0, 0.8),
-                       rgba(0, 0, 0, 0.9),
-                       rgba(0, 0, 0, 1)
-     ),url(https://www.themoviedb.org/t/p/original/7Pv3ocLAj1BfcdUUsslMYyDMYXK.jpg) no-repeat center / cover`,
-      }}
-      className='w-screen h-screen flex items-center justify-center'
+    <LazyImage
+      asBackground
+      src='https://www.themoviedb.org/t/p/original/7Pv3ocLAj1BfcdUUsslMYyDMYXK.jpg'
+      gradient='radial-gradient(circle, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 1))'
+      backgroundSize='cover'
+      backgroundPosition='center'
+      backgroundRepeat='no-repeat'
+      className='w-full h-[calc(100vh-72px)] flex items-center justify-center'
     >
-      <div className='flex flex-col items-center justify-center gap-3 w-[1280px] rounded-md shadow-lg bg-neutral-400/20 backdrop-blur p-6 border-none outline outline-1 outline-neutral-800'>
-        <div className='flex flex-col items-center justify-center gap-1'>
-          <h1 className='text-stone-200 text-xl tracking-wider text-center'>
+      <div className='w-full max-w-[760px] h-auto flex flex-col items-center justify-center gap-6 p-6 rounded-md bg-black/50 backdrop-blur-md border border-neutral-700'>
+        <div className='w-full h-auto flex flex-col items-center gap-1.5'>
+          <h6 className='w-full h-auto text-white text-2xl font-medium tracking-wide text-center'>
             Something went wrong
-          </h1>
+          </h6>
 
-          <p className='text-stone-400 text-base tracking-wide text-center'>
-            The current URL path that you just tried:&nbsp;
-            <code className='text-stone-200'>"{location.pathname}"</code>
-            &nbsp;doesn't exist
+          <p className='w-full h-auto text-neutral-400 text-base font-normal tracking-wide text-center'>
+            Looks like this scene didn't make the final cut.
+            <br />
+            The page you're looking for doesn't exist — or maybe it got left on
+            the editing floor.
           </p>
         </div>
 
-        <button
-          className='outline-none border-none bg-neutral-900 text-base text-slate-500 font-medium tracking-wide py-1.5 px-3 rounded-md shadow-lg hover:bg-neutral-950 hover:text-slate-400 focus-visible:bg-neutral-950 focus-visible:text-slate-400 transition-all duration-300'
-          onClick={() => navigate('/')}
+        <Link
+          to='/'
+          aria-label='Back to home page'
+          className='outline-none border-none w-auto h-auto flex items-center justify-center text-center cursor-pointer py-1.5 px-6 bg-amber-400 text-black text-base font-medium tracking-wide rounded-md hover:bg-amber-500 focus-visible:bg-amber-500 transition-colors duration-300'
         >
           Home Page
-        </button>
+        </Link>
       </div>
-    </div>
+    </LazyImage>
   );
 }
 

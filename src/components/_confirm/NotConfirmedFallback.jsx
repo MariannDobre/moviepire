@@ -26,9 +26,8 @@ export default function NotConfirmedFallback() {
       </div>
 
       <Link
-        type='button'
-        aria-label='Back to home page'
         to='/'
+        aria-label='Back to home page'
         className='outline-none border-none w-auto h-auto flex items-center justify-center text-center cursor-pointer py-1.5 px-6 bg-amber-400 text-black text-base font-medium tracking-wide rounded-md hover:bg-amber-500 focus-visible:bg-amber-500 transition-colors duration-300'
       >
         Home Page

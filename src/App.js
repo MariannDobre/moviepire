@@ -40,6 +40,11 @@ function App() {
             />
 
             <Route
+              path='*'
+              element={<PageNotFound />}
+            />
+
+            <Route
               path='/discovery'
               element={<DiscoveryPage />}
             />
@@ -89,11 +94,6 @@ function App() {
               element={<DiaryPage />}
             />
           </Route>
-
-          <Route
-            path='*'
-            element={<PageNotFound />}
-          />
         </Routes>
       </BrowserRouter>
 
