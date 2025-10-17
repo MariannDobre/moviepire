@@ -15,7 +15,7 @@ function PageNotFound() {
       <div className='w-full max-w-[760px] h-auto flex flex-col items-center justify-center gap-6 p-6 rounded-md bg-black/50 backdrop-blur-md border border-neutral-700'>
         <div className='w-full h-auto flex flex-col items-center gap-1.5'>
           <h6 className='w-full h-auto text-white text-2xl font-medium tracking-wide text-center'>
-            Something went wrong
+            Oops, something's missing...
           </h6>
 
           <p className='w-full h-auto text-neutral-400 text-base font-normal tracking-wide text-center'>

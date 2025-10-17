@@ -2,17 +2,17 @@ import { capitalizeWords } from '../../utils/functions';
 
 export default function MovieGenres({ movieGenre, type }) {
   return (
-    <div className='w-full h-auto flex items-center self-start gap-1.5 lg:gap-3'>
-      <span className='whitespace-nowrap w-auto h-auto flex items-center justify-center text-center text-xs lg:text-sm text-white font-medium tracking-wider bg-blue-400 py-0.5 px-2 lg:py-1 lg:px-3 rounded-md lg:rounded-xl xl:rounded-full shadow-sm'>
+    <div className='w-full h-auto flex items-center self-start gap-3'>
+      <span className='whitespace-nowrap w-auto h-auto flex items-center justify-center text-center bg-amber-400 text-black text-xs font-medium tracking-wider py-1 px-3 rounded-md'>
         {capitalizeWords(type)}
       </span>
 
-      <div className='w-full h-auto flex items-center self-start gap-1.5 lg:gap-3 overflow-hidden'>
+      <div className='w-full h-auto flex items-center self-start gap-3'>
         {movieGenre &&
           movieGenre.map((genre, index) => (
             <span
               key={index}
-              className='whitespace-nowrap w-auto h-auto flex items-center justify-center text-center text-xs lg:text-sm text-black font-medium tracking-wider bg-white py-0.5 px-2 lg:py-1 lg:px-3 rounded-md lg:rounded-xl xl:rounded-full shadow-sm'
+              className='whitespace-nowrap w-auto h-auto flex items-center justify-center text-center bg-neutral-100 text-black text-xs font-medium tracking-wider py-1 px-3 rounded-md'
             >
               {genre}
             </span>

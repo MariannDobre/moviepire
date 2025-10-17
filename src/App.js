@@ -12,7 +12,7 @@ import MovieTrailerPage from './components/_trailerpage/MovieTrailerPage';
 import MoviePage from './components/_aboutmovie/MoviePage';
 import RegisterPage from './pages/RegisterPage';
 import ClipPage from './components/_clippage/ClipPage';
-import DiaryPage from './components/_diary/DiaryPage';
+import DiaryPage from './pages/DiaryPage';
 import AccountPage from './pages/AccountPage';
 import StatsPage from './pages/StatsPage';
 
@@ -44,9 +44,15 @@ function App() {
               element={<PageNotFound />}
             />
 
+            {/* General */}
             <Route
               path='/discovery'
               element={<DiscoveryPage />}
+            />
+
+            <Route
+              path='/diary'
+              element={<DiaryPage />}
             />
 
             <Route
@@ -54,6 +60,7 @@ function App() {
               element={<StatsPage />}
             />
 
+            {/* Account */}
             <Route
               path='/login'
               element={<LoginPage />}
@@ -64,6 +71,17 @@ function App() {
               element={<RegisterPage />}
             />
 
+            <Route
+              path='/account'
+              element={<AccountPage />}
+            />
+
+            <Route
+              path='/confirm-email'
+              element={<ConfirmPage />}
+            />
+
+            {/* Dynamic routes */}
             <Route
               path='/about-movie/:movieId'
               element={<MoviePage />}
@@ -77,21 +95,6 @@ function App() {
             <Route
               path='/clip-for-movie/:movieId'
               element={<ClipPage />}
-            />
-
-            <Route
-              path='/account'
-              element={<AccountPage />}
-            />
-
-            <Route
-              path='/confirm-email'
-              element={<ConfirmPage />}
-            />
-
-            <Route
-              path='/diary'
-              element={<DiaryPage />}
             />
           </Route>
         </Routes>

@@ -1,22 +1,33 @@
-import { useQuery } from '@tanstack/react-query';
-import { useSearchParams } from 'react-router-dom';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { getDiaryMovies } from './functions/getDiaryMovies';
 
-// retrieves from supabase the viewed movies of each user and the sorted/filtered movies
 export function useDiaryMovies(userId, genre, type, yearRange) {
-  // const [searchParams] = useSearchParams();
-  // const sortBy = searchParams.get('sortBy') || 'list_order';
-  // const filterBy = searchParams.get('order') || 'asc';
+  const pageSize = 20;
 
   const {
-    data: diaryMovies,
+    data,
     isFetching,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
     error,
-  } = useQuery({
+  } = useInfiniteQuery({
     queryKey: ['diaryMovies', userId, genre, type, yearRange],
-    queryFn: () => getDiaryMovies(userId, genre, type, yearRange),
+    queryFn: ({ pageParam = 0 }) =>
+      getDiaryMovies(userId, genre, type, yearRange, pageParam, pageSize),
+    getNextPageParam: (lastPage) => lastPage.nextPage,
     enabled: !!userId,
+    staleTime: 1000 * 60 * 2, // cache for 2 minutes
   });
 
-  return { diaryMovies, isFetching, error };
+  const diaryMovies = data?.pages.flatMap((page) => page.data) ?? [];
+
+  return {
+    diaryMovies,
+    isFetching,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+    error,
+  };
 }

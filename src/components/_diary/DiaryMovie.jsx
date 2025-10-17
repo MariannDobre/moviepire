@@ -6,12 +6,13 @@ import MovieHeading from './MovieHeading';
 import MovieGenres from './MovieGenres';
 import MovieCast from './MovieCast';
 import MovieDescription from './MovieDescription';
-import MovieControlPanel from './MovieControlPanel';
 import SmallLoader from '../loaders/SmallLoader';
 
 import { FaTrashAlt } from 'react-icons/fa';
+import LazyImage from '../../utils/LazyImage';
+import MovieRating from './MovieRating';
 
-export default function DiaryMovie({ movie }) {
+export default function DiaryMovie({ movie, index }) {
   const { user } = useUser();
 
   const movieData = movie?.movies || {};
@@ -25,75 +26,56 @@ export default function DiaryMovie({ movie }) {
     movieDuration,
     movieGenre,
     movieDescription,
+    movieDirector,
     movieStars,
   } = movieData;
 
   const { rating } = useRating(user?.id, id);
   const { removeFromDiary, isPending: isRemovingFromDiary } =
     useRemoveFromDiary(user?.id, id, movieName);
-  const movieRating = rating?.ratings || 0;
 
-  if (!movie || !movie.movies) {
-    // return (
-    //   <div className='w-full h-[420px] flex items-center justify-center'>
-    //     <p className='text-gray-400 text-lg font-normal tracking-wide text-center'>
-    //       Movie data not available
-    //     </p>
-    //   </div>
-    // );
-
-    return console.warn('DiaryMovie skipped: missing movie or movie.movies');
-  }
-
-  // const findCurrentRating = ratings.filter(
-  //   (item) => item.item_id === Number(id)
-  // );
-  // const movieRating =
-  //   findCurrentRating.length > 0 ? findCurrentRating[0]?.ratings : 0;
+  const userRating = rating?.ratings ?? 0;
 
   return (
-    <div className='w-full flex flex-col gap-1.5 lg:gap-3 relative'>
+    <div className='w-full h-auto flex flex-col gap-3 relative'>
       <button
         type='button'
+        aria-label='Remove the current movie from the diary'
+        title='Remove the current movie from the diary'
         onClick={removeFromDiary}
         disabled={isRemovingFromDiary}
-        className='group absolute top-0 right-0 w-8 h-8 md:w-10 md:h-10 outline-none border border-neutral-500 cursor-pointer disabled:cursor-not-allowed disabled:opacity-75 bg-transparent flex items-center justify-center rounded-md shadow-sm hover:border-red-700 focus-visible:border-red-700 hover:bg-red-100/10 focus-visible:bg-red-100/10 transition-all duration-500'
+        className='group absolute top-0 right-0 w-8 h-8 outline-none border border-neutral-700 bg-transparent cursor-pointer disabled:cursor-not-allowed disabled:opacity-75 flex items-center justify-center rounded-md hover:bg-white/15 focus-visible:bg-white/15 transition-colors duration-300'
       >
         {isRemovingFromDiary ? (
           <SmallLoader
-            color='text-red-500'
             size='text-sm'
+            color='text-red-500'
           />
         ) : (
-          <span className='w-full h-full flex items-center justify-center text-sm md:text-base text-red-500 group-hover:text-red-700 group-focus-visible:text-red-700 transition-all duration-500'>
+          <span className='w-full h-full flex items-center justify-center text-sm text-red-500 transition-colors duration-300'>
             <FaTrashAlt />
           </span>
         )}
       </button>
 
       <div className='w-full h-auto flex items-start justify-start gap-3'>
-        <div className='w-[72px] xl:w-[172px] h-auto'>
-          <img
-            style={{
-              width: '100%',
-              height: '100%',
-            }}
-            className='w-full h-full object-cover drop-shadow-sm opacity-85'
+        <div className='w-44 h-72'>
+          <LazyImage
             src={moviePoster}
-            alt={`Poster for ${movieName}`}
-            effect='opacity'
-            delayMethod='debounce'
-            delayTime={500}
+            alt={`Poster of ${movieName}`}
+            className='w-full h-full object-cover'
           />
         </div>
 
-        <div className='w-[calc(100%-12px-72px-32px-12px)] xl:w-[calc(100%-12px-172px-40px-12px)] h-full flex flex-col gap-1.5 lg:gap-3'>
+        <div className='w-[calc(100%-72px-24px-176px-12px)] h-full flex flex-col gap-3'>
           {/* HEADING */}
           <MovieHeading
             id={id}
             movieName={movieName}
             movieYear={movieYear}
             movieDuration={movieDuration}
+            date={movie.created_at}
+            index={index}
           />
 
           {/* GENRES + TYPES */}
@@ -102,25 +84,23 @@ export default function DiaryMovie({ movie }) {
             type={type}
           />
 
-          {/* CAST */}
-          <MovieCast movieStars={movieStars} />
+          {/* IMDB RATING + USER RATING */}
+          <MovieRating
+            id={id}
+            imdbRating={imdbRating}
+            userRating={userRating}
+          />
         </div>
       </div>
 
-      <div className='w-full h-auto'>
-        {/* DESCRIPTION */}
-        <MovieDescription movieDescription={movieDescription} />
-      </div>
+      {/* DESCRIPTION */}
+      <MovieDescription movieDescription={movieDescription} />
 
-      <div className='w-full h-auto'>
-        {/* CONTROL PANEL */}
-        <MovieControlPanel
-          id={id}
-          imdbRating={imdbRating}
-          movieRating={movieRating}
-          date={movie.created_at}
-        />
-      </div>
+      {/* CAST */}
+      <MovieCast
+        movieDirector={movieDirector}
+        movieStars={movieStars}
+      />
     </div>
   );
 }

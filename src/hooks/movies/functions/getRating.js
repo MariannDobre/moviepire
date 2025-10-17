@@ -6,7 +6,7 @@ export async function getRating(userId, movieId) {
     .select('id, item_id, ratings')
     .eq('user_id', userId)
     .eq('item_id', movieId)
-    .single();
+    .maybeSingle();
 
   if (error && error.code !== 'PGRST116')
     throw new Error(

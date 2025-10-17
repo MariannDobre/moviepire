@@ -1,3 +1,4 @@
+import React, { useRef, useEffect } from 'react';
 import { useUser } from '../../hooks/auth/useUser';
 import { useDiaryMovies } from '../../hooks/movies/useDiaryMovies';
 import SmallLoader from '../loaders/SmallLoader';
@@ -8,21 +9,43 @@ export default function DiaryMoviesList({
   selectedType,
   selectedYearRange,
 }) {
-  const { user, isAuthenticated } = useUser();
-  const { diaryMovies, isFetching, error } = useDiaryMovies(
-    user?.id,
-    selectedGenre,
-    selectedType,
-    selectedYearRange
-  );
+  const { user } = useUser();
+  const {
+    diaryMovies,
+    isFetching,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+    error,
+  } = useDiaryMovies(user?.id, selectedGenre, selectedType, selectedYearRange);
 
-  if (!isAuthenticated) return null;
+  const loadMoreRef = useRef();
+
+  // Intersection observer
+  useEffect(() => {
+    if (!hasNextPage || isFetchingNextPage) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          fetchNextPage();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    const el = loadMoreRef.current;
+    if (el) observer.observe(el);
+
+    return () => {
+      if (el) observer.unobserve(el);
+    };
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   if (error)
     return (
-      <div className='w-full h-[calc(100vh-48px-48px-80px)] p-3 lg:p-6 flex flex-col items-center justify-center gap-9 bg-neutral-50/10 border border-red-700 rounded-lg shadow-sm'>
-        <p className='text-red-500 text-sm font-normal tracking-wide text-center'>
-          There was an error while fetching the diary data...
+      <div className='w-full h-[calc(100vh-72px-48px-62px-148px)] p-6 flex flex-col items-center justify-center bg-red-950/35 border border-red-500 rounded-md'>
+        <p className='text-red-500 text-base font-normal tracking-wider text-center'>
+          There was an error while fetching your diary...
           <br />
           {error?.message}
         </p>
@@ -31,39 +54,68 @@ export default function DiaryMoviesList({
 
   if (isFetching)
     return (
-      <div className='w-full h-[calc(100vh-48px-48px-80px)] p-3 lg:p-6 flex flex-col items-center justify-center gap-3 bg-neutral-50/10 border border-yellow-700 rounded-lg shadow-sm'>
-        <p className='text-yellow-500 text-base lg:text-lg font-normal tracking-wide text-center'>
-          Loading the diary data...
+      <div className='w-full h-[calc(100vh-72px-48px-62px-148px)] p-6 flex flex-col items-center justify-center gap-3 bg-yellow-950/45 border border-yellow-500 rounded-md'>
+        <p className='text-yellow-500 text-base font-normal tracking-wider text-center'>
+          Loading your diary...
         </p>
 
         <SmallLoader
           size='text-2xl'
-          color='text-yellow-700'
+          color='text-yellow-500'
         />
       </div>
     );
 
+  if (!diaryMovies.length)
+    return (
+      <div className='w-full h-[calc(100vh-72px-48px-62px-148px)] p-6 flex flex-col items-center justify-center bg-yellow-950/45 border border-yellow-500 rounded-md'>
+        <p className='text-yellow-500 text-base font-normal tracking-wider text-center'>
+          Your diary is empty.
+        </p>
+      </div>
+    );
+
+  if (!diaryMovies.length && !isFetching)
+    return (
+      <div className='w-full h-[calc(100vh-72px-48px-62px-148px)] p-6 flex flex-col items-center justify-center bg-yellow-950/45 border border-yellow-500 rounded-md'>
+        <p className='text-yellow-500 text-base font-normal tracking-wider text-center'>
+          No entries found for your filters.
+        </p>
+      </div>
+    );
+
   return (
-    <div className='w-full h-auto flex flex-col items-center gap-1.5 lg:gap-3'>
-      <p className='text-xs md:text-sm text-white font-medium tracking-wider self-start'>
-        <span className='text-sm md:text-base text-blue-400'>
-          {diaryMovies?.length}
-        </span>
+    <div className='w-full h-auto flex flex-col items-center gap-3'>
+      <p className='text-sm text-neutral-100 font-medium tracking-wider self-start'>
+        <span className='text-base text-amber-400'>{diaryMovies?.length}</span>
         &nbsp;entries found
       </p>
 
-      <div className='w-full h-auto flex flex-col items-center gap-[18px] lg:gap-6 p-3 lg:p-6 bg-neutral-50/10 border border-neutral-500 rounded-md lg:rounded-lg shadow-sm'>
-        {diaryMovies.length > 0 ? (
-          diaryMovies.map((movie, index) => (
+      <div className='w-full h-auto flex flex-col items-center gap-6 p-6 bg-transparent border border-neutral-700 rounded-md'>
+        {diaryMovies.map((movie, index) => (
+          <React.Fragment key={`${movie.id}-${index}`}>
             <DiaryMovie
-              key={index}
               movie={movie}
+              index={index}
             />
-          ))
-        ) : (
-          <p className='text-sm md:text-base lg:text-lg text-gray-400 font-medium tracking-wider md:tracking-wide text-center'>
-            No title with this filtering options
-          </p>
+            {index !== diaryMovies.length - 1 && (
+              <div className='w-full h-px bg-neutral-700' />
+            )}
+          </React.Fragment>
+        ))}
+
+        {hasNextPage && (
+          <div
+            ref={loadMoreRef}
+            className='w-full h-auto flex items-center justify-center p-6'
+          >
+            {isFetchingNextPage && (
+              <SmallLoader
+                size='text-2xl'
+                color='text-yellow-500'
+              />
+            )}
+          </div>
         )}
       </div>
     </div>

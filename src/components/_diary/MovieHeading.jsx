@@ -1,35 +1,46 @@
 import { Link } from 'react-router-dom';
+import { formatDate } from '../../utils/functions';
 
-import { FaRegCalendarAlt, FaRegClock } from 'react-icons/fa';
+import { FaRegCalendarAlt, FaRegClock, FaRegEye } from 'react-icons/fa';
 
 export default function MovieHeading({
   id,
   movieName,
   movieYear,
   movieDuration,
+  date,
+  index,
 }) {
   return (
-    <div className='w-full h-auto flex flex-col gap-1 self-start'>
+    <div className='w-full h-auto flex flex-col gap-1.5 self-start'>
       <Link
         to={`/about/${id}`}
-        className='w-full outline-none border-none no-underline cursor-pointer bg-transparent text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-blue-400 font-medium tracking-wider lg:tracking-wide text-start self-start hover:text-blue-500 focus-visible:text-blue-500 transition-all duration-500'
+        className='w-auto h-auto outline-none border-none flex items-center gap-1.5 no-underline cursor-pointer text-2xl text-amber-400 font-medium tracking-wide text-start self-start hover:text-amber-500 focus-visible:text-amber-500 transition-colors duration-300'
       >
+        <span>{index + 1}.</span>
         {movieName}
       </Link>
 
-      <div className='w-full h-auto flex items-center self-start gap-3 lg:gap-6'>
-        <p className='w-auto h-auto flex items-center self-start gap-1 md:gap-1.5 text-xs md:text-sm lg:text-base text-white font-normal tracking-wider lg:tracking-wide text-start'>
-          <span className='text-sm md:text-base lg:text-lg text-blue-400'>
+      <div className='w-full h-auto flex items-center self-start gap-[18px]'>
+        <p className='w-auto h-auto flex items-center self-start gap-1.5 text-sm text-neutral-100 font-medium tracking-wider text-start'>
+          <span className='text-base text-amber-400'>
             <FaRegCalendarAlt />
           </span>
           {movieYear}
         </p>
 
-        <p className='w-auto h-auto flex items-center self-start gap-1 md:gap-1.5 text-xs md:text-sm lg:text-basee text-white font-normal tracking-wider lg:tracking-wide text-start'>
-          <span className='text-sm md:text-base lg:text-lg text-blue-400'>
+        <p className='w-auto h-auto flex items-center self-start gap-1.5 text-sm text-neutral-100 font-medium tracking-wider text-start'>
+          <span className='text-base text-amber-400'>
             <FaRegClock />
           </span>
           {movieDuration}&nbsp;min
+        </p>
+
+        <p className='w-auto h-auto flex items-center self-start gap-1.5 text-sm text-neutral-100 font-medium tracking-wider text-start'>
+          <span className='text-base text-amber-400'>
+            <FaRegEye />
+          </span>
+          {formatDate(date)}
         </p>
       </div>
     </div>

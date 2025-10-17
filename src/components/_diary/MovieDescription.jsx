@@ -1,6 +1,6 @@
 export default function MovieDescription({ movieDescription }) {
   return (
-    <p className='w-full h-auto text-xs md:text-base lg:text-base text-gray-400 font-normal tracking-wider'>
+    <p className='w-full h-auto text-neutral-200 text-sm font-normal tracking-wider text-start'>
       {movieDescription}
     </p>
   );
