@@ -5,7 +5,7 @@ import { useUser } from '../hooks/auth/useUser';
 import UpdatePublicData from '../components/_auth/UpdatePublicData';
 import UpdatePrivateData from '../components/_auth/UpdatePrivateData';
 import AccountDetails from '../components/_auth/AccountDetails';
-import SmallLoader from '../components/loaders/SmallLoader';
+import SmallLoader from '../interface/_loaders/SmallLoader';
 import LazyImage from '../utils/LazyImage';
 
 import { FaGlobe, FaShieldAlt } from 'react-icons/fa';
@@ -122,7 +122,7 @@ export default function AccountPage() {
                 aria-label={`Set the view to ${btn.value}`}
                 value={btn.value}
                 onClick={() => setCurrentView(btn.value)}
-                className={`group flex items-center justify-center gap-1.5 ${
+                className={`group flex items-center justify-center gap-3 ${
                   currentView === btn.value
                     ? 'text-white bg-neutral-50/20 shadow-sm'
                     : 'text-neutral-400 bg-transparent shadow-none'

@@ -1,5 +1,5 @@
-import WhatToWatch from '../components/_home/WhatToWatch';
-import LatestThisYear from '../components/_home/LatestThisYear';
+import WhatToWatch from '../components/_home-page/WhatToWatch';
+import LatestThisYear from '../components/_home-page/LatestThisYear';
 import Banner from '../components/_banner/Banner';
 
 function HomePage() {

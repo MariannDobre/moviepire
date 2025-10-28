@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useUser } from '../../hooks/auth/useUser';
 import { useUpdatePublicData } from '../../hooks/auth/mutations/useUpdatePublicData';
 
-import SmallLoader from '../loaders/SmallLoader';
+import SmallLoader from '../../interface/_loaders/SmallLoader';
 
 import { FaRegUser } from 'react-icons/fa6';
 

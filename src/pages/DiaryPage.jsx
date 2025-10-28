@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from '../hooks/auth/useUser';
 
-import FilterPanel from '../components/_diary/FilterPanel';
-import DiaryMoviesList from '../components/_diary/DiaryMoviesList';
+import FilterPanel from '../components/_diary-page/FilterPanel';
+import DiaryMoviesList from '../components/_diary-page/DiaryMoviesList';
 import LazyImage from '../utils/LazyImage';
-import SmallLoader from '../components/loaders/SmallLoader';
-import SectionHeader from '../components/_home/SectionHeader';
+import SmallLoader from '../interface/_loaders/SmallLoader';
+import SectionHeader from '../components/_home-page/SectionHeader';
 
 export default function DiaryPage() {
   const { user, isAuthenticated } = useUser();

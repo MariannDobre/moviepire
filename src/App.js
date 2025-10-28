@@ -8,13 +8,12 @@ import DiscoveryPage from './pages/DiscoveryPage';
 import LoginPage from './pages/LoginPage';
 import ConfirmPage from './pages/ConfirmPage';
 import PageNotFound from './pages/PageNotFound';
-import MovieTrailerPage from './components/_trailerpage/MovieTrailerPage';
-import MoviePage from './components/_aboutmovie/MoviePage';
 import RegisterPage from './pages/RegisterPage';
-import ClipPage from './components/_clippage/ClipPage';
 import DiaryPage from './pages/DiaryPage';
 import AccountPage from './pages/AccountPage';
 import StatsPage from './pages/StatsPage';
+import HowItWorksPage from './pages/HowItWorksPage';
+import AboutMoviePage from './pages/AboutMoviePage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -81,20 +80,16 @@ function App() {
               element={<ConfirmPage />}
             />
 
+            {/* About the app */}
+            <Route
+              path='/how-it-works'
+              element={<HowItWorksPage />}
+            />
+
             {/* Dynamic routes */}
             <Route
-              path='/about-movie/:movieId'
-              element={<MoviePage />}
-            />
-
-            <Route
-              path='/trailer-for-movie/:movieId'
-              element={<MovieTrailerPage />}
-            />
-
-            <Route
-              path='/clip-for-movie/:movieId'
-              element={<ClipPage />}
+              path='/about-movie/:movieID'
+              element={<AboutMoviePage />}
             />
           </Route>
         </Routes>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useUpdatePrivateData } from '../../hooks/auth/mutations/useUpdatePrivateData';
 
-import SmallLoader from '../loaders/SmallLoader';
+import SmallLoader from '../../interface/_loaders/SmallLoader';
 
 import { FaShieldHalved } from 'react-icons/fa6';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';

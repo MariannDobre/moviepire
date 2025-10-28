@@ -31,7 +31,8 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: black;
+  /* background: black; */
+  background: transparent;
 }
 
 ::-webkit-scrollbar-corner {

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useRandomMovies } from '../hooks/movies/useRandomMovies';
 
-import SmallLoader from '../components/loaders/SmallLoader';
-import TypeSelector from '../components/_discovery/TypeSelector';
-import DiscoveryTable from '../components/_discovery/DiscoveryTable';
+import SmallLoader from '../interface/_loaders/SmallLoader';
+import TypeSelector from '../components/_discovery-page/TypeSelector';
+import DiscoveryTable from '../components/_discovery-page/DiscoveryTable';
 import Banner from '../components/_banner/Banner';
 
 const limit = 32;

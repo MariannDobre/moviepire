@@ -1,6 +1,6 @@
 import { useUser } from '../../hooks/auth/useUser';
 
-import SmallLoader from '../loaders/SmallLoader';
+import SmallLoader from '../../interface/_loaders/SmallLoader';
 import Logo from '../_logo/Logo';
 import GeneralLinks from './_navigation/GeneralLinks';
 import AccountLinks from './_navigation/AccountLinks';

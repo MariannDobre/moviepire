@@ -1,8 +1,8 @@
 import { useUser } from '../hooks/auth/useUser';
 
-import LoginForm from '../components/_login/LoginForm';
-import AlreadyAuthentificated from '../components/_login/AlreadyAuthentificated';
-import SmallLoader from '../components/loaders/SmallLoader';
+import LoginForm from '../components/_login-page/LoginForm';
+import AlreadyAuthentificated from '../components/_login-page/AlreadyAuthentificated';
+import SmallLoader from '../interface/_loaders/SmallLoader';
 
 export default function LoginPage() {
   const { user, isFetching } = useUser();

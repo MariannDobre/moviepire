@@ -1,9 +1,9 @@
 import { useUser } from '../hooks/auth/useUser';
 import { Link } from 'react-router-dom';
 
-import ConfirmedFallback from '../components/_confirm/ConfirmedFallback';
-import NotConfirmedFallback from '../components/_confirm/NotConfirmedFallback';
-import SmallLoader from '../components/loaders/SmallLoader';
+import ConfirmedFallback from '../components/_confirm-page/ConfirmedFallback';
+import NotConfirmedFallback from '../components/_confirm-page/NotConfirmedFallback';
+import SmallLoader from '../interface/_loaders/SmallLoader';
 import LazyImage from '../utils/LazyImage';
 
 export default function ConfirmPage() {

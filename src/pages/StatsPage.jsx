@@ -1,11 +1,11 @@
 import { useUser } from '../hooks/auth/useUser';
 import { Link } from 'react-router-dom';
 
-import SectionHeader from '../components/_home/SectionHeader';
-import StatsContainer from '../components/_stats/StatsContainer';
+import SectionHeader from '../components/_home-page/SectionHeader';
+import StatsContainer from '../components/_stats-page/StatsContainer';
 import Banner from '../components/_banner/Banner';
 import LazyImage from '../utils/LazyImage';
-import SmallLoader from '../components/loaders/SmallLoader';
+import SmallLoader from '../interface/_loaders/SmallLoader';
 
 export default function StatsPage() {
   const { user, isFetching, isAuthenticated } = useUser();

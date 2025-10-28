@@ -1,8 +1,8 @@
 import { useUser } from '../hooks/auth/useUser';
 
-import AlreadyRegistered from '../components/_register/AlreadyRegistered';
-import RegisterForm from '../components/_register/RegisterForm';
-import SmallLoader from '../components/loaders/SmallLoader';
+import AlreadyRegistered from '../components/_register-page/AlreadyRegistered';
+import RegisterForm from '../components/_register-page/RegisterForm';
+import SmallLoader from '../interface/_loaders/SmallLoader';
 
 export default function RegisterPage() {
   const { user, isFetching } = useUser();

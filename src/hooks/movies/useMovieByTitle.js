@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { getMovieByTitle } from './functions/getMovieByTitle';
 
-// retrieves back from supabase movies where their titles match the searchQuery parameter
 export function useMovieByTitle(searchQuery) {
+  const shouldFetch = Boolean(searchQuery?.length >= 3);
+
   const {
     data: movies,
     isFetching,
@@ -10,6 +11,7 @@ export function useMovieByTitle(searchQuery) {
   } = useQuery({
     queryKey: ['movies', searchQuery],
     queryFn: () => getMovieByTitle(searchQuery),
+    enabled: shouldFetch,
   });
 
   return { movies, isFetching, error };

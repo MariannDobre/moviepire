@@ -1,74 +1,72 @@
 import { useEffect, useState } from 'react';
-import Star from './Star';
-import { FaStar } from 'react-icons/fa';
 import { useUser } from '../../hooks/auth/useUser';
-import { useParams } from 'react-router-dom';
-import { useRating } from '../../hooks/movies/useRating';
-import { useRemoveRating } from '../../hooks/movies/mutations/useRemoveRating';
-import { useUpdateRating } from '../../hooks/movies/mutations/useUpdateRating';
 import { useAddRating } from '../../hooks/movies/mutations/useAddRating';
-import SmallLoader from '../loaders/SmallLoader';
+import { useUpdateRating } from '../../hooks/movies/mutations/useUpdateRating';
+import { useRemoveRating } from '../../hooks/movies/mutations/useRemoveRating';
+
+import Star from './Star';
+import SmallLoader from '../../interface/_loaders/SmallLoader';
+
+import { FaStar } from 'react-icons/fa';
 
 export default function RatingContainer({
   maxRating = 5,
-  className = '',
+  ratingID,
+  userRating,
+  movieID,
+  movieName,
   starColor = 'text-white',
   starSize = 'text-base',
   textColor = 'text-white',
   textSize = 'text-base',
-  movieTitle,
+  className = '',
 }) {
   const { user } = useUser();
-  const { movieId } = useParams();
 
-  const { rating } = useRating(user.id, movieId);
-  const movieRating = rating?.ratings || 0;
-  const ratingId = rating?.id;
-
-  const [newRating, setNewRating] = useState(movieRating);
+  const [newRating, setNewRating] = useState(userRating);
   const [displayedRating, setDisplayedRating] = useState(0);
 
   const { insertRating, isPending: adding } = useAddRating(
     user.id,
-    movieId,
-    movieTitle,
+    movieID,
+    movieName,
     newRating,
     setNewRating
   );
 
   const { modifyRating, isPending: updating } = useUpdateRating(
     user.id,
-    movieId,
-    movieTitle,
+    movieID,
+    movieName,
     newRating,
-    ratingId,
+    ratingID,
     setNewRating
   );
 
   const { deleteRating, isPending: removing } = useRemoveRating(
     user.id,
-    movieId,
-    movieTitle
+    movieID,
+    movieName
   );
 
   // Sync UI with DB value on load
   useEffect(() => {
-    setNewRating(movieRating);
-  }, [movieRating]);
+    setNewRating(userRating);
+  }, [userRating]);
 
   function handleRating(value) {
     setNewRating(value);
   }
 
-  const isRated = Boolean(movieRating);
+  const isRated = Boolean(userRating);
 
   return (
     <div className={className}>
       {/* Message */}
       <p className='text-white text-xl font-medium tracking-wide text-center'>
         {!isRated
-          ? 'This title is not rated yet.'
-          : `You rated this title with ${movieRating}/10.`}
+          ? 'This title is not rated yet'
+          : `You rated this title with ${userRating}/10`}
       </p>
 
       {/* Stars */}
@@ -115,28 +113,49 @@ export default function RatingContainer({
             type='button'
             onClick={() => insertRating()}
             disabled={adding || !newRating}
-            className='outline-none border-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-75 disabled:bg-blue-400 disabled:shadow-sm flex items-center justify-center text-center py-1.5 px-6 bg-blue-400 text-base text-white font-medium tracking-wider rounded-md shadow-sm hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
+            className='w-56 h-auto outline-none border-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-75 disabled:bg-amber-400 flex items-center justify-center text-center py-1.5 px-3 bg-amber-400 text-sm text-black font-medium tracking-wider rounded-md hover:bg-amber-500 focus-visible:bg-amber-500 transition-colors duration-300'
           >
-            {adding ? <SmallLoader /> : 'Submit Rating'}
+            {adding ? (
+              <SmallLoader
+                size='text-xl'
+                color='text-black'
+              />
+            ) : (
+              'Submit Rating'
+            )}
           </button>
         ) : (
           <>
             <button
               type='button'
               onClick={() => modifyRating()}
-              disabled={updating || newRating === movieRating}
-              className='outline-none border-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-75 disabled:bg-blue-400 disabled:shadow-sm flex items-center justify-center text-center py-1.5 px-6 bg-blue-400 text-base text-white font-medium tracking-wider rounded-md shadow-sm hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
+              disabled={updating || newRating === userRating}
+              className='w-56 h-auto outline-none border-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-75 disabled:bg-amber-400 flex items-center justify-center text-center py-1.5 px-3 bg-amber-400 text-sm text-black font-medium tracking-wider rounded-md hover:bg-amber-500 focus-visible:bg-amber-500 transition-colors duration-300'
             >
-              {updating ? <SmallLoader /> : 'Update Rating'}
+              {updating ? (
+                <SmallLoader
+                  size='text-xl'
+                  color='text-black'
+                />
+              ) : (
+                'Update Rating'
+              )}
             </button>
 
             <button
               type='button'
               onClick={() => deleteRating()}
               disabled={removing}
-              className='outline-none border-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-75 disabled:bg-red-400 disabled:shadow-sm flex items-center justify-center text-center py-1.5 px-6 bg-red-400 text-base text-white font-medium tracking-wider rounded-md shadow-sm hover:bg-red-500 focus-visible:bg-red-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
+              className='w-56 h-auto outline-none border-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-75 disabled:bg-red-500 flex items-center justify-center text-center py-1.5 px-3 bg-red-500 text-sm text-white font-medium tracking-wider rounded-md hover:bg-red-700 focus-visible:bg-red-700 transition-colors duration-300'
             >
-              {removing ? <SmallLoader /> : 'Remove Rating'}
+              {removing ? (
+                <SmallLoader
+                  size='text-xl'
+                  color='text-black'
+                />
+              ) : (
+                'Remove Rating'
+              )}
             </button>
           </>
         )}
