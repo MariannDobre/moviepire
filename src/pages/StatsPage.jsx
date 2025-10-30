@@ -10,7 +10,7 @@ import SmallLoader from '../interface/_loaders/SmallLoader';
 export default function StatsPage() {
   const { user, isFetching, isAuthenticated } = useUser();
 
-  if (!isAuthenticated || !user?.email_confirmed_at) {
+  if (!isAuthenticated || !user?.email_confirmed_at)
     return (
       <LazyImage
         asBackground
@@ -49,9 +49,8 @@ export default function StatsPage() {
         </div>
       </LazyImage>
     );
-  }
 
-  if (isFetching) {
+  if (isFetching)
     return (
       <div className='w-full h-[calc(100vh-72px)] p-6 flex flex-col items-center justify-center gap-3 bg-yellow-950/45 border border-yellow-500 rounded-md'>
         <p className='text-yellow-500 text-base font-normal tracking-wider text-center'>
@@ -64,7 +63,6 @@ export default function StatsPage() {
         />
       </div>
     );
-  }
 
   return (
     <div className='w-full h-[calc(100vh-72px)] flex flex-col gap-9'>

@@ -1,24 +1,33 @@
 import { Link } from 'react-router-dom';
+import { IoSparklesOutline } from 'react-icons/io5';
 
 export default function AlreadyRegistered() {
   return (
-    <div className='w-full max-w-[640px] h-auto flex flex-col items-center justify-center gap-3 p-3 lg:p-6 rounded-md lg:rounded-lg shadow-sm bg-black/75 backdrop-blur-md border border-neutral-500'>
-      <p className='text-lg text-white font-normal tracking-wide text-center'>
-        You're already registered! 🎉
-        <br />
-        If you're trying to switch accounts or to make a new one, please&nbsp;
-        <span className='text-blue-400 font-medium'>log out</span>&nbsp;first.
-      </p>
+    <div className='w-full max-w-[760px] h-auto flex flex-col items-center justify-center gap-6 p-6 rounded-md bg-black/50 backdrop-blur-md border border-neutral-700'>
+      <div className='w-14 h-14 flex items-center justify-center rounded-full'>
+        <span className='w-full h-full flex items-center justify-center rounded-full drop-shadow-sm bg-amber-400 text-black text-2xl'>
+          <IoSparklesOutline />
+        </span>
+      </div>
 
-      <p className='text-base text-gray-400 font-normal tracking-wide'>
-        Otherwise, feel free to keep exploring the app.
-      </p>
+      <div className='w-full h-auto flex flex-col items-center gap-1.5'>
+        <h6 className='w-full h-auto text-white text-2xl font-medium tracking-wide text-center'>
+          You're already registered
+        </h6>
+
+        <p className='w-full h-auto text-neutral-400 text-base font-normal tracking-wide text-center'>
+          If you're trying to switch accounts, please log out first. Otherwise,
+          feel free to keep exploring the app.
+        </p>
+      </div>
 
       <Link
         to='/'
-        className='outline-none border-none cursor-pointer py-1.5 px-6 text-base text-white font-normal tracking-wide bg-blue-400 rounded-md shadow-sm hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
+        aria-label='Back to home page'
+        title='Back to home page'
+        className='outline-none border-none w-auto h-auto flex items-center justify-center text-center cursor-pointer py-1.5 px-6 bg-amber-400 text-black text-base font-medium tracking-wide rounded-md hover:bg-amber-500 focus-visible:bg-amber-500 transition-colors duration-300'
       >
-        Back to Home Page
+        Home Page
       </Link>
     </div>
   );

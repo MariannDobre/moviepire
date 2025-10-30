@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useLogin } from '../../hooks/auth/mutations/useLogin';
+import { Link } from 'react-router-dom';
 
 import SmallLoader from '../../interface/_loaders/SmallLoader';
 
@@ -17,7 +17,6 @@ export default function LoginForm() {
     formState: { errors },
   } = useForm();
   const { loginUser, isPending } = useLogin();
-  const navigate = useNavigate();
 
   const onSubmit = ({ loginEmail, loginPassword }) => {
     loginUser({ loginEmail, loginPassword }, { onSettled: () => reset() });
@@ -26,41 +25,53 @@ export default function LoginForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='w-full max-w-[640px] h-auto flex flex-col items-center justify-center gap-3 lg:gap-6 p-3 lg:p-6 rounded-md lg:rounded-lg shadow-sm bg-black/75 backdrop-blur-md border border-neutral-500'
+      aria-label='Login form'
+      className='w-full max-w-[760px] h-auto flex flex-col items-center justify-center gap-6 p-6 rounded-md bg-black/50 backdrop-blur-md border border-neutral-700'
     >
-      <div className='w-full h-auto flex flex-col items-center justify-center gap-1.5 lg:gap-3'>
-        <h6 className='flex items-center justify-center gap-3 text-base md:text-lg lg:text-xl text-white font-medium tracking-wide'>
-          <span className='w-8 h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12 flex items-center justify-center text-base lg:text-xl xl:text-2xl text-white bg-gradient-to-br from-indigo-500 to-blue-400 rounded-md xl:rounded-lg shadow-sm'>
-            <FaFilm />
-          </span>
+      {/* HEADER */}
+      <div className='w-full h-auto flex flex-col items-center gap-1.5'>
+        <Link
+          to='/'
+          aria-label='Back to home page'
+          title='Back to home page'
+          className='outline-none border-none cursor-pointer w-12 h-12 rounded-md flex items-center justify-center text-white text-2xl bg-gradient-to-br from-rose-500 to-amber-400 hover:from-rose-700 hover:to-amber-400'
+        >
+          <FaFilm aria-hidden='true' />
+        </Link>
+
+        <h6 className='w-full h-auto text-white text-2xl font-medium tracking-wide text-center'>
           Sign In
         </h6>
 
-        <p className='text-xs md:text-sm lg:text-base text-gray-400 font-normal tracking-wide text-center'>
+        <p className='w-full h-auto text-neutral-400 text-base font-normal tracking-wide text-center'>
           Welcome back to your cinematic journey
           <br />
           Enter your credentials to access your account
         </p>
       </div>
 
+      {/* EMAIL FIELD */}
       <label
         htmlFor='loginEmail'
-        className='w-full h-auto flex flex-col gap-1.5'
+        className='w-full h-auto flex flex-col gap-1.5 items-start justify-start'
       >
-        <p className='self-start w-full flex items-center gap-1.5 text-sm md:text-base lg:text-lg text-white font-normal tracking-wide'>
-          <span className='text-blue-400'>
-            <MdOutlineEmail />
+        <p className='flex items-center gap-2 text-base text-neutral-200 font-medium tracking-wider self-start text-start'>
+          <span className='text-sm text-amber-400'>
+            <MdOutlineEmail aria-hidden='true' />
           </span>
           E-Mail
         </p>
 
         <input
           type='email'
-          name='loginEmail'
           id='loginEmail'
+          name='loginEmail'
           placeholder='john_doe@gmail.com'
           disabled={isPending}
-          className='outline-none border border-neutral-500 disabled:border-neutral-500 disabled:cursor-not-allowed disabled:opacity-75 w-full h-auto py-1 lg:py-1.5 px-2 lg:px-3 rounded-sm lg:rounded-md shadow-sm bg-neutral-800 text-xs md:text-sm text-white font-normal tracking-wider placeholder:text-xs md:placeholder:text-sm placeholder:text-neutral-500 placeholder:font-normal placeholder:tracking-wider caret-blue-400 hover:border-blue-400 focus-visible:border-blue-400 hover:shadow-lg focus-visible:shadow-lg selection:bg-blue-400 selection:text-white transition-all duration-500'
+          aria-required='true'
+          aria-invalid={!!errors?.loginEmail}
+          aria-describedby={errors?.loginEmail ? 'loginEmail-error' : undefined}
+          className='outline-none border border-neutral-700 w-full h-auto py-1 px-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:border-neutral-700 placeholder:text-neutral-400 placeholder:text-sm placeholder:font-medium placeholder:tracking-widest bg-black/75 text-white text-sm font-medium tracking-widest caret-amber-400 rounded-md hover:border-amber-400 focus-visible:border-amber-400 transition-all duration-300'
           {...register('loginEmail', {
             required: 'Email field is required.',
             pattern: {
@@ -70,93 +81,117 @@ export default function LoginForm() {
           })}
         />
         {errors?.loginEmail && (
-          <span className='py-0.5 md:my-1.5 ml-2 md:ml-3 text-red-500 text-xs md:text-sm font-normal tracking-wider'>
+          <span
+            id='loginEmail-error'
+            className='text-xs text-red-500 font-normal tracking-widest py-0.5 pl-3'
+          >
             {errors?.loginEmail?.message}
           </span>
         )}
       </label>
 
+      {/* PASSWORD FIELD */}
       <label
         htmlFor='loginPassword'
-        className='w-full h-auto flex flex-col gap-1.5 relative'
+        className='w-full h-auto flex flex-col gap-1.5 items-start justify-start relative'
       >
-        <p className='self-start w-full flex items-center gap-1.5 text-sm md:text-base lg:text-lg text-white font-normal tracking-wide'>
-          <span className='text-blue-400'>
-            <FaShieldAlt />
+        <p className='flex items-center gap-2 text-base text-neutral-200 font-medium tracking-wider self-start text-start'>
+          <span className='text-sm text-amber-400'>
+            <FaShieldAlt aria-hidden='true' />
           </span>
           Password
         </p>
 
         <input
           type={showPassword ? 'text' : 'password'}
-          name='loginPassword'
           id='loginPassword'
+          name='loginPassword'
           placeholder='my_strong_password'
           disabled={isPending}
-          className='outline-none border border-neutral-500 disabled:border-neutral-500 disabled:cursor-not-allowed disabled:opacity-75 w-full h-auto py-1 lg:py-1.5 px-2 lg:px-3 rounded-sm lg:rounded-md shadow-sm bg-neutral-800 text-xs md:text-sm text-white font-normal tracking-wider placeholder:text-xs md:placeholder:text-sm placeholder:text-neutral-500 placeholder:font-normal placeholder:tracking-wider caret-blue-400 hover:border-blue-400 focus-visible:border-blue-400 hover:shadow-lg focus-visible:shadow-lg selection:bg-blue-400 selection:text-white transition-all duration-500'
+          aria-required='true'
+          aria-invalid={!!errors?.loginPassword}
+          aria-describedby={
+            errors?.loginPassword ? 'loginPassword-error' : undefined
+          }
+          className='outline-none border border-neutral-700 w-full h-auto py-1 px-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:border-neutral-700 placeholder:text-neutral-400 placeholder:text-sm placeholder:font-medium placeholder:tracking-widest bg-black/75 text-white text-sm font-medium tracking-widest caret-amber-400 rounded-md hover:border-amber-400 focus-visible:border-amber-400 transition-all duration-300'
           {...register('loginPassword', {
             required: 'Password field is required.',
           })}
         />
         {errors?.loginPassword && (
-          <span className='py-0.5 md:my-1.5 ml-2 md:ml-3 text-red-500 text-xs md:text-sm font-normal tracking-wider'>
+          <span
+            id='loginPassword-error'
+            className='text-xs text-red-500 font-normal tracking-widest py-0.5 pl-3'
+          >
             {errors?.loginPassword?.message}
           </span>
         )}
 
         <button
           type='button'
+          aria-label={
+            showPassword ? 'Hide password text' : 'Show password text'
+          }
+          title={showPassword ? 'Hide password' : 'Show password'}
           onClick={() => setShowPassword((currentValue) => !currentValue)}
           className={`absolute right-3 ${
-            errors?.loginPassword
-              ? 'bottom-[33px] md:bottom-[48px]'
-              : 'bottom-1.5 md:bottom-2.5'
-          } border-none outline-none text-sm md:text-base text-neutral-500 hover:text-blue-400 focus-visible:text-blue-400 transition-all duration-500`}
+            errors?.loginPassword ? 'bottom-[33px]' : 'bottom-[7px]'
+          } border-none outline-none text-base text-neutral-400 hover:text-amber-400 focus-visible:text-amber-400 transition-colors duration-300`}
         >
-          {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+          {showPassword ? (
+            <FaRegEyeSlash aria-hidden='true' />
+          ) : (
+            <FaRegEye aria-hidden='true' />
+          )}
         </button>
       </label>
 
-      <button
-        type='submit'
-        disabled={isPending}
-        className='outline-none border-none w-full h-auto cursor-pointer disabled:bg-neutral-800 disabled:text-neutral-500 disabled:cursor-not-allowed disabled:opacity-75 py-1 px-3 lg:py-1.5 lg:px-6 text-xs md:text-sm lg:text-base text-white font-normal tracking-wider lg:tracking-wide text-center rounded-sm lg:rounded-md shadow-sm bg-blue-400 hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
-      >
-        {isPending ? (
-          <SmallLoader
-            size='text-2xl'
-            color='text-blue-400'
-          />
-        ) : (
-          'Sign In'
-        )}
-      </button>
+      {/* ACTIONS BUTTONS SECTION */}
+      <div className='w-full h-auto flex flex-col items-center gap-4'>
+        <button
+          type='submit'
+          aria-label='Sign in to your account'
+          title='Sign in to your account'
+          disabled={isPending}
+          className='w-full h-auto outline-none border-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-amber-400 py-1.5 px-6 flex items-center justify-center text-center rounded-md bg-amber-400 text-black text-sm font-medium tracking-wider hover:bg-amber-500 focus-visible:bg-amber-500 transition-colors duration-300'
+        >
+          {isPending ? (
+            <SmallLoader
+              size='text-xl'
+              color='text-black'
+            />
+          ) : (
+            'Sign In'
+          )}
+        </button>
 
-      <div className='w-full h-auto flex items-center justify-center gap-1.5 lg:gap-3'>
-        <div className='w-full h-px bg-neutral-500' />
+        <div className='w-full h-auto flex items-center justify-center gap-1.5'>
+          <div className='w-full h-px bg-neutral-700' />
 
-        <p className='w-[640px] text-xs lg:text-sm text-gray-400 font-normal tracking-wider text-center selection:bg-blue-400 selection:text-white'>
-          Don't have an account yet?
-        </p>
+          <p className='w-[640px] text-sm text-neutral-400 font-medium tracking-widest text-center'>
+            Don't have an account yet?
+          </p>
 
-        <div className='w-full h-px bg-neutral-500' />
+          <div className='w-full h-px bg-neutral-700' />
+        </div>
+
+        <Link
+          to='/register'
+          aria-label='Go to registration page to create a new account'
+          title='Create a new account'
+          disabled={isPending}
+          className='w-full h-auto outline-none border-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-amber-400 py-1.5 px-6 flex items-center justify-center text-center rounded-md bg-amber-400 text-black text-sm font-medium tracking-wider hover:bg-amber-500 focus-visible:bg-amber-500 transition-colors duration-300'
+        >
+          {isPending ? (
+            <SmallLoader
+              size='text-xl'
+              color='text-black'
+            />
+          ) : (
+            'Create an Account'
+          )}
+        </Link>
       </div>
-
-      <button
-        type='button'
-        disabled={isPending}
-        onClick={() => navigate('/register')}
-        className='outline-none border-none w-full h-auto cursor-pointer disabled:bg-neutral-800 disabled:text-neutral-500 disabled:cursor-not-allowed disabled:opacity-75 py-1 px-3 lg:py-1.5 lg:px-6 text-xs md:text-sm lg:text-base text-white font-normal tracking-wider lg:tracking-wide text-center rounded-sm lg:rounded-md shadow-sm bg-blue-400 hover:bg-blue-500 focus-visible:bg-blue-500 hover:shadow-lg focus-visible:shadow-lg transition-all duration-500'
-      >
-        {isPending ? (
-          <SmallLoader
-            size='text-2xl'
-            color='text-blue-400'
-          />
-        ) : (
-          'Create an Account'
-        )}
-      </button>
     </form>
   );
 }
