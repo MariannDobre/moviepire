@@ -22,6 +22,7 @@ function AccountDetails() {
 
   return (
     <React.Fragment>
+      {/* HEADER */}
       <header className='w-full h-auto flex flex-col items-start justify-start'>
         <h6 className='text-xl text-white font-medium tracking-wide text-start'>
           Account Information
@@ -32,66 +33,72 @@ function AccountDetails() {
         </p>
       </header>
 
+      {/* ACCOUNT USERNAME FIELD */}
       <label
-        htmlFor='account-username'
+        htmlFor='accountUsername'
         className='w-full h-auto flex flex-col gap-1.5 items-start justify-start'
       >
-        <p className='flex items-center gap-2 text-sm text-neutral-200 font-medium tracking-wider self-start text-start'>
-          <span className='text-base text-amber-400'>
-            <FaRegUser />
+        <p className='flex items-center gap-2 text-base text-neutral-200 font-medium tracking-wider self-start text-start'>
+          <span className='text-sm text-amber-400'>
+            <FaRegUser aria-hidden='true' />
           </span>
           Account Username
         </p>
 
         <input
           type='text'
-          id='account-username'
-          name='account-username'
+          id='accountUsername'
+          name='accountUsername'
           placeholder={user?.user_metadata?.username}
           disabled
-          className='outline-none border border-neutral-700 w-full h-auto py-1.5 px-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:border-neutral-700 placeholder:text-neutral-400 placeholder:text-base placeholder:font-medium placeholder:tracking-wider bg-black/75 rounded-md'
+          readOnly
+          className='outline-none border border-neutral-700 w-full h-auto py-1 px-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:border-neutral-700 placeholder:text-neutral-400 placeholder:text-sm placeholder:font-medium placeholder:tracking-widest bg-black/75 text-white text-sm font-medium tracking-widest caret-amber-400 rounded-md hover:border-amber-400 focus-visible:border-amber-400 transition-all duration-300'
         />
       </label>
 
+      {/* ACCOUNT EMAIL FIELD */}
       <label
-        htmlFor='account-email'
+        htmlFor='accountEmail'
         className='w-full h-auto flex flex-col gap-1.5 items-start justify-start'
       >
-        <p className='flex items-center gap-2 text-sm text-neutral-200 font-medium tracking-wider self-start text-start'>
-          <span className='text-base text-amber-400'>
-            <MdOutlineEmail />
+        <p className='flex items-center gap-2 text-base text-neutral-200 font-medium tracking-wider self-start text-start'>
+          <span className='text-sm text-amber-400'>
+            <MdOutlineEmail aria-hidden='true' />
           </span>
           Account E-Mail
         </p>
 
         <input
           type='email'
-          id='account-email'
-          name='account-email'
+          id='accountEmail'
+          name='accountEmail'
           placeholder={user?.email}
           disabled
-          className='outline-none border border-neutral-700 w-full h-auto py-1.5 px-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:border-neutral-700 placeholder:text-neutral-400 placeholder:text-base placeholder:font-medium placeholder:tracking-wider bg-black/75 rounded-md'
+          readOnly
+          className='outline-none border border-neutral-700 w-full h-auto py-1 px-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:border-neutral-700 placeholder:text-neutral-400 placeholder:text-sm placeholder:font-medium placeholder:tracking-widest bg-black/75 text-white text-sm font-medium tracking-widest caret-amber-400 rounded-md hover:border-amber-400 focus-visible:border-amber-400 transition-all duration-300'
         />
       </label>
 
+      {/* LAST SIGNED IN FIELD */}
       <label
-        htmlFor='account-last-signed-in'
+        htmlFor='lstSignedIn'
         className='w-full h-auto flex flex-col gap-1.5 items-start justify-start'
       >
-        <p className='flex items-center gap-2 text-sm text-neutral-200 font-medium tracking-wider self-start text-start'>
-          <span className='text-base text-amber-400'>
-            <FaRegClock />
+        <p className='flex items-center gap-2 text-base text-neutral-200 font-medium tracking-wider self-start text-start'>
+          <span className='text-sm text-amber-400'>
+            <FaRegClock aria-hidden='true' />
           </span>
           Last Signed In
         </p>
 
         <input
           type='text'
-          id='account-last-signed-in'
-          name='account-last-signed-in'
+          id='lstSignedIn'
+          name='lstSignedIn'
           placeholder={extractDate}
           disabled
-          className='outline-none border border-neutral-700 w-full h-auto py-1.5 px-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:border-neutral-700 placeholder:text-neutral-400 placeholder:text-base placeholder:font-medium placeholder:tracking-wider bg-black/75 rounded-md'
+          readOnly
+          className='outline-none border border-neutral-700 w-full h-auto py-1 px-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:border-neutral-700 placeholder:text-neutral-400 placeholder:text-sm placeholder:font-medium placeholder:tracking-widest bg-black/75 text-white text-sm font-medium tracking-widest caret-amber-400 rounded-md hover:border-amber-400 focus-visible:border-amber-400 transition-all duration-300'
         />
       </label>
     </React.Fragment>
